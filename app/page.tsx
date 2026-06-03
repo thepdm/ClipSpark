@@ -14,30 +14,30 @@ const HERO_SLIDES = [
 
 const SECTIONS = [
   {
-    title: 'Trending Now',
+    title: 'Fantasy & Magic',
     items: [
-      { label: 'NIGHT RUN', imageId: REGEN_POOL[0] },
-      { label: 'CITY LIGHTS', imageId: REGEN_POOL[1] },
-      { label: 'FOREST WALK', imageId: REGEN_POOL[2] },
-      { label: 'MOUNTAIN TOP', imageId: REGEN_POOL[3] },
+      { label: 'Snow Queen', desc: 'Forest at midnight', imageId: CHARACTER_IMAGES[0] },
+      { label: 'Dark Wizard', desc: 'Ancient spell ritual', imageId: CHARACTER_IMAGES[5] },
+      { label: 'Fairy Tale', desc: 'Enchanted kingdom', imageId: CHARACTER_IMAGES[3] },
+      { label: 'Cyber Witch', desc: 'Neon magic', imageId: CHARACTER_IMAGES[4] },
     ],
   },
   {
-    title: 'Cinematic',
+    title: 'Urban & Street',
     items: [
-      { label: 'EPIC DAWN', imageId: REGEN_POOL[4] },
-      { label: 'WILD LANDS', imageId: REGEN_POOL[5] },
-      { label: 'OCEAN DREAM', imageId: REGEN_POOL[6] },
-      { label: 'MISTY VALLEY', imageId: REGEN_POOL[7] },
+      { label: 'Street Dancer', desc: 'City lights & rhythm', imageId: CHARACTER_IMAGES[1] },
+      { label: 'Rapper', desc: 'Downtown vibes', imageId: CHARACTER_IMAGES[6] },
+      { label: 'Skater', desc: 'Concrete jungle', imageId: CHARACTER_IMAGES[2] },
+      { label: 'Graffiti Artist', desc: 'Walls come alive', imageId: CHARACTER_IMAGES[7] },
     ],
   },
   {
-    title: 'Characters',
+    title: 'Cinematic Drama',
     items: [
-      { label: 'CYBER RIDER', imageId: CHARACTER_IMAGES[4] },
-      { label: 'WARRIOR', imageId: CHARACTER_IMAGES[5] },
-      { label: 'EXPLORER', imageId: CHARACTER_IMAGES[6] },
-      { label: 'DESIGNER', imageId: CHARACTER_IMAGES[7] },
+      { label: 'Lost Astronaut', desc: 'Alone in deep space', imageId: REGEN_POOL[0] },
+      { label: 'Mountain Climber', desc: 'Summit at sunset', imageId: REGEN_POOL[3] },
+      { label: 'Ocean Diver', desc: 'Underwater silence', imageId: REGEN_POOL[4] },
+      { label: 'Forest Runner', desc: 'Chased by shadows', imageId: REGEN_POOL[2] },
     ],
   },
 ];
@@ -179,22 +179,23 @@ export default function Home() {
                   key={item.label}
                   onClick={() => handleStart(item.label)}
                   style={{
-                    width: 160, height: 210, borderRadius: 16, overflow: 'hidden',
+                    width: 150, height: 210, borderRadius: 16, overflow: 'hidden',
                     flexShrink: 0, cursor: 'pointer', position: 'relative',
                     border: '1px solid rgba(255,255,255,0.07)',
                   }}
                 >
                   <img
-                    src={`https://images.unsplash.com/${item.imageId}?w=320&h=420&fit=crop&q=80`}
+                    src={`https://images.unsplash.com/${item.imageId}?w=300&h=420&fit=crop&q=80`}
                     alt={item.label}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.85) saturate(1.1)' }}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.82) saturate(1.1)' }}
                   />
                   <div style={{
                     position: 'absolute', inset: 0,
-                    background: 'linear-gradient(to top, rgba(10,10,15,0.88) 0%, transparent 55%)',
+                    background: 'linear-gradient(to top, rgba(10,10,15,0.92) 0%, transparent 50%)',
                   }} />
                   <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
-                    <p style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: 0.8 }}>{item.label}</p>
+                    <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 2, lineHeight: 1.2 }}>{item.label}</p>
+                    <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
