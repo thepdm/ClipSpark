@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 
 export function TabBar() {
   const path = usePathname();
-  const isCreate = path === '/' || path.startsWith('/script') || path.startsWith('/scenes') || path.startsWith('/music') || path.startsWith('/result');
+  const isCreate = path === '/' || path.startsWith('/character') || path.startsWith('/story') || path.startsWith('/script') || path.startsWith('/scenes') || path.startsWith('/music') || path.startsWith('/result');
   const isProjects = path === '/projects';
 
   return (
