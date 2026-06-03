@@ -25,10 +25,10 @@ export default function ResultPage() {
   const [saved, setSaved] = useState(false);
 
   useEffect(() => {
-    const s = sessionStorage.getItem('clipai_scenes');
-    const t = sessionStorage.getItem('clipai_track');
-    const c = sessionStorage.getItem('clipai_concept') || '';
-    const f = sessionStorage.getItem('clipai_format') || 'reels';
+    const s = sessionStorage.getItem('clipspark_scenes');
+    const t = sessionStorage.getItem('clipspark_track');
+    const c = sessionStorage.getItem('clipspark_concept') || '';
+    const f = sessionStorage.getItem('clipspark_format') || 'reels';
     if (!s || !t) { router.push('/'); return; }
     setScenes(JSON.parse(s));
     setTrack(JSON.parse(t));
@@ -53,8 +53,8 @@ export default function ResultPage() {
       sceneCount: scenes.length,
       createdAt: Date.now(),
     };
-    const existing = JSON.parse(localStorage.getItem('clipai_projects') || '[]');
-    localStorage.setItem('clipai_projects', JSON.stringify([project, ...existing]));
+    const existing = JSON.parse(localStorage.getItem('clipspark_projects') || '[]');
+    localStorage.setItem('clipspark_projects', JSON.stringify([project, ...existing]));
     setSaved(true);
   };
 

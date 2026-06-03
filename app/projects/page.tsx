@@ -27,14 +27,14 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    const data = localStorage.getItem('clipai_projects');
+    const data = localStorage.getItem('clipspark_projects');
     if (data) setProjects(JSON.parse(data));
   }, []);
 
   const deleteProject = (id: string) => {
     const updated = projects.filter(p => p.id !== id);
     setProjects(updated);
-    localStorage.setItem('clipai_projects', JSON.stringify(updated));
+    localStorage.setItem('clipspark_projects', JSON.stringify(updated));
   };
 
   const formatDate = (ts: number) => {

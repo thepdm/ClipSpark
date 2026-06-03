@@ -22,7 +22,7 @@ export default function Home() {
   const [recentProjects, setRecentProjects] = useState<{id:string; title:string; format:string; createdAt:number}[]>([]);
 
   useEffect(() => {
-    const data = localStorage.getItem('clipai_projects');
+    const data = localStorage.getItem('clipspark_projects');
     if (data) setRecentProjects(JSON.parse(data).slice(0, 3));
   }, []);
 
@@ -46,7 +46,7 @@ export default function Home() {
                 <polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" />
               </svg>
             </div>
-            <span style={{ fontSize: 12, fontWeight: 600, color: '#E8445A' }}>ClipAI</span>
+            <span style={{ fontSize: 12, fontWeight: 600, color: '#E8445A' }}>ClipSpark</span>
           </div>
 
           <h1 style={{ fontSize: 34, fontWeight: 700, letterSpacing: -0.8, color: 'var(--text-1)', lineHeight: 1.08, marginBottom: 8 }}>
@@ -82,7 +82,7 @@ export default function Home() {
           {FORMATS.map(f => (
             <div
               key={f.id}
-              onClick={() => { sessionStorage.setItem('clipai_format', f.id); router.push('/script'); }}
+              onClick={() => { sessionStorage.setItem('clipspark_format', f.id); router.push('/script'); }}
               style={{
                 flex: 1, ...glass,
                 borderRadius: 'var(--r-lg)',

@@ -25,7 +25,7 @@ export default function MusicPage() {
 
   const handleNext = () => {
     if (!selectedTrack) return;
-    sessionStorage.setItem('clipai_track', JSON.stringify(selectedTrack));
+    sessionStorage.setItem('clipspark_track', JSON.stringify(selectedTrack));
     router.push('/result');
   };
 

@@ -32,15 +32,15 @@ export default function ScriptPage() {
   const [isGenerating, setIsGenerating] = useState(false);
 
   useEffect(() => {
-    const saved = sessionStorage.getItem('clipai_format');
+    const saved = sessionStorage.getItem('clipspark_format');
     if (saved) setFormat(saved);
   }, []);
 
   const handleGenerate = () => {
     if (!concept.trim()) return;
     setIsGenerating(true);
-    sessionStorage.setItem('clipai_concept', concept);
-    sessionStorage.setItem('clipai_format', format);
+    sessionStorage.setItem('clipspark_concept', concept);
+    sessionStorage.setItem('clipspark_format', format);
     setTimeout(() => router.push('/scenes'), 2000);
   };
 

@@ -21,8 +21,8 @@ export default function ScenesPage() {
   const [format, setFormat] = useState('');
 
   useEffect(() => {
-    const c = sessionStorage.getItem('clipai_concept') || '';
-    const f = sessionStorage.getItem('clipai_format') || 'reels';
+    const c = sessionStorage.getItem('clipspark_concept') || '';
+    const f = sessionStorage.getItem('clipspark_format') || 'reels';
     setConcept(c);
     setFormat(f);
     setTimeout(() => {
@@ -32,7 +32,7 @@ export default function ScenesPage() {
   }, []);
 
   const handleNext = () => {
-    sessionStorage.setItem('clipai_scenes', JSON.stringify(scenes));
+    sessionStorage.setItem('clipspark_scenes', JSON.stringify(scenes));
     router.push('/music');
   };
 
