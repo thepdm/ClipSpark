@@ -104,9 +104,9 @@ export default function ResultPage() {
         position: 'sticky', top: 0, zIndex: 50,
         padding: '12px 20px 10px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(255,232,240,0.70)',
+        background: 'var(--nav-bg)',
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.4)',
+        borderBottom: '1px solid var(--glass-border)',
       }}>
         <Link href="/music" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">

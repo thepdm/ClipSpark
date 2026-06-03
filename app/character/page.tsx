@@ -64,9 +64,9 @@ export default function CharacterPage() {
         position: 'sticky', top: 0, zIndex: 50,
         padding: '12px 20px 10px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(255,232,240,0.70)',
+        background: 'var(--nav-bg)',
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid rgba(255,255,255,0.4)',
+        borderBottom: '1px solid var(--glass-border)',
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
@@ -106,7 +106,7 @@ export default function CharacterPage() {
                 style={{
                   width: '100%', padding: '14px 16px',
                   borderRadius: 'var(--r-lg)',
-                  background: 'rgba(255,255,255,0.65)',
+                  background: 'rgba(255,255,255,0.07)',
                   backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)',
                   border: '1px solid var(--glass-border)',
                   fontSize: 15, color: 'var(--text-1)',

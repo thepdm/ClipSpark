@@ -3,19 +3,22 @@
 :root {
   --accent: #E8445A;
   --accent-2: #FF8FA3;
-  --accent-soft: rgba(232, 68, 90, 0.12);
-  --glass: rgba(255, 255, 255, 0.60);
-  --glass-border: rgba(255, 255, 255, 0.72);
-  --glass-thick: rgba(255, 255, 255, 0.80);
-  --text-1: #1C1C1E;
-  --text-2: rgba(60, 60, 67, 0.55);
-  --text-3: rgba(60, 60, 67, 0.28);
-  --shadow: 0 8px 32px rgba(0, 0, 0, 0.09);
-  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.06);
+  --accent-soft: rgba(232, 68, 90, 0.15);
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --glass-thick: rgba(255, 255, 255, 0.12);
+  --text-1: #F0F0FF;
+  --text-2: #7878A0;
+  --text-3: #44445A;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.30);
   --r-xl: 28px;
   --r-lg: 20px;
   --r-md: 14px;
   --r-pill: 999px;
+  --nav-bg: rgba(10, 10, 15, 0.85);
+  --surface: #12121A;
+  --surface-2: #1A1A26;
 }
 
 * {
@@ -28,7 +31,7 @@ html { height: 100%; }
 
 body {
   min-height: 100svh;
-  background: linear-gradient(160deg, #FFE8F0 0%, #F0E8FF 50%, #E8F4FF 100%);
+  background: #0A0A0F;
   background-attachment: fixed;
   color: var(--text-1);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
@@ -46,8 +49,8 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.4); opacity: 0.6; }
 }
 
 .animate-spin { animation: spin 0.85s linear infinite; }
