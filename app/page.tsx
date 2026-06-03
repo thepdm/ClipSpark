@@ -2,34 +2,56 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { CHARACTER_IMAGES } from '@/lib/mockScenes';
+import { CHARACTER_IMAGES, REGEN_POOL } from '@/lib/mockScenes';
 import { TabBar } from '@/components/TabBar';
 
-const glass: React.CSSProperties = {
-  background: 'var(--glass)',
-  backdropFilter: 'blur(20px) saturate(180%)',
-  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-  border: '1px solid var(--glass-border)',
-};
-
-const FEATURED = [
-  { name: 'Снегурочка', tag: 'Fantasy', imageId: CHARACTER_IMAGES[0] },
-  { name: 'Street dancer', tag: 'Urban', imageId: CHARACTER_IMAGES[1] },
-  { name: 'Space explorer', tag: 'Sci-Fi', imageId: CHARACTER_IMAGES[2] },
-  { name: 'Young chef', tag: 'Lifestyle', imageId: CHARACTER_IMAGES[3] },
-  { name: 'Cyber rider', tag: 'Action', imageId: CHARACTER_IMAGES[4] },
+const HERO_SLIDES = [
+  { title: 'Snow Queen', desc: 'A magical winter tale — forest, midnight glow', imageId: CHARACTER_IMAGES[0], tag: 'Fantasy' },
+  { title: 'Urban Dancer', desc: 'Neon streets, rhythm and pure soul energy', imageId: CHARACTER_IMAGES[1], tag: 'Urban' },
+  { title: 'Space Explorer', desc: 'Discover unknown worlds beyond the stars', imageId: CHARACTER_IMAGES[2], tag: 'Sci-Fi' },
+  { title: 'Young Chef', desc: 'Ingredients float, spices dance, magic cooks', imageId: CHARACTER_IMAGES[3], tag: 'Lifestyle' },
 ];
 
-const TRENDING = ['🔥 Trending', 'Cinematic', 'Lo-fi vibe', 'Action', 'Fantasy', 'Anime', 'Dark'];
+const SECTIONS = [
+  {
+    title: 'Trending Now',
+    items: [
+      { label: 'NIGHT RUN', imageId: REGEN_POOL[0] },
+      { label: 'CITY LIGHTS', imageId: REGEN_POOL[1] },
+      { label: 'FOREST WALK', imageId: REGEN_POOL[2] },
+      { label: 'MOUNTAIN TOP', imageId: REGEN_POOL[3] },
+    ],
+  },
+  {
+    title: 'Cinematic',
+    items: [
+      { label: 'EPIC DAWN', imageId: REGEN_POOL[4] },
+      { label: 'WILD LANDS', imageId: REGEN_POOL[5] },
+      { label: 'OCEAN DREAM', imageId: REGEN_POOL[6] },
+      { label: 'MISTY VALLEY', imageId: REGEN_POOL[7] },
+    ],
+  },
+  {
+    title: 'Characters',
+    items: [
+      { label: 'CYBER RIDER', imageId: CHARACTER_IMAGES[4] },
+      { label: 'WARRIOR', imageId: CHARACTER_IMAGES[5] },
+      { label: 'EXPLORER', imageId: CHARACTER_IMAGES[6] },
+      { label: 'DESIGNER', imageId: CHARACTER_IMAGES[7] },
+    ],
+  },
+];
 
 export default function Home() {
   const router = useRouter();
-  const [prompt, setPrompt] = useState('');
-  const [recentProjects, setRecentProjects] = useState<{ id: string; title: string; format: string; createdAt: number; exportMode?: string }[]>([]);
+  const [heroIndex, setHeroIndex] = useState(0);
+  const [recentProjects, setRecentProjects] = useState<{ id: string; title: string; format: string; createdAt: number }[]>([]);
 
   useEffect(() => {
     const data = localStorage.getItem('clipspark_projects');
     if (data) setRecentProjects(JSON.parse(data).slice(0, 3));
+    const timer = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 4000);
+    return () => clearInterval(timer);
   }, []);
 
   const handleStart = (prefill?: string) => {
@@ -37,169 +59,195 @@ export default function Home() {
     router.push('/character');
   };
 
-  const handlePromptSubmit = () => {
-    if (!prompt.trim()) { router.push('/character'); return; }
-    sessionStorage.setItem('clipspark_prefill_character', prompt);
-    router.push('/character');
-  };
+  const slide = HERO_SLIDES[heroIndex];
 
   return (
-    <div style={{ minHeight: '100svh', paddingBottom: 96 }}>
-      <main style={{ padding: '52px 20px 0' }}>
+    <div style={{ minHeight: '100svh', paddingBottom: 100, background: '#0A0A0F' }}>
 
-        {/* Logo */}
-        <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8,
-          background: 'rgba(232,68,90,0.15)',
-          borderRadius: 999, padding: '5px 12px 5px 8px', marginBottom: 20,
-          border: '1px solid rgba(232,68,90,0.25)',
-        }}>
+      {/* Top nav */}
+      <div style={{
+        position: 'sticky', top: 0, zIndex: 50,
+        padding: '14px 20px 12px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        background: 'rgba(10,10,15,0.85)',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+      }}>
+        <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5, color: '#F0F0FF' }}>ClipSpark</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{
-            width: 22, height: 22, borderRadius: '50%',
+            display: 'flex', alignItems: 'center', gap: 5,
             background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+            borderRadius: 999, padding: '5px 12px',
+            fontSize: 12, fontWeight: 700, color: '#fff',
+            boxShadow: '0 3px 12px rgba(232,68,90,0.35)',
+          }}>
+            ✦ PRO
+          </div>
+          <div style={{
+            width: 34, height: 34, borderRadius: '50%',
+            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
-              <polygon points="23 7 16 12 23 17 23 7" /><rect x="1" y="5" width="15" height="14" rx="2" />
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
             </svg>
           </div>
-          <span style={{ fontSize: 12, fontWeight: 600, color: '#E8445A' }}>ClipSpark</span>
         </div>
+      </div>
 
-        {/* Headline */}
-        <h1 style={{
-          fontSize: 38, fontWeight: 800, letterSpacing: -1,
-          color: 'var(--text-1)', lineHeight: 1.05, marginBottom: 28,
-        }}>
-          Turn ideas into<br />
-          <span style={{ color: '#E8445A' }}>music videos</span>
-        </h1>
+      {/* Hero carousel */}
+      <div
+        style={{ position: 'relative', width: '100%', height: '56vw', maxHeight: 340, overflow: 'hidden', cursor: 'pointer' }}
+        onClick={() => handleStart(slide.title)}
+      >
+        {HERO_SLIDES.map((s, i) => (
+          <div key={i} style={{
+            position: 'absolute', inset: 0,
+            opacity: i === heroIndex ? 1 : 0,
+            transition: 'opacity 0.6s ease',
+          }}>
+            <img
+              src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`}
+              alt={s.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.75) saturate(1.2)' }}
+            />
+          </div>
+        ))}
 
-        {/* Prompt input bar */}
-        <div style={{
-          ...glass, borderRadius: 'var(--r-xl)',
-          padding: '4px 4px 4px 18px',
-          display: 'flex', alignItems: 'center', gap: 8,
-          marginBottom: 14,
-          boxShadow: '0 0 0 1px rgba(232,68,90,0.0)',
-          transition: 'box-shadow 0.2s',
-        }}>
-          <input
-            value={prompt}
-            onChange={e => setPrompt(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handlePromptSubmit()}
-            placeholder="Describe your character or idea..."
-            style={{
-              flex: 1, background: 'transparent', border: 'none', outline: 'none',
-              fontSize: 15, color: 'var(--text-1)', fontFamily: 'inherit',
-              padding: '10px 0',
-            }}
-          />
-          <button
-            onClick={handlePromptSubmit}
-            style={{
-              width: 44, height: 44, borderRadius: 16, flexShrink: 0,
-              background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
-              border: 'none', cursor: 'pointer',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              boxShadow: '0 4px 16px rgba(232,68,90,0.40)',
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
-            </svg>
-          </button>
-        </div>
+        {/* Gradient overlays */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.2) 0%, transparent 40%, rgba(10,10,15,0.75) 100%)' }} />
 
-        {/* Trending chips */}
-        <div style={{ display: 'flex', gap: 7, overflowX: 'auto', marginBottom: 32, paddingBottom: 2 }}>
-          {TRENDING.map((t, i) => (
-            <button
-              key={t}
-              onClick={() => handleStart(i === 0 ? undefined : t)}
-              style={{
-                padding: '7px 14px', borderRadius: 999, flexShrink: 0,
-                background: i === 0 ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'var(--glass)',
-                border: i === 0 ? 'none' : '1px solid var(--glass-border)',
-                color: i === 0 ? '#fff' : 'var(--text-2)',
-                fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                boxShadow: i === 0 ? '0 3px 14px rgba(232,68,90,0.35)' : 'none',
-              }}
-            >
-              {t}
+        {/* Content */}
+        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 16px 16px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 12 }}>
+            <div style={{ flex: 1 }}>
+              <span style={{
+                display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1,
+                color: '#E8445A', background: 'rgba(232,68,90,0.2)', borderRadius: 999,
+                padding: '3px 8px', marginBottom: 6,
+              }}>
+                {slide.tag}
+              </span>
+              <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 4 }}>
+                {slide.title}
+              </p>
+              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>
+                {slide.desc}
+              </p>
+            </div>
+            <button style={{
+              flexShrink: 0,
+              padding: '10px 18px', borderRadius: 999,
+              background: 'rgba(255,255,255,0.18)',
+              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.35)',
+              color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            }}>
+              Try It!
             </button>
-          ))}
-        </div>
+          </div>
 
-        {/* Featured characters */}
-        <div style={{ marginBottom: 8 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: 14 }}>
-            Featured characters
-          </p>
-          <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingBottom: 4, marginLeft: -20, paddingLeft: 20, marginRight: -20, paddingRight: 20 }}>
-            {FEATURED.map(char => (
-              <div
-                key={char.name}
-                onClick={() => handleStart(char.name)}
+          {/* Dots */}
+          <div style={{ display: 'flex', gap: 5, justifyContent: 'center', marginTop: 12 }}>
+            {HERO_SLIDES.map((_, i) => (
+              <button
+                key={i}
+                onClick={e => { e.stopPropagation(); setHeroIndex(i); }}
                 style={{
-                  width: 150, height: 220, borderRadius: 18, overflow: 'hidden',
-                  flexShrink: 0, cursor: 'pointer', position: 'relative',
-                  border: '1px solid rgba(255,255,255,0.08)',
-                  boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
+                  width: i === heroIndex ? 20 : 6, height: 6, borderRadius: 999, border: 'none', cursor: 'pointer',
+                  background: i === heroIndex ? '#fff' : 'rgba(255,255,255,0.35)',
+                  transition: 'all 0.3s', padding: 0,
                 }}
-              >
-                <img
-                  src={`https://images.unsplash.com/${char.imageId}?w=300&h=440&fit=crop&q=80`}
-                  alt={char.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(1.15) brightness(0.9)' }}
-                />
-                <div style={{
-                  position: 'absolute', inset: 0,
-                  background: 'linear-gradient(to top, rgba(10,10,15,0.92) 0%, rgba(10,10,15,0.3) 50%, transparent 100%)',
-                }} />
-                <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF', marginBottom: 3, lineHeight: 1.2 }}>{char.name}</p>
-                  <span style={{
-                    fontSize: 10, fontWeight: 600, color: '#E8445A',
-                    background: 'rgba(232,68,90,0.18)', borderRadius: 999,
-                    padding: '2px 7px', border: '1px solid rgba(232,68,90,0.3)',
-                  }}>
-                    {char.tag}
-                  </span>
-                </div>
-              </div>
+              />
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Recent projects */}
-        {recentProjects.length > 0 && (
-          <div style={{ marginTop: 32 }}>
-            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: 12 }}>
-              Recent
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {recentProjects.map(p => (
-                <div key={p.id} style={{
-                  ...glass, borderRadius: 'var(--r-lg)', padding: '14px 16px',
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                  boxShadow: 'var(--shadow-sm)', cursor: 'pointer',
-                }}>
-                  <div>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-1)', marginBottom: 2 }}>{p.title}</p>
-                    <p style={{ fontSize: 12, color: 'var(--text-2)', textTransform: 'capitalize' }}>
-                      {p.format}{p.exportMode === 'synced' ? ' · 🎵 Beat-synced' : ''}
-                    </p>
-                  </div>
-                  <div style={{ padding: '5px 12px', borderRadius: 999, background: 'rgba(232,68,90,0.12)', color: '#E8445A', fontSize: 12, fontWeight: 600, border: '1px solid rgba(232,68,90,0.2)' }}>
-                    Open →
+      {/* Content sections */}
+      <div style={{ padding: '0 0 8px' }}>
+        {SECTIONS.map(section => (
+          <div key={section.title} style={{ marginTop: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
+              <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>{section.title}</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>See All</span>
+            </div>
+            <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingLeft: 20, paddingRight: 20, paddingBottom: 2 }}>
+              {section.items.map(item => (
+                <div
+                  key={item.label}
+                  onClick={() => handleStart(item.label)}
+                  style={{
+                    width: 160, height: 210, borderRadius: 16, overflow: 'hidden',
+                    flexShrink: 0, cursor: 'pointer', position: 'relative',
+                    border: '1px solid rgba(255,255,255,0.07)',
+                  }}
+                >
+                  <img
+                    src={`https://images.unsplash.com/${item.imageId}?w=320&h=420&fit=crop&q=80`}
+                    alt={item.label}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.85) saturate(1.1)' }}
+                  />
+                  <div style={{
+                    position: 'absolute', inset: 0,
+                    background: 'linear-gradient(to top, rgba(10,10,15,0.88) 0%, transparent 55%)',
+                  }} />
+                  <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
+                    <p style={{ fontSize: 12, fontWeight: 800, color: '#fff', letterSpacing: 0.8 }}>{item.label}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
+        ))}
+
+        {/* Recent projects */}
+        {recentProjects.length > 0 && (
+          <div style={{ marginTop: 28 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
+              <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>My Projects</span>
+              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>See All</span>
+            </div>
+            <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              {recentProjects.map(p => (
+                <div key={p.id} style={{
+                  background: 'rgba(255,255,255,0.06)', borderRadius: 16,
+                  padding: '14px 16px', border: '1px solid rgba(255,255,255,0.08)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer',
+                }}>
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: '#F0F0FF', marginBottom: 2 }}>{p.title}</p>
+                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', textTransform: 'capitalize' }}>{p.format}</p>
+                  </div>
+                  <span style={{ fontSize: 12, fontWeight: 600, color: '#E8445A' }}>Open →</span>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
-      </main>
+      </div>
+
+      {/* Floating CTA */}
+      <div style={{
+        position: 'fixed', bottom: 80, left: '50%', transform: 'translateX(-50%)',
+        zIndex: 90,
+      }}>
+        <button
+          onClick={() => handleStart()}
+          style={{
+            display: 'flex', alignItems: 'center', gap: 8,
+            padding: '14px 32px', borderRadius: 999,
+            background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+            color: '#fff', fontSize: 16, fontWeight: 700,
+            border: 'none', cursor: 'pointer',
+            boxShadow: '0 8px 32px rgba(232,68,90,0.50)',
+            letterSpacing: -0.2, whiteSpace: 'nowrap',
+          }}
+        >
+          ✦ Create a Video
+        </button>
+      </div>
 
       <TabBar />
     </div>
