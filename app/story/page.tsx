@@ -152,36 +152,6 @@ export default function StoryPage() {
           </div>
         </div>
 
-        <div style={{ marginBottom: 28 }}>
-          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'var(--text-3)', textTransform: 'uppercase', marginBottom: 10 }}>
-            Format
-          </p>
-          <div style={{ display: 'flex', gap: 10 }}>
-            {FORMATS.map(f => (
-              <button
-                key={f.id}
-                onClick={() => setFormat(f.id)}
-                style={{
-                  flex: 1, padding: '14px 8px',
-                  borderRadius: 'var(--r-lg)',
-                  background: format === f.id ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'var(--glass)',
-                  backdropFilter: format === f.id ? 'none' : 'blur(24px)',
-                  WebkitBackdropFilter: format === f.id ? 'none' : 'blur(24px)',
-                  border: format === f.id ? 'none' : '1px solid var(--glass-border)',
-                  color: format === f.id ? '#fff' : 'var(--text-2)',
-                  cursor: 'pointer', textAlign: 'center',
-                  boxShadow: format === f.id ? '0 4px 18px rgba(232,68,90,0.32)' : 'var(--shadow-sm)',
-                  transition: 'all 0.18s',
-                }}
-              >
-                <div style={{ fontSize: 22, marginBottom: 5 }}>{f.emoji}</div>
-                <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 2 }}>{f.label}</div>
-                <div style={{ fontSize: 10, opacity: 0.75 }}>{f.desc}</div>
-              </button>
-            ))}
-          </div>
-        </div>
-
         <button
           onClick={handleGenerate}
           disabled={!story.trim() || isGenerating}
