@@ -92,9 +92,8 @@ export default function Home() {
   }, []);
 
   const handleStart = (character: string, story: string) => {
-    sessionStorage.setItem('clipspark_prefill_character', character);
-    sessionStorage.setItem('clipspark_prefill_story', story);
-    router.push('/character');
+    sessionStorage.setItem('clipspark_prefill_description', story || character);
+    router.push('/create');
   };
 
   return (

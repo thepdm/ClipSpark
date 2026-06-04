@@ -90,15 +90,13 @@ export default function ScenesPage() {
   };
 
   useEffect(() => {
+    const desc = sessionStorage.getItem('clipspark_description') || sessionStorage.getItem('clipspark_story') || '';
     const c = sessionStorage.getItem('clipspark_character');
-    const s = sessionStorage.getItem('clipspark_story') || '';
     if (c) setCharacter(JSON.parse(c));
-    setStory(s);
-    const charData = c ? JSON.parse(c) : null;
+    setStory(desc);
     setTimeout(() => {
-      setScenes(getStoryScenes(charData?.name || ''));
-      // Auto-pick track based on story length as seed
-      const idx = (s.length % TRACKS.length);
+      setScenes(getStoryScenes(desc.split(' ').slice(0, 3).join(' ')));
+      const idx = (desc.length % TRACKS.length);
       setTrack(TRACKS[idx]);
       setLoading(false);
     }, 1800);

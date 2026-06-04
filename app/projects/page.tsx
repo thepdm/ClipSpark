@@ -65,7 +65,7 @@ export default function ProjectsPage() {
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>Your saved videos will appear here</p>
             </div>
             <button
-              onClick={() => router.push('/character')}
+              onClick={() => router.push('/create')}
               style={{
                 marginTop: 8, padding: '14px 36px',
                 borderRadius: 999,

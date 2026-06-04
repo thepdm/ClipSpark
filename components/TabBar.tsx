@@ -32,7 +32,7 @@ export function TabBar() {
 
       {/* Center create button */}
       <button
-        onClick={() => router.push('/character')}
+        onClick={() => router.push('/create')}
         style={{
           width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
           background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
