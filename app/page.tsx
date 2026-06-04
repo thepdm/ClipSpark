@@ -7,14 +7,6 @@ import { TabBar } from '@/components/TabBar';
 
 const HERO_SLIDES = [
   {
-    title: 'Snow Queen',
-    desc: 'Forest at midnight — magical New Year atmosphere',
-    imageId: 'photo-1551854838-212c9b8ba5f5',
-    character: 'Снегурочка',
-    story: 'Снегурочка walks around a snow-covered house in the forest at midnight, singing a magical song. After one circle the camera slowly pulls back — she fades into the snowy darkness.',
-    tag: 'Fantasy',
-  },
-  {
     title: 'Maldives Sunset',
     desc: 'Turquoise water, white sand, golden hour',
     imageId: 'photo-1573843981267-be1999ff37cd',
