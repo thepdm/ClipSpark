@@ -9,7 +9,7 @@ const HERO_SLIDES = [
   {
     title: 'Snow Queen',
     desc: 'Forest at midnight — magical New Year atmosphere',
-    imageId: 'photo-1478760329108-5c3ed9d495a0',
+    imageId: 'photo-1551854838-212c9b8ba5f5',
     character: 'Снегурочка',
     story: 'Снегурочка walks around a snow-covered house in the forest at midnight, singing a magical song. After one circle the camera slowly pulls back — she fades into the snowy darkness.',
     tag: 'Fantasy',
@@ -58,6 +58,7 @@ const SECTIONS = [
       { name: 'Spring Bloom', desc: 'Blooming garden, pastel', imageId: 'photo-1469474968028-56623f02e42e', story: 'A girl wanders through a cherry blossom garden in spring. Petals fall around her like snow — soft pastel colours, pure joy.' },
       { name: 'Night City', desc: 'Neon rain, city lights', imageId: 'photo-1447752875215-b2761acb3c5d', story: 'A girl walks through a neon-lit rainy city at midnight. Reflections shimmer on wet streets — she owns the night.' },
       { name: 'Rooftop Sunset', desc: 'City view, wind, golden sky', imageId: 'photo-1426604966848-d7adac402bff', story: 'A girl stands on a rooftop at sunset with the whole city below. Wind in her hair, golden sky behind her — the city is hers.' },
+      { name: 'Glam & Sexy', desc: 'Confidence, luxury, allure', imageId: 'photo-1529626455594-4ff0802cfb7e', story: 'A girl owns the room — dramatic lighting, confident gaze, slow motion. Every frame is pure power and femininity.' },
     ],
   },
 ];
