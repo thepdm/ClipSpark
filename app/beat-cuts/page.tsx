@@ -1,0 +1,138 @@
+'use client';
+import { useState, useRef } from 'react';
+import Link from 'next/link';
+import { TRACKS } from '@/lib/mockMusic';
+import { TabBar } from '@/components/TabBar';
+
+const SAMPLE_CLIPS = [
+  { label: 'Urban Night', imageId: 'photo-1470071459604-3b5ec3a7fe05', duration: '0:12' },
+  { label: 'Forest Run', imageId: 'photo-1516117172878-fd2c41f4a759', duration: '0:08' },
+  { label: 'City Lights', imageId: 'photo-1448375240586-882707db888b', duration: '0:15' },
+];
+const BAR_HEIGHTS = [40,65,30,80,55,45,70,35,85,50,45,75,30,60,85,40,55,70,45,65];
+
+type Stage = 'upload' | 'track' | 'generating' | 'result';
+
+export default function BeatCutsPage() {
+  const [stage, setStage] = useState<Stage>('upload');
+  const [selectedClip, setSelectedClip] = useState(0);
+  const [trackId, setTrackId] = useState(TRACKS[0].id);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const selectedTrack = TRACKS.find(t => t.id === trackId) || TRACKS[0];
+
+  return (
+    <div style={{ minHeight: '100svh', background: '#0A0A0F', paddingBottom: 100 }}>
+      <div style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 20px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(10,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+        <Link href="/" style={{ color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 4 }}>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back
+        </Link>
+        <span style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF' }}>Beat Cuts</span>
+        <div style={{ width: 50 }} />
+      </div>
+
+      <main style={{ padding: '24px 20px 0' }}>
+        {stage === 'upload' && (
+          <>
+            <p style={{ fontSize: 26, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.5, marginBottom: 8 }}>Choose your clip</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>AI will analyze the beat and cut your scenes perfectly in sync</p>
+
+            <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed rgba(232,68,90,0.4)', borderRadius: 20, padding: '28px 20px', textAlign: 'center', cursor: 'pointer', background: 'rgba(232,68,90,0.05)', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 16 }}>
+              <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8445A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              </div>
+              <div style={{ textAlign: 'left' }}>
+                <p style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>Upload video</p>
+                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>MP4, MOV · up to 2 minutes</p>
+              </div>
+            </div>
+            <input ref={fileRef} type="file" accept="video/*" style={{ display: 'none' }} />
+
+            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: 12 }}>Or try a sample clip</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+              {SAMPLE_CLIPS.map((clip, i) => (
+                <div key={i} onClick={() => setSelectedClip(i)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px', borderRadius: 16, cursor: 'pointer', border: selectedClip === i ? '1.5px solid #E8445A' : '1px solid rgba(255,255,255,0.08)', background: selectedClip === i ? 'rgba(232,68,90,0.08)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
+                  <img src={`https://images.unsplash.com/${clip.imageId}?w=120&h=80&fit=crop&q=70`} alt="" style={{ width: 56, height: 40, borderRadius: 8, objectFit: 'cover', flexShrink: 0 }} />
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF' }}>{clip.label}</p>
+                    <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{clip.duration}</p>
+                  </div>
+                  {selectedClip === i && <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#E8445A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
+                </div>
+              ))}
+            </div>
+            <button onClick={() => setStage('track')} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(232,68,90,0.35)' }}>
+              Choose Music →
+            </button>
+          </>
+        )}
+
+        {stage === 'track' && (
+          <>
+            <p style={{ fontSize: 22, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.4, marginBottom: 6 }}>Choose your track</p>
+            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>AI will find the beats and cut your video to them</p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
+              {TRACKS.map(t => (
+                <div key={t.id} onClick={() => setTrackId(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px', borderRadius: 16, cursor: 'pointer', border: trackId === t.id ? `1.5px solid ${t.color}` : '1px solid rgba(255,255,255,0.08)', background: trackId === t.id ? `${t.color}12` : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
+                  <div style={{ width: 40, height: 40, borderRadius: 10, background: `linear-gradient(135deg,${t.color},${t.color}88)`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF', marginBottom: 2 }}>{t.title}</p>
+                    <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{t.genre} · {t.bpm} BPM</p>
+                  </div>
+                  {trackId === t.id && <div style={{ width: 20, height: 20, borderRadius: '50%', background: t.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
+                </div>
+              ))}
+            </div>
+
+            <button onClick={() => { setStage('generating'); setTimeout(() => setStage('result'), 3000); }} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(232,68,90,0.35)' }}>
+              ✨ Analyze & Cut
+            </button>
+          </>
+        )}
+
+        {stage === 'generating' && (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '65svh', gap: 24 }}>
+            <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 52 }}>
+              {BAR_HEIGHTS.slice(0, 14).map((h, i) => (
+                <div key={i} style={{ width: 5, borderRadius: 3, height: `${h}%`, background: `linear-gradient(to top,#E8445A,#FF8FA3)`, animation: `pulse ${0.5+(i%3)*0.15}s ease-in-out infinite alternate`, animationDelay: `${i*0.06}s` }} />
+              ))}
+            </div>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: 17, fontWeight: 700, color: '#F0F0FF', marginBottom: 6 }}>Analyzing beat...</p>
+              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)' }}>Finding cuts at {selectedTrack.bpm} BPM · {selectedTrack.title}</p>
+            </div>
+          </div>
+        )}
+
+        {stage === 'result' && (
+          <>
+            <p style={{ fontSize: 22, fontWeight: 800, color: '#F0F0FF', marginBottom: 4 }}>Beat-synced ✓</p>
+            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>{SAMPLE_CLIPS[selectedClip].label} · {selectedTrack.title} · {selectedTrack.bpm} BPM</p>
+            <div style={{ borderRadius: 20, overflow: 'hidden', marginBottom: 16, position: 'relative' }}>
+              <img src={`https://images.unsplash.com/${SAMPLE_CLIPS[selectedClip].imageId}?w=800&h=450&fit=crop&q=80`} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
+              <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(232,68,90,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>🎵 Beat-synced</div>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 14, padding: '12px 14px', marginBottom: 20 }}>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginBottom: 8, fontWeight: 600 }}>CUT POINTS</p>
+              <div style={{ display: 'flex', gap: 3 }}>
+                {BAR_HEIGHTS.map((h, i) => (
+                  <div key={i} style={{ flex: 1, height: 28, borderRadius: 3, background: `rgba(232,68,90,${h/100 * 0.8})` }} />
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button onClick={() => setStage('track')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Change track</button>
+              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(232,68,90,0.35)' }}>Export</button>
+            </div>
+          </>
+        )}
+      </main>
+      <TabBar />
+    </div>
+  );
+}

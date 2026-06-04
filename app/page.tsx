@@ -34,30 +34,30 @@ const HERO_SLIDES = [
 
 const SECTIONS = [
   {
-    title: 'Fantasy & Magic',
+    title: 'Locations',
     items: [
-      { name: 'Snow Queen', desc: 'Forest, midnight, New Year', imageId: CHARACTER_IMAGES[0], story: 'Снегурочка walks around a snow-covered house in the forest at midnight, singing. Camera pulls back — she vanishes into darkness.' },
-      { name: 'Dark Wizard', desc: 'Ancient library, summoning ritual', imageId: CHARACTER_IMAGES[5], story: 'A dark wizard performs an ancient ritual in a crumbling library. Books fly, candles flare — a portal tears open in the air.' },
-      { name: 'Forest Spirit', desc: 'Enchanted woods at dawn', imageId: REGEN_POOL[2], story: 'A forest spirit drifts between ancient trees at dawn. Flowers bloom at every footstep — the forest wakes up around her.' },
-      { name: 'Cyber Witch', desc: 'Neon magic, hologram spells', imageId: CHARACTER_IMAGES[4], story: 'A cyber witch casts holographic spells in a neon-soaked city. Code streams from her fingertips — the city grid obeys her will.' },
+      { name: 'Maldives', desc: 'Turquoise water, white sand, sunset', imageId: 'photo-1573843981267-be1999ff37cd', story: 'A girl walks along a white sand beach in the Maldives at golden hour. Crystal clear water surrounds her — the sky turns pink and violet as the sun sets.' },
+      { name: 'Paris', desc: 'Streets, cafés, flowers, rain', imageId: 'photo-1499856871958-5b9627545d1a', story: 'A girl strolls through rainy Paris streets, past flower stalls and glowing café windows. She twirls her umbrella — the city lights reflect in puddles.' },
+      { name: 'Dubai Desert', desc: 'Golden dunes, luxury, sunset', imageId: 'photo-1512453979798-5ea266f8880c', story: 'A girl stands on golden desert dunes in Dubai at sunset. Sand flows around her — the horizon glows deep orange and red.' },
+      { name: 'Amalfi Coast', desc: 'Blue sea, lemons, Italian summer', imageId: 'photo-1534445867742-43195f401b6c', story: 'A girl walks through the colourful streets of Amalfi, past lemon trees and sea views. She sits at a cliffside café — the Mediterranean sparkles below.' },
     ],
   },
   {
-    title: 'Urban & Street',
+    title: 'Aesthetic Style',
     items: [
-      { name: 'Street Dancer', desc: 'City lights, late night freestyle', imageId: CHARACTER_IMAGES[1], story: 'A street dancer freestyles through neon-lit alleys at midnight. Crowd gathers, energy builds to an explosive finale.' },
-      { name: 'Rapper', desc: 'Rooftop performance, downtown', imageId: CHARACTER_IMAGES[6], story: 'A rapper performs on a downtown rooftop at sunset. City sprawls behind — the track drops as golden hour hits.' },
-      { name: 'Graffiti Artist', desc: 'Warehouse walls come alive', imageId: REGEN_POOL[0], story: 'A graffiti artist paints a massive mural on a warehouse wall. The art comes alive — characters step off the wall and dance.' },
-      { name: 'Skater', desc: 'Concrete jungle, night session', imageId: REGEN_POOL[1], story: 'A skater tears through an empty city at 3am. Each trick lands perfectly — the city is hers and hers alone.' },
+      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1531746020798-e6953c6e8e04', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
+      { name: 'Golden Hour', desc: 'Magic sunset, warm light', imageId: 'photo-1501854140801-50d01698950b', story: 'A girl walks through a field at golden hour as the sun sets behind her. Long shadows, warm glow, hair in the breeze — pure magic.' },
+      { name: 'Vintage Film', desc: 'Film grain, 90s colours', imageId: 'photo-1526045612212-70caf35c14df', story: 'A girl explores the city in a vintage aesthetic — film grain, faded colours, analogue camera flares. Feels like a 90s music video.' },
+      { name: 'Dark Botanica', desc: 'Tropics, jungle, luxury', imageId: 'photo-1441974231531-c6227db76b6e', story: 'A girl moves through a lush tropical jungle at dusk — exotic flowers, deep shadows, luxury and mystery at every turn.' },
     ],
   },
   {
-    title: 'Cinematic Drama',
+    title: 'Mood & Vibe',
     items: [
-      { name: 'Lost Astronaut', desc: 'Alone, deep space, crystal cave', imageId: CHARACTER_IMAGES[2], story: 'An astronaut discovers a crystal cave on an alien planet. She reaches out — the cave explodes with colour and light.' },
-      { name: 'Mountain Climber', desc: 'Summit push at golden hour', imageId: REGEN_POOL[3], story: 'A climber makes the final push to a summit at golden hour. She reaches the top — endless mountain range stretches out below.' },
-      { name: 'Ocean Diver', desc: 'Shipwreck, bioluminescence', imageId: REGEN_POOL[4], story: 'A diver explores a sunken shipwreck at night. Bioluminescent creatures light up the darkness — she finds a glowing artefact.' },
-      { name: 'Forest Runner', desc: 'Chased by shadows, ancient trees', imageId: REGEN_POOL[2], story: 'A runner sprints through an ancient forest at dusk, chased by shadows. She bursts into a clearing — the shadows dissolve in golden light.' },
+      { name: 'Winter Luxe', desc: 'Snow, fur coat, cosy', imageId: 'photo-1491555103944-7c647fd857e6', story: 'A girl walks through a snowy city in a luxurious fur coat. Snowflakes fall gently — warm café lights glow through frosted windows.' },
+      { name: 'Spring Bloom', desc: 'Blooming garden, pastel', imageId: 'photo-1469474968028-56623f02e42e', story: 'A girl wanders through a cherry blossom garden in spring. Petals fall around her like snow — soft pastel colours, pure joy.' },
+      { name: 'Night City', desc: 'Neon rain, city lights', imageId: 'photo-1447752875215-b2761acb3c5d', story: 'A girl walks through a neon-lit rainy city at midnight. Reflections shimmer on wet streets — she owns the night.' },
+      { name: 'Rooftop Sunset', desc: 'City view, wind, golden sky', imageId: 'photo-1426604966848-d7adac402bff', story: 'A girl stands on a rooftop at sunset with the whole city below. Wind in her hair, golden sky behind her — the city is hers.' },
     ],
   },
 ];
@@ -169,13 +169,11 @@ export default function Home() {
           <span style={{ fontSize: 11, fontWeight: 600, color: '#E8445A', background: 'rgba(232,68,90,0.12)', borderRadius: 999, padding: '3px 10px', border: '1px solid rgba(232,68,90,0.2)' }}>New</span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: '0 20px' }}>
-          {/* Animate Photo */}
-          <FeatureCard title="Animate Photo" desc="Upload a photo — AI adds parallax and motion" tag="Animation" color="#7C5CFC" onClick={() => router.push('/character')}>
-            <img src="https://images.unsplash.com/d0WQ8jMQd2c?w=300&h=200&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
+          <FeatureCard title="Animate Photo" desc="Upload a photo — AI adds parallax and motion" tag="Animation" color="#7C5CFC" onClick={() => router.push('/animate')}>
+            <img src="https://images.unsplash.com/d0WQ8jMQd2c?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
           </FeatureCard>
 
-          {/* Photos to Video — collage */}
-          <FeatureCard title="Photos to Video" desc="N photos → AI generates smooth transitions" tag="Video" color="#06B6D4" onClick={() => router.push('/character')}>
+          <FeatureCard title="Photos to Video" desc="N photos → AI generates smooth transitions" tag="Video" color="#06B6D4" onClick={() => router.push('/photos-to-video')}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, width: '100%', height: '100%' }}>
               {['photo-1534528741775-53994a69daeb','photo-1516117172878-fd2c41f4a759','photo-1507003211169-0a1dd7228f2d','photo-1470071459604-3b5ec3a7fe05'].map((id, i) => (
                 <img key={i} src={`https://images.unsplash.com/${id}?w=150&h=150&fit=crop&q=70`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7)' }} />
@@ -183,14 +181,12 @@ export default function Home() {
             </div>
           </FeatureCard>
 
-          {/* Beat Cuts */}
-          <FeatureCard title="Beat Cuts" desc="AI auto-cuts scenes exactly on the beat" tag="Editing" color="#E8445A" onClick={() => router.push('/character')}>
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=200&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
+          <FeatureCard title="Beat Cuts" desc="AI auto-cuts scenes exactly on the beat" tag="Editing" color="#E8445A" onClick={() => router.push('/beat-cuts')}>
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
           </FeatureCard>
 
-          {/* Style Transfer */}
-          <FeatureCard title="Style Transfer" desc="Neon / Film Noir / Anime / Cinematic — all scenes at once" tag="Style" color="#F59E0B" onClick={() => router.push('/character')}>
-            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=200&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
+          <FeatureCard title="Style Transfer" desc="Neon / Film Noir / Vintage / Cinematic" tag="Style" color="#F59E0B" onClick={() => router.push('/style-transfer')}>
+            <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
           </FeatureCard>
         </div>
       </div>
