@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { CHARACTER_IMAGES, REGEN_POOL } from '@/lib/mockScenes';
 import { TabBar } from '@/components/TabBar';
 
@@ -63,6 +64,12 @@ const SECTIONS = [
 
 export default function Home() {
   const router = useRouter();
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   const handleStart = (character: string, story: string) => {
     sessionStorage.setItem('clipspark_prefill_character', character);
@@ -105,17 +112,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Hero — featured idea */}
-      {(() => {
-        const s = HERO_SLIDES[0];
-        return (
-          <div
-            onClick={() => handleStart(s.character, s.story)}
-            style={{ position: 'relative', width: '100%', height: 260, overflow: 'hidden', cursor: 'pointer' }}
-          >
+      {/* Hero slider */}
+      <div style={{ position: 'relative', width: '100%', height: 260, overflow: 'hidden' }}>
+        {HERO_SLIDES.map((s, i) => (
+          <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === heroIndex ? 1 : 0, transition: 'opacity 0.6s ease', pointerEvents: i === heroIndex ? 'auto' : 'none' }}
+            onClick={() => handleStart(s.character, s.story)}>
             <img src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`} alt={s.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.85) 100%)' }} />
+              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)', cursor: 'pointer' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.88) 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 20px 20px' }}>
               <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#E8445A', background: 'rgba(232,68,90,0.18)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(232,68,90,0.3)' }}>
                 {s.tag} · Featured
@@ -127,10 +131,17 @@ export default function Home() {
                   Try It →
                 </button>
               </div>
+              {/* Pagination dots */}
+              <div style={{ display: 'flex', gap: 5, marginTop: 12, justifyContent: 'center' }}>
+                {HERO_SLIDES.map((_, di) => (
+                  <button key={di} onClick={e => { e.stopPropagation(); setHeroIndex(di); }}
+                    style={{ width: di === heroIndex ? 20 : 6, height: 6, borderRadius: 999, border: 'none', cursor: 'pointer', background: di === heroIndex ? '#fff' : 'rgba(255,255,255,0.35)', transition: 'all 0.3s', padding: 0 }} />
+                ))}
+              </div>
             </div>
           </div>
-        );
-      })()}
+        ))}
+      </div>
 
       {/* AI Features */}
       <div style={{ marginTop: 28 }}>
