@@ -190,29 +190,87 @@ export default function BeatCutsPage() {
         </div>
       )}
 
-      {/* Result */}
+      {/* Result — CapCut-style editor */}
       {stage === 'result' && selectedItem && (
-        <main style={{ padding: '24px 20px 0' }}>
-          <p style={{ fontSize: 22, fontWeight: 800, color: '#F0F0FF', marginBottom: 4 }}>Beat-synced ✓</p>
-          <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>{selectedTrack.title} · {selectedTrack.bpm} BPM</p>
-          <div style={{ borderRadius: 20, overflow: 'hidden', marginBottom: 16, position: 'relative' }}>
-            <img src={`https://images.unsplash.com/${selectedItem.imageId}?w=800&h=450&fit=crop&q=80`} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
-            <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.25)' }} />
-            <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(139,92,246,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>🎵 Beat-synced</div>
+        <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100svh - 60px)' }}>
+
+          {/* Top controls */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', flexShrink: 0 }}>
+            <button onClick={() => setStage('gallery')} style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>✕</button>
+            <div style={{ textAlign: 'center' }}>
+              <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF' }}>{selectedTrack.title}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{selectedTrack.bpm} BPM · Beat-synced</p>
+            </div>
+            <button style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            </button>
           </div>
-          <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 14, padding: '12px 14px', marginBottom: 20 }}>
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginBottom: 8, fontWeight: 600 }}>CUT POINTS</p>
-            <div style={{ display: 'flex', gap: 3 }}>
-              {BAR_HEIGHTS.map((h, i) => (
-                <div key={i} style={{ flex: 1, height: 28, borderRadius: 3, background: `rgba(139,92,246,${h/100 * 0.8})` }} />
+
+          {/* Full-screen video preview */}
+          <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+            <img src={`https://images.unsplash.com/${selectedItem.imageId}?w=800&h=1200&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            {/* Play button */}
+            <button style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 52, height: 52, borderRadius: '50%', background: 'rgba(0,0,0,0.4)', backdropFilter: 'blur(8px)', border: '1.5px solid rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 2 }}><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+          </div>
+
+          {/* Editor bottom panel */}
+          <div style={{ flexShrink: 0, background: '#111', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+
+            {/* Audio waveform track */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 16px 6px' }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth={2}><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              </div>
+              <div style={{ flex: 1, height: 36, background: 'rgba(255,255,255,0.06)', borderRadius: 8, position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', gap: 1, padding: '0 6px' }}>
+                {BAR_HEIGHTS.map((h, i) => (
+                  <div key={i} style={{ flex: 1, borderRadius: 1, height: `${Math.max(20, h * 0.4)}%`, background: i % 4 === 0 ? 'rgba(16,185,129,0.8)' : 'rgba(255,255,255,0.25)' }} />
+                ))}
+                {/* Playhead */}
+                <div style={{ position: 'absolute', top: 0, bottom: 0, left: '30%', width: 2, background: '#10B981', borderRadius: 1 }} />
+              </div>
+            </div>
+
+            {/* Clip strip */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 16px 10px' }}>
+              <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, cursor: 'pointer' }}>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth={2}><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              </div>
+              <div style={{ flex: 1, display: 'flex', gap: 3, overflowX: 'auto', position: 'relative' }}>
+                {selectedIds.map((id, i) => {
+                  const item = GALLERY_GROUPS.flatMap(g => g.items).find(it => it.id === id);
+                  const isActive = i === 0;
+                  return item ? (
+                    <div key={id} style={{ width: 70, height: 52, borderRadius: 6, overflow: 'hidden', flexShrink: 0, position: 'relative', border: isActive ? '2.5px solid #fff' : '1.5px solid rgba(255,255,255,0.15)' }}>
+                      <img src={`https://images.unsplash.com/${item.imageId}?w=140&h=104&fit=crop&q=70`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      {isActive && (
+                        <div style={{ position: 'absolute', top: 2, right: 2, background: 'rgba(0,0,0,0.6)', borderRadius: 4, padding: '1px 4px', fontSize: 9, fontWeight: 700, color: '#fff' }}>4.3</div>
+                      )}
+                    </div>
+                  ) : null;
+                })}
+                <div style={{ width: 36, height: 52, borderRadius: 6, border: '1.5px dashed rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, cursor: 'pointer', fontSize: 18, color: 'rgba(255,255,255,0.3)' }}>+</div>
+              </div>
+            </div>
+
+            {/* Toolbar */}
+            <div style={{ display: 'flex', justifyContent: 'space-around', padding: '8px 0 16px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+              {[
+                { icon: '⇄', label: 'REPLACE' },
+                { icon: '⊢', label: 'SPLIT' },
+                { icon: '⊡', label: 'SCALE' },
+                { icon: '🗑', label: 'DELETE' },
+                { icon: '⧉', label: 'DUPLICATE' },
+              ].map(tool => (
+                <button key={tool.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: '0 8px' }}>
+                  <span style={{ fontSize: 20, color: '#fff' }}>{tool.icon}</span>
+                  <span style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 0.5 }}>{tool.label}</span>
+                </button>
               ))}
             </div>
           </div>
-          <div style={{ display: 'flex', gap: 10 }}>
-            <button onClick={() => setStage('track')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Change track</button>
-            <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(139,92,246,0.35)' }}>Export</button>
-          </div>
-        </main>
+        </div>
       )}
 
       <TabBar />
