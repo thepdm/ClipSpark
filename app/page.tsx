@@ -9,7 +9,7 @@ const HERO_SLIDES = [
   {
     title: 'TikTok Dance',
     desc: 'Trending moves, viral energy — your moment to shine',
-    imageId: 'photo-1598387993281-cecf8b71a8f8',
+    imageId: 'photo-EhUEJhwPxHE',
     character: 'Dancer',
     story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.',
     tag: 'TikTok',
