@@ -183,7 +183,7 @@ export default function ScenesPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <Link href="/story" style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, flexShrink: 0 }}>
+        <Link href="/create" style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, flexShrink: 0 }}>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
