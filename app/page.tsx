@@ -7,6 +7,14 @@ import { TabBar } from '@/components/TabBar';
 
 const HERO_SLIDES = [
   {
+    title: 'TikTok Dance',
+    desc: 'Trending moves, viral energy — your moment to shine',
+    imageId: 'photo-1547347298-4074fc3086f0',
+    character: 'Dancer',
+    story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.',
+    tag: 'TikTok',
+  },
+  {
     title: 'Maldives Sunset',
     desc: 'Turquoise water, white sand, golden hour',
     imageId: 'photo-1573843981267-be1999ff37cd',
