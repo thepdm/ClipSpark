@@ -188,6 +188,10 @@ export default function Home() {
           <FeatureCard title="Style Transfer" desc="Neon / Film Noir / Vintage / Cinematic" tag="Style" color="#F59E0B" onClick={() => router.push('/style-transfer')}>
             <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
           </FeatureCard>
+
+          <FeatureCard title="AI Dance" desc="Upload your photo — AI makes you dance to any beat" tag="Dance" color="#10B981" onClick={() => router.push('/ai-dance')}>
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.2)' }} />
+          </FeatureCard>
         </div>
       </div>
 
