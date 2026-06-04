@@ -3,133 +3,174 @@ import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { TabBar } from '@/components/TabBar';
 
-const STYLES = [
-  { id: 'parallax', label: 'Parallax', desc: 'Depth & layers', icon: '✦' },
-  { id: 'drift', label: 'Drift', desc: 'Slow float', icon: '〰' },
-  { id: 'zoom', label: 'Zoom In', desc: 'Pull forward', icon: '⊕' },
-  { id: 'wind', label: 'Wind', desc: 'Hair & fabric', icon: '~' },
+const GALLERY_PHOTOS = [
+  'photo-1534528741775-53994a69daeb',
+  'photo-1516117172878-fd2c41f4a759',
+  'photo-1524504388940-b1c1722653e0',
+  'photo-1544005313-94ddf0286df2',
+  'photo-1507003211169-0a1dd7228f2d',
+  'photo-1426604966848-d7adac402bff',
+  'photo-1469474968028-56623f02e42e',
+  'photo-1447752875215-b2761acb3c5d',
 ];
-const DURATIONS = ['3s', '5s', '8s'];
 
-type Stage = 'upload' | 'style' | 'generating' | 'result';
+const MY_WORKS = [
+  { imageId: 'photo-1534528741775-53994a69daeb', title: 'My Portrait', date: 'Today' },
+  { imageId: 'photo-1573843981267-be1999ff37cd', title: 'Beach Day', date: 'Yesterday' },
+  { imageId: 'photo-1519501025264-65ba15a82390', title: 'Night Walk', date: 'June 3' },
+  { imageId: 'photo-1516117172878-fd2c41f4a759', title: 'Forest', date: 'June 1' },
+];
+
+const TABS = ['Animate', 'Combine', 'Change'];
+const PROMPT_EXAMPLES = [
+  'Butterflies fly and shimmer in all colors of the rainbow',
+  'The wind gently moves the hair, golden light',
+  'Slow zoom in, dreamy blur effect',
+  'Petals fall like snow around her',
+];
+
+type Stage = 'idle' | 'generating' | 'result';
 
 export default function AnimatePage() {
-  const [stage, setStage] = useState<Stage>('upload');
-  const [photoUrl, setPhotoUrl] = useState('');
-  const [selectedStyle, setSelectedStyle] = useState('parallax');
-  const [duration, setDuration] = useState('5s');
+  const [activeTab, setActiveTab] = useState(0);
+  const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
+  const [prompt, setPrompt] = useState('');
+  const [stage, setStage] = useState<Stage>('idle');
+  const [resultUrl, setResultUrl] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
-    const url = URL.createObjectURL(file);
-    setPhotoUrl(url);
-    setStage('style');
+    if (file) setSelectedPhoto(URL.createObjectURL(file));
   };
 
   const handleGenerate = () => {
+    if (!selectedPhoto || !prompt.trim()) return;
     setStage('generating');
-    setTimeout(() => setStage('result'), 2500);
-  };
-
-  const cssAnimation: Record<string, string> = {
-    parallax: 'scale(1.08) translateY(-4px)',
-    drift: 'translateX(6px) translateY(-3px)',
-    zoom: 'scale(1.15)',
-    wind: 'scale(1.04) rotate(0.5deg)',
+    setResultUrl(selectedPhoto);
+    setTimeout(() => setStage('result'), 2800);
   };
 
   return (
     <div style={{ minHeight: '100svh', background: '#0A0A0F', paddingBottom: 100 }}>
-      <div style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 20px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(10,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <Link href="/" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 4 }}>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          Back
-        </Link>
-        <span style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF' }}>Animate Photo</span>
-        <div style={{ width: 50 }} />
+
+      {/* Nav */}
+      <div style={{ padding: '52px 20px 16px', display: 'flex', alignItems: 'center', gap: 16 }}>
+        <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: 20, lineHeight: 1 }}>‹</Link>
+        <span style={{ flex: 1, textAlign: 'center', fontSize: 17, fontWeight: 700, color: '#F0F0FF' }}>Studio</span>
+        <div style={{ width: 20 }} />
       </div>
 
-      <main style={{ padding: '24px 20px 0' }}>
-        {stage === 'upload' && (
-          <>
-            <p style={{ fontSize: 26, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.5, marginBottom: 8 }}>Upload your photo</p>
-            <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 28 }}>AI will add motion and make it come alive</p>
-            <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed rgba(124,92,252,0.4)', borderRadius: 20, padding: '60px 20px', textAlign: 'center', cursor: 'pointer', background: 'rgba(124,92,252,0.06)' }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>📸</div>
-              <p style={{ fontSize: 16, fontWeight: 700, color: '#F0F0FF', marginBottom: 6 }}>Tap to upload</p>
-              <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)' }}>JPG, PNG — any portrait photo</p>
-            </div>
-            <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFile} />
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8, marginTop: 20 }}>
-              {['photo-1534528741775-53994a69daeb','photo-1544005313-94ddf0286df2','photo-1524504388940-b1c1722653e0'].map(id => (
-                <div key={id} onClick={() => { setPhotoUrl(`https://images.unsplash.com/${id}?w=400&h=500&fit=crop`); setStage('style'); }} style={{ borderRadius: 14, overflow: 'hidden', cursor: 'pointer', aspectRatio: '3/4' }}>
-                  <img src={`https://images.unsplash.com/${id}?w=200&h=260&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-              ))}
-            </div>
-            <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', marginTop: 8 }}>Or pick a sample photo above</p>
-          </>
-        )}
+      {/* Tabs */}
+      <div style={{ margin: '0 16px 20px', background: 'rgba(255,255,255,0.08)', borderRadius: 999, padding: 4, display: 'flex' }}>
+        {TABS.map((tab, i) => (
+          <button key={tab} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === i ? 'rgba(255,255,255,0.15)' : 'transparent', color: activeTab === i ? '#fff' : 'rgba(255,255,255,0.4)', fontSize: 14, fontWeight: activeTab === i ? 700 : 500, transition: 'all 0.2s' }}>
+            {tab}
+          </button>
+        ))}
+      </div>
 
-        {stage === 'style' && (
-          <>
-            <div style={{ display: 'flex', gap: 14, marginBottom: 24 }}>
-              <img src={photoUrl} alt="" style={{ width: 90, height: 120, borderRadius: 14, objectFit: 'cover', flexShrink: 0 }} />
-              <div>
-                <p style={{ fontSize: 22, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.4, marginBottom: 6 }}>Choose style</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>How should AI animate your photo?</p>
-              </div>
+      <div style={{ padding: '0 16px' }}>
+
+        {/* Upload / Preview area */}
+        {!selectedPhoto ? (
+          <div onClick={() => fileRef.current?.click()} style={{ borderRadius: 20, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '52px 20px', textAlign: 'center', cursor: 'pointer', marginBottom: 16 }}>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: 12 }}>
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+            <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>Upload a photo<br />to create a video</p>
+          </div>
+        ) : (
+          <div style={{ borderRadius: 20, overflow: 'hidden', marginBottom: 16, position: 'relative' }}>
+            <img src={selectedPhoto} alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block' }} />
+            <div style={{ position: 'absolute', bottom: 14, left: '50%', transform: 'translateX(-50%)' }}>
+              <button onClick={() => { setSelectedPhoto(null); setStage('idle'); }} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 22px', borderRadius: 999, background: 'rgba(30,30,30,0.85)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.2)', color: '#fff', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+                <span style={{ fontSize: 16 }}>↺</span> Replace
+              </button>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
-              {STYLES.map(s => (
-                <div key={s.id} onClick={() => setSelectedStyle(s.id)} style={{ borderRadius: 16, padding: '16px', cursor: 'pointer', border: selectedStyle === s.id ? '2px solid #7C5CFC' : '1px solid rgba(255,255,255,0.08)', background: selectedStyle === s.id ? 'rgba(124,92,252,0.12)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
-                  <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
-                  <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>{s.label}</p>
-                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{s.desc}</p>
-                </div>
-              ))}
+          </div>
+        )}
+        <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={handleFileUpload} />
+
+        {/* Gallery strip */}
+        <div style={{ display: 'flex', gap: 8, overflowX: 'auto', marginBottom: 16, paddingBottom: 2 }}>
+          {GALLERY_PHOTOS.map(id => (
+            <div key={id} onClick={() => { setSelectedPhoto(`https://images.unsplash.com/${id}?w=600&h=600&fit=crop`); setStage('idle'); }} style={{ width: 72, height: 72, borderRadius: 14, overflow: 'hidden', flexShrink: 0, cursor: 'pointer', border: selectedPhoto?.includes(id) ? '2.5px solid #8B5CF6' : '2px solid transparent', transition: 'border 0.15s' }}>
+              <img src={`https://images.unsplash.com/${id}?w=144&h=144&fit=crop&q=70`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
             </div>
-            <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: 10 }}>Duration</p>
-            <div style={{ display: 'flex', gap: 8, marginBottom: 28 }}>
-              {DURATIONS.map(d => (
-                <button key={d} onClick={() => setDuration(d)} style={{ flex: 1, padding: '10px', borderRadius: 12, border: duration === d ? 'none' : '1px solid rgba(255,255,255,0.08)', background: duration === d ? 'linear-gradient(135deg,#7C5CFC,#a78bfa)' : 'rgba(255,255,255,0.04)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>{d}</button>
-              ))}
-            </div>
-            <button onClick={handleGenerate} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#7C5CFC,#a78bfa)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(124,92,252,0.4)' }}>
-              ✨ Animate
+          ))}
+        </div>
+
+        {/* Prompt field */}
+        <div style={{ borderRadius: 18, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', marginBottom: 20, overflow: 'hidden' }}>
+          <textarea
+            value={prompt}
+            onChange={e => setPrompt(e.target.value)}
+            placeholder={`Come up with a story. For example: ${PROMPT_EXAMPLES[0]}`}
+            rows={3}
+            style={{ width: '100%', padding: '16px 16px 8px', background: 'transparent', border: 'none', outline: 'none', color: '#F0F0FF', fontSize: 14, lineHeight: 1.55, resize: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }}
+          />
+          <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '4px 12px 10px' }}>
+            <button
+              onClick={handleGenerate}
+              disabled={!selectedPhoto || !prompt.trim() || stage === 'generating'}
+              style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: selectedPhoto && prompt.trim() ? 'linear-gradient(135deg,#8B5CF6,#EC4899)' : 'rgba(255,255,255,0.1)',
+                border: 'none', cursor: selectedPhoto && prompt.trim() ? 'pointer' : 'default',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: selectedPhoto && prompt.trim() ? '0 3px 12px rgba(139,92,246,0.4)' : 'none',
+                transition: 'all 0.2s',
+              }}
+            >
+              {stage === 'generating'
+                ? <div style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', animation: 'spin 0.85s linear infinite' }} />
+                : <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+              }
             </button>
-          </>
-        )}
+          </div>
+          {/* Quick prompts */}
+          <div style={{ display: 'flex', gap: 6, overflowX: 'auto', padding: '0 12px 12px' }}>
+            {PROMPT_EXAMPLES.map(ex => (
+              <button key={ex} onClick={() => setPrompt(ex)} style={{ flexShrink: 0, padding: '5px 12px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: 11, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                {ex.length > 24 ? ex.slice(0, 24) + '…' : ex}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        {stage === 'generating' && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '65svh', gap: 20 }}>
-            <div style={{ position: 'relative', width: 120, height: 160, borderRadius: 20, overflow: 'hidden' }}>
-              <img src={photoUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', animation: 'pulse 1.5s ease-in-out infinite' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(124,92,252,0.3), transparent)', animation: 'pulse 1.5s ease-in-out infinite' }} />
+        {/* Result */}
+        {stage === 'result' && (
+          <div style={{ marginBottom: 20, borderRadius: 18, overflow: 'hidden', border: '1.5px solid rgba(139,92,246,0.4)', position: 'relative' }}>
+            <img src={resultUrl} alt="" style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', display: 'block', animation: 'pulse 3s ease-in-out infinite alternate' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 55%, rgba(10,10,15,0.7))' }} />
+            <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(139,92,246,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>✨ Animated</div>
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 14px 14px', display: 'flex', gap: 8 }}>
+              <button onClick={() => setStage('idle')} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>↻ Redo</button>
+              <button style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', border: 'none', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Save & Share</button>
             </div>
-            <p style={{ fontSize: 17, fontWeight: 700, color: '#F0F0FF' }}>Animating your photo...</p>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)' }}>AI is adding {STYLES.find(s=>s.id===selectedStyle)?.label} motion</p>
           </div>
         )}
 
-        {stage === 'result' && (
-          <>
-            <p style={{ fontSize: 22, fontWeight: 800, color: '#F0F0FF', marginBottom: 4 }}>Your animated photo</p>
-            <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>{STYLES.find(s=>s.id===selectedStyle)?.label} · {duration}</p>
-            <div style={{ borderRadius: 20, overflow: 'hidden', marginBottom: 20, position: 'relative', aspectRatio: '3/4', maxHeight: 420, margin: '0 auto 20px', display: 'block' }}>
-              <img src={photoUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', animation: `float-${selectedStyle} 3s ease-in-out infinite alternate`, transition: 'transform 3s ease-in-out' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, transparent 60%, rgba(10,10,15,0.6))' }} />
-              <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(124,92,252,0.8)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>✨ AI Animated</div>
+        {/* My Works */}
+        <p style={{ fontSize: 17, fontWeight: 700, color: '#F0F0FF', textAlign: 'center', marginBottom: 16 }}>My Works</p>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          {MY_WORKS.map(w => (
+            <div key={w.imageId} style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', aspectRatio: '1', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <img src={`https://images.unsplash.com/${w.imageId}?w=300&h=300&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)' }} />
+              <div style={{ position: 'absolute', bottom: 8, left: 10, right: 28 }}>
+                <p style={{ fontSize: 12, fontWeight: 600, color: '#fff', marginBottom: 1 }}>{w.title}</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>{w.date}</p>
+              </div>
+              <button style={{ position: 'absolute', bottom: 8, right: 8, background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>⋯</button>
             </div>
-            <div style={{ display: 'flex', gap: 10 }}>
-              <button onClick={() => setStage('style')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Try another</button>
-              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#7C5CFC,#a78bfa)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(124,92,252,0.4)' }}>Save & Share</button>
-            </div>
-          </>
-        )}
-      </main>
+          ))}
+        </div>
+      </div>
+
       <TabBar />
     </div>
   );
