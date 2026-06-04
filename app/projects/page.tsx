@@ -55,27 +55,8 @@ export default function ProjectsPage() {
 
       <main style={{ padding: '20px 20px 0' }}>
 
-        {/* New Video button */}
-        <button
-          onClick={() => router.push('/character')}
-          style={{
-            width: '100%', padding: '16px 24px', marginBottom: 24,
-            borderRadius: 20,
-            background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
-            color: '#fff', fontSize: 16, fontWeight: 700,
-            border: 'none', cursor: 'pointer',
-            boxShadow: '0 6px 28px rgba(232,68,90,0.40)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
-          }}
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-            <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-          New Video
-        </button>
-
         {projects.length === 0 ? (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '45svh', textAlign: 'center', gap: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '55svh', textAlign: 'center', gap: 14 }}>
             <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(232,68,90,0.08)', border: '1px solid rgba(232,68,90,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34 }}>
               🎬
             </div>
@@ -83,6 +64,23 @@ export default function ProjectsPage() {
               <h2 style={{ fontSize: 18, fontWeight: 700, color: '#F0F0FF', marginBottom: 6 }}>No projects yet</h2>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>Your saved videos will appear here</p>
             </div>
+            <button
+              onClick={() => router.push('/character')}
+              style={{
+                marginTop: 8, padding: '14px 36px',
+                borderRadius: 999,
+                background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+                color: '#fff', fontSize: 15, fontWeight: 700,
+                border: 'none', cursor: 'pointer',
+                boxShadow: '0 6px 24px rgba(232,68,90,0.40)',
+                display: 'flex', alignItems: 'center', gap: 8,
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" />
+              </svg>
+              New Video
+            </button>
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
