@@ -135,6 +135,21 @@ export default function Home() {
       }}>
         <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5, color: '#F0F0FF' }}>ClipSpark</span>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button
+            onClick={() => router.push('/remix')}
+            style={{
+              display: 'flex', alignItems: 'center', gap: 5,
+              background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)',
+              borderRadius: 999, padding: '6px 14px',
+              fontSize: 13, fontWeight: 700, color: 'rgba(255,255,255,0.75)',
+              cursor: 'pointer',
+            }}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+            Remix
+          </button>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 5,
             background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
@@ -143,15 +158,6 @@ export default function Home() {
             boxShadow: '0 3px 12px rgba(139,92,246,0.35)',
           }}>
             ✦ PRO
-          </div>
-          <div style={{
-            width: 34, height: 34, borderRadius: '50%',
-            background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.09)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-            </svg>
           </div>
         </div>
       </div>

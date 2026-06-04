@@ -48,7 +48,6 @@ export function TabBar() {
         </svg>
       </button>
 
-      <TabItem href="/remix" active={isRemix} icon={<RemixIcon />} label="Remix" />
       <TabItem href="/projects" active={isProjects} icon={<FolderIcon />} label="Projects" />
     </nav>
   );
