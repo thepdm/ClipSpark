@@ -22,9 +22,9 @@ function StepBar() {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 20 }}>
       {[1, 2, 3, 4, 5].map(n => (
-        <div key={n} style={{ height: 4, borderRadius: 999, flex: 1, background: '#E8445A' }} />
+        <div key={n} style={{ height: 4, borderRadius: 999, flex: 1, background: '#8B5CF6' }} />
       ))}
-      <span style={{ fontSize: 11, color: '#E8445A', fontWeight: 700, whiteSpace: 'nowrap', marginLeft: 4 }}>Done ✓</span>
+      <span style={{ fontSize: 11, color: '#8B5CF6', fontWeight: 700, whiteSpace: 'nowrap', marginLeft: 4 }}>Done ✓</span>
     </div>
   );
 }
@@ -94,7 +94,7 @@ export default function ResultPage() {
 
   if (!track || scenes.length === 0) return (
     <div style={{ minHeight: '100svh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <div style={{ width: 44, height: 44, borderRadius: '50%', border: '2.5px solid rgba(232,68,90,0.15)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
+      <div style={{ width: 44, height: 44, borderRadius: '50%', border: '2.5px solid rgba(139,92,246,0.15)', borderTopColor: '#8B5CF6', animation: 'spin 0.85s linear infinite' }} />
     </div>
   );
 
@@ -108,7 +108,7 @@ export default function ResultPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--glass-border)',
       }}>
-        <Link href="/music" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
+        <Link href="/music" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -127,20 +127,20 @@ export default function ResultPage() {
             {exportMode === 'syncing' ? (
               <div style={{
                 width: '100%', height: '100%', minHeight: 200,
-                background: 'linear-gradient(135deg, rgba(232,68,90,0.12), rgba(255,143,163,0.12))',
+                background: 'linear-gradient(135deg, rgba(139,92,246,0.12), rgba(255,143,163,0.12))',
                 display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16,
               }}>
                 <div style={{ display: 'flex', alignItems: 'flex-end', gap: 4, height: 40 }}>
                   {BAR_HEIGHTS.slice(0, 10).map((h, i) => (
                     <div key={i} style={{
                       width: 6, borderRadius: 3, height: `${h}%`,
-                      background: `linear-gradient(to top, #E8445A, #FF8FA3)`,
+                      background: `linear-gradient(to top, #8B5CF6, #EC4899)`,
                       animation: `pulse ${0.5 + (i % 3) * 0.15}s ease-in-out infinite alternate`,
                       animationDelay: `${i * 0.07}s`,
                     }} />
                   ))}
                 </div>
-                <p style={{ fontSize: 15, fontWeight: 700, color: '#E8445A' }}>Syncing to beat...</p>
+                <p style={{ fontSize: 15, fontWeight: 700, color: '#8B5CF6' }}>Syncing to beat...</p>
                 <p style={{ fontSize: 12, color: 'var(--text-2)' }}>Matching scenes to {track.bpm} BPM</p>
               </div>
             ) : (
@@ -156,7 +156,7 @@ export default function ResultPage() {
                 {exportMode === 'synced' && (
                   <div style={{
                     position: 'absolute', top: 10, left: 10,
-                    background: 'rgba(232,68,90,0.85)', backdropFilter: 'blur(8px)',
+                    background: 'rgba(139,92,246,0.85)', backdropFilter: 'blur(8px)',
                     borderRadius: 999, padding: '4px 10px',
                     fontSize: 10, fontWeight: 700, color: '#fff',
                     display: 'flex', alignItems: 'center', gap: 4,
@@ -211,7 +211,7 @@ export default function ResultPage() {
                     flex: scene.duration,
                     height: exportMode === 'synced' ? 6 : 3,
                     borderRadius: 999,
-                    background: i === activeScene ? '#E8445A' : 'rgba(232,68,90,0.2)',
+                    background: i === activeScene ? '#8B5CF6' : 'rgba(139,92,246,0.2)',
                     border: 'none', cursor: 'pointer', transition: 'all 0.2s', padding: 0,
                   }} />
                 ))}
@@ -221,7 +221,7 @@ export default function ResultPage() {
                   {BAR_HEIGHTS.slice(0, 20).map((h, i) => (
                     <div key={i} style={{
                       flex: 1, height: 4, borderRadius: 1,
-                      background: `rgba(232,68,90,${h / 100})`,
+                      background: `rgba(139,92,246,${h / 100})`,
                     }} />
                   ))}
                 </div>
@@ -248,7 +248,7 @@ export default function ResultPage() {
           <div style={{
             display: 'flex', alignItems: 'center', gap: 12,
             padding: '10px 12px', borderRadius: 12,
-            background: 'rgba(232,68,90,0.07)',
+            background: 'rgba(139,92,246,0.07)',
           }}>
             <div style={{
               width: 36, height: 36, borderRadius: '50%',
@@ -278,10 +278,10 @@ export default function ResultPage() {
                 style={{
                   flex: 1, padding: '18px 12px',
                   borderRadius: 'var(--r-xl)',
-                  background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+                  background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
                   color: '#fff', fontSize: 14, fontWeight: 700,
                   border: 'none', cursor: 'pointer',
-                  boxShadow: '0 6px 24px rgba(232,68,90,0.35)',
+                  boxShadow: '0 6px 24px rgba(139,92,246,0.35)',
                   textAlign: 'center',
                 }}
               >
@@ -315,7 +315,7 @@ export default function ResultPage() {
               ...glass, borderRadius: 'var(--r-lg)', padding: '12px 16px', marginBottom: 14,
               display: 'flex', alignItems: 'center', gap: 10, boxShadow: 'var(--shadow-sm)',
             }}>
-              <div style={{ width: 36, height: 36, borderRadius: 10, background: exportMode === 'synced' ? 'rgba(232,68,90,0.1)' : 'rgba(28,28,30,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>
+              <div style={{ width: 36, height: 36, borderRadius: 10, background: exportMode === 'synced' ? 'rgba(139,92,246,0.1)' : 'rgba(28,28,30,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, fontSize: 18 }}>
                 {exportMode === 'synced' ? '🎵' : '🎬'}
               </div>
               <div>
@@ -335,10 +335,10 @@ export default function ResultPage() {
                 style={{
                   flex: 1, padding: '14px 0',
                   borderRadius: 'var(--r-xl)',
-                  background: saved ? 'rgba(16,185,129,0.12)' : 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+                  background: saved ? 'rgba(16,185,129,0.12)' : 'linear-gradient(135deg, #8B5CF6, #EC4899)',
                   color: saved ? '#10B981' : '#fff', fontSize: 15, fontWeight: 700,
                   border: 'none', cursor: saved ? 'default' : 'pointer',
-                  boxShadow: saved ? 'none' : '0 6px 24px rgba(232,68,90,0.35)',
+                  boxShadow: saved ? 'none' : '0 6px 24px rgba(139,92,246,0.35)',
                 }}
               >
                 {saved ? '✓ Saved' : 'Save Project'}

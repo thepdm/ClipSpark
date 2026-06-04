@@ -17,7 +17,7 @@ function StepBar() {
         <div key={n} style={{
           height: 3, borderRadius: 999,
           flex: n === 3 ? 2 : 1,
-          background: n <= 3 ? '#E8445A' : 'rgba(232,68,90,0.15)',
+          background: n <= 3 ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
         }} />
       ))}
     </div>
@@ -162,7 +162,7 @@ export default function ScenesPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <Link href="/story" style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500, flexShrink: 0 }}>
+        <Link href="/story" style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, flexShrink: 0 }}>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -174,10 +174,10 @@ export default function ScenesPage() {
           disabled={loading || scenes.length === 0}
           style={{
             flexShrink: 0, padding: '8px 16px', borderRadius: 999,
-            background: loading ? 'rgba(232,68,90,0.15)' : 'linear-gradient(135deg, #E8445A, #FF8FA3)',
-            color: loading ? '#E8445A' : '#fff',
+            background: loading ? 'rgba(139,92,246,0.15)' : 'linear-gradient(135deg, #8B5CF6, #EC4899)',
+            color: loading ? '#8B5CF6' : '#fff',
             fontSize: 13, fontWeight: 700, border: 'none', cursor: loading ? 'default' : 'pointer',
-            boxShadow: loading ? 'none' : '0 4px 16px rgba(232,68,90,0.35)',
+            boxShadow: loading ? 'none' : '0 4px 16px rgba(139,92,246,0.35)',
           }}
         >
           Export →
@@ -186,7 +186,7 @@ export default function ScenesPage() {
 
       {loading ? (
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
-          <div style={{ width: 48, height: 48, borderRadius: '50%', border: '2.5px solid rgba(232,68,90,0.18)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
+          <div style={{ width: 48, height: 48, borderRadius: '50%', border: '2.5px solid rgba(139,92,246,0.18)', borderTopColor: '#8B5CF6', animation: 'spin 0.85s linear infinite' }} />
           <p style={{ fontSize: 16, fontWeight: 600, color: '#F0F0FF' }}>Building your storyboard...</p>
           <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)' }}>Scenes + music are being generated</p>
         </div>
@@ -199,7 +199,7 @@ export default function ScenesPage() {
               <div style={{ padding: '10px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
                 <img src={`https://images.unsplash.com/${character.imageId}?w=80&h=80&fit=crop&q=80`} alt="" style={{ width: 34, height: 34, borderRadius: 8, objectFit: 'cover', flexShrink: 0 }} />
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 13, fontWeight: 700, color: '#E8445A' }}>{character.name}</p>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#8B5CF6' }}>{character.name}</p>
                   <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{story}</p>
                 </div>
                 <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', flexShrink: 0 }}>{scenes.length} scenes · {totalDuration}s</p>
@@ -210,9 +210,9 @@ export default function ScenesPage() {
             <div style={{ padding: '0 16px' }}>
               <div style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', background: '#000', width: '52%', aspectRatio: '9/16', margin: '0 auto' }}>
                 {isRegen ? (
-                  <div style={{ width: '100%', height: '100%', background: 'rgba(232,68,90,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
-                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '2.5px solid rgba(232,68,90,0.2)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
-                    <p style={{ fontSize: 13, color: '#E8445A', fontWeight: 600 }}>Regenerating...</p>
+                  <div style={{ width: '100%', height: '100%', background: 'rgba(139,92,246,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
+                    <div style={{ width: 36, height: 36, borderRadius: '50%', border: '2.5px solid rgba(139,92,246,0.2)', borderTopColor: '#8B5CF6', animation: 'spin 0.85s linear infinite' }} />
+                    <p style={{ fontSize: 13, color: '#8B5CF6', fontWeight: 600 }}>Regenerating...</p>
                   </div>
                 ) : activeScene ? (
                   <>
@@ -273,7 +273,7 @@ export default function ScenesPage() {
                   if (idx >= 0) setActiveIdx(idx);
                 }}
               >
-                <div style={{ height: '100%', width: `${(currentTime / totalDuration) * 100}%`, background: '#E8445A', borderRadius: 999, transition: 'width 0.1s linear' }} />
+                <div style={{ height: '100%', width: `${(currentTime / totalDuration) * 100}%`, background: '#8B5CF6', borderRadius: 999, transition: 'width 0.1s linear' }} />
               </div>
               <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', fontVariantNumeric: 'tabular-nums', minWidth: 36, textAlign: 'right' }}>
                 {formatTime(totalDuration)}
@@ -285,9 +285,9 @@ export default function ScenesPage() {
               {editingId === activeScene?.id ? (
                 <div>
                   <textarea value={editPrompt} onChange={e => setEditPrompt(e.target.value)} autoFocus rows={3}
-                    style={{ width: '100%', padding: '12px 14px', borderRadius: 12, background: 'rgba(255,255,255,0.07)', border: '1.5px solid #E8445A', color: '#F0F0FF', fontSize: 13, lineHeight: 1.5, resize: 'none', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+                    style={{ width: '100%', padding: '12px 14px', borderRadius: 12, background: 'rgba(255,255,255,0.07)', border: '1.5px solid #8B5CF6', color: '#F0F0FF', fontSize: 13, lineHeight: 1.5, resize: 'none', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' }} />
                   <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                    <button onClick={saveEdit} style={{ flex: 1, padding: '10px', borderRadius: 10, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 13, fontWeight: 700, border: 'none', cursor: 'pointer' }}>Save</button>
+                    <button onClick={saveEdit} style={{ flex: 1, padding: '10px', borderRadius: 10, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 13, fontWeight: 700, border: 'none', cursor: 'pointer' }}>Save</button>
                     <button onClick={() => setEditingId(null)} style={{ flex: 1, padding: '10px', borderRadius: 10, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.5)', fontSize: 13, cursor: 'pointer' }}>Cancel</button>
                   </div>
                 </div>
@@ -300,7 +300,7 @@ export default function ScenesPage() {
                     <button onClick={() => { if (activeScene) { setEditingId(activeScene.id); setEditPrompt(activeScene.prompt); } }}
                       style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>✏️</button>
                     <button onClick={() => activeScene && handleRegen(activeScene.id)} disabled={isRegen}
-                      style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', color: '#E8445A', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: isRegen ? 'default' : 'pointer' }}>↻</button>
+                      style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.25)', color: '#8B5CF6', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: isRegen ? 'default' : 'pointer' }}>↻</button>
                     <button onClick={() => activeScene && handleDelete(activeScene.id)} disabled={scenes.length <= 1}
                       style={{ width: 34, height: 34, borderRadius: 9, background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.25)', fontSize: 13, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: scenes.length <= 1 ? 'default' : 'pointer' }}>🗑</button>
                   </div>
@@ -318,7 +318,7 @@ export default function ScenesPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 1 }}>
                     <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{track.title}</p>
                     {track.source === 'ai_generated' && (
-                      <span style={{ fontSize: 9, fontWeight: 700, color: '#E8445A', background: 'rgba(232,68,90,0.15)', borderRadius: 999, padding: '2px 5px', flexShrink: 0 }}>AI</span>
+                      <span style={{ fontSize: 9, fontWeight: 700, color: '#8B5CF6', background: 'rgba(139,92,246,0.15)', borderRadius: 999, padding: '2px 5px', flexShrink: 0 }}>AI</span>
                     )}
                   </div>
                   <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>{track.genre} · {track.bpm} BPM</p>
@@ -329,7 +329,7 @@ export default function ScenesPage() {
                     {genLoading ? <div style={{ width: 12, height: 12, borderRadius: '50%', border: '2px solid rgba(255,255,255,0.1)', borderTopColor: 'rgba(255,255,255,0.4)', animation: 'spin 0.85s linear infinite' }} /> : '↻'}
                   </button>
                   <button onClick={() => setShowMusicSheet(true)}
-                    style={{ padding: '0 10px', height: 30, borderRadius: 8, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', color: '#E8445A', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                    style={{ padding: '0 10px', height: 30, borderRadius: 8, background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.25)', color: '#8B5CF6', fontSize: 11, fontWeight: 700, cursor: 'pointer', whiteSpace: 'nowrap' }}>
                     Change
                   </button>
                 </div>
@@ -368,10 +368,10 @@ export default function ScenesPage() {
                   const clipW = scene.duration * PX_PER_SEC;
                   return (
                     <div key={scene.id} onClick={() => { setActiveIdx(i); setCurrentTime(sceneStartTimes[i]); }}
-                      style={{ width: clipW, height: 72, flexShrink: 0, borderRadius: 10, overflow: 'hidden', cursor: 'pointer', position: 'relative', border: isActive ? '2px solid #E8445A' : '2px solid rgba(255,255,255,0.06)', boxShadow: isActive ? '0 0 14px rgba(232,68,90,0.35)' : 'none', transition: 'all 0.15s' }}>
+                      style={{ width: clipW, height: 72, flexShrink: 0, borderRadius: 10, overflow: 'hidden', cursor: 'pointer', position: 'relative', border: isActive ? '2px solid #8B5CF6' : '2px solid rgba(255,255,255,0.06)', boxShadow: isActive ? '0 0 14px rgba(139,92,246,0.35)' : 'none', transition: 'all 0.15s' }}>
                       {isRegenThis ? (
-                        <div style={{ width: '100%', height: '100%', background: 'rgba(232,68,90,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          <div style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(232,68,90,0.2)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
+                        <div style={{ width: '100%', height: '100%', background: 'rgba(139,92,246,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <div style={{ width: 16, height: 16, borderRadius: '50%', border: '2px solid rgba(139,92,246,0.2)', borderTopColor: '#8B5CF6', animation: 'spin 0.85s linear infinite' }} />
                         </div>
                       ) : (
                         <>
@@ -382,7 +382,7 @@ export default function ScenesPage() {
                       <span style={{ position: 'absolute', bottom: 4, left: 5, fontSize: 10, fontWeight: 700, color: isActive ? '#fff' : 'rgba(255,255,255,0.35)' }}>{i + 1}</span>
                       {clipW > 45 && <span style={{ position: 'absolute', bottom: 4, right: 5, fontSize: 9, color: isActive ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.25)' }}>{scene.duration}s</span>}
                       <button onClick={e => { e.stopPropagation(); setActiveIdx(i); handleRegen(scene.id); }}
-                        style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: 5, background: 'rgba(0,0,0,0.6)', border: 'none', color: isActive ? '#E8445A' : 'rgba(255,255,255,0.35)', fontSize: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>↻</button>
+                        style={{ position: 'absolute', top: 4, right: 4, width: 18, height: 18, borderRadius: 5, background: 'rgba(0,0,0,0.6)', border: 'none', color: isActive ? '#8B5CF6' : 'rgba(255,255,255,0.35)', fontSize: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>↻</button>
                     </div>
                   );
                 })}
@@ -412,7 +412,7 @@ export default function ScenesPage() {
 
             {/* AI Generate button */}
             <button onClick={() => { handleRegenTrack(); setShowMusicSheet(false); }}
-              style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'linear-gradient(135deg, #E8445A, #FF8FA3)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+              style={{ width: '100%', padding: '13px', borderRadius: 14, background: 'linear-gradient(135deg, #8B5CF6, #EC4899)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', marginBottom: 16, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
               ✨ Generate AI Track
             </button>
 
@@ -422,7 +422,7 @@ export default function ScenesPage() {
                 const isSelected = track.id === t.id;
                 return (
                   <div key={t.id} onClick={() => { setTrack(t); setShowMusicSheet(false); }}
-                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', borderRadius: 14, background: isSelected ? 'rgba(232,68,90,0.12)' : 'rgba(255,255,255,0.05)', border: isSelected ? '1px solid rgba(232,68,90,0.3)' : '1px solid rgba(255,255,255,0.07)', cursor: 'pointer' }}>
+                    style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 14px', borderRadius: 14, background: isSelected ? 'rgba(139,92,246,0.12)' : 'rgba(255,255,255,0.05)', border: isSelected ? '1px solid rgba(139,92,246,0.3)' : '1px solid rgba(255,255,255,0.07)', cursor: 'pointer' }}>
                     <div style={{ width: 36, height: 36, borderRadius: 10, background: `linear-gradient(135deg, ${t.color}, ${t.color}88)`, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                     </div>
@@ -431,7 +431,7 @@ export default function ScenesPage() {
                       <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{t.genre} · {t.bpm} BPM · {t.duration}</p>
                     </div>
                     {isSelected && (
-                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#E8445A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                       </div>
                     )}

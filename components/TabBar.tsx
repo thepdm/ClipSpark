@@ -35,10 +35,10 @@ export function TabBar() {
         onClick={() => router.push('/character')}
         style={{
           width: 52, height: 52, borderRadius: '50%', flexShrink: 0,
-          background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+          background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
           border: 'none', cursor: 'pointer',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 4px 20px rgba(232,68,90,0.55)',
+          boxShadow: '0 4px 20px rgba(139,92,246,0.55)',
           transform: 'translateY(-8px)',
         }}
       >
@@ -61,7 +61,7 @@ function TabItem({ href, active, icon, label }: {
       padding: '8px 28px',
       borderRadius: 999,
       textDecoration: 'none',
-      color: active ? '#E8445A' : 'rgba(255,255,255,0.30)',
+      color: active ? '#8B5CF6' : 'rgba(255,255,255,0.30)',
       transition: 'color 0.2s',
     }}>
       <div style={{ width: 24, height: 24 }}>{icon}</div>

@@ -32,7 +32,7 @@ function StepBar({ current }: { current: number }) {
         <div key={n} style={{
           height: 4, borderRadius: 999, transition: 'flex 0.3s',
           flex: n === current ? 2 : 1,
-          background: n <= current ? '#E8445A' : 'rgba(232,68,90,0.15)',
+          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
         }} />
       ))}
       <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
@@ -76,7 +76,7 @@ export default function StoryPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--glass-border)',
       }}>
-        <Link href="/character" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
+        <Link href="/character" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -104,7 +104,7 @@ export default function StoryPage() {
             />
             <div>
               <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)', lineHeight: 1.2 }}>{character.name}</p>
-              <p style={{ fontSize: 10, color: '#E8445A', fontWeight: 600 }}>✨ Character selected</p>
+              <p style={{ fontSize: 10, color: '#8B5CF6', fontWeight: 600 }}>✨ Character selected</p>
             </div>
           </div>
         )}
@@ -144,7 +144,7 @@ export default function StoryPage() {
             {EXAMPLES.map(ex => (
               <button key={ex} onClick={() => setStory(ex)} style={{
                 padding: '5px 11px', borderRadius: 999,
-                background: 'rgba(232,68,90,0.08)', color: '#E8445A',
+                background: 'rgba(139,92,246,0.08)', color: '#8B5CF6',
                 fontSize: 11, fontWeight: 500, border: 'none', cursor: 'pointer',
                 textAlign: 'left',
               }}>
@@ -160,11 +160,11 @@ export default function StoryPage() {
           style={{
             width: '100%', padding: '16px',
             borderRadius: 'var(--r-xl)',
-            background: story.trim() && !isGenerating ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'rgba(0,0,0,0.08)',
+            background: story.trim() && !isGenerating ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'rgba(0,0,0,0.08)',
             color: story.trim() && !isGenerating ? '#fff' : 'var(--text-3)',
             fontSize: 16, fontWeight: 700,
             border: 'none', cursor: story.trim() ? 'pointer' : 'default',
-            boxShadow: story.trim() && !isGenerating ? '0 6px 24px rgba(232,68,90,0.35)' : 'none',
+            boxShadow: story.trim() && !isGenerating ? '0 6px 24px rgba(139,92,246,0.35)' : 'none',
             transition: 'all 0.18s',
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
           }}

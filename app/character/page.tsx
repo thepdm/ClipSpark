@@ -25,7 +25,7 @@ function StepBar({ current }: { current: number }) {
         <div key={n} style={{
           height: 4, borderRadius: 999, transition: 'flex 0.3s',
           flex: n === current ? 2 : 1,
-          background: n <= current ? '#E8445A' : 'rgba(232,68,90,0.15)',
+          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
         }} />
       ))}
       <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
@@ -73,7 +73,7 @@ export default function CharacterPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--glass-border)',
       }}>
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -123,7 +123,7 @@ export default function CharacterPage() {
                 {EXAMPLES.map(ex => (
                   <button key={ex} onClick={() => setDescription(ex)} style={{
                     padding: '5px 12px', borderRadius: 999,
-                    background: 'rgba(232,68,90,0.08)', color: '#E8445A',
+                    background: 'rgba(139,92,246,0.08)', color: '#8B5CF6',
                     fontSize: 12, fontWeight: 500, border: 'none', cursor: 'pointer',
                   }}>
                     {ex}
@@ -144,10 +144,10 @@ export default function CharacterPage() {
             >
               <div style={{
                 width: 40, height: 40, borderRadius: 12, flexShrink: 0,
-                background: 'rgba(232,68,90,0.09)',
+                background: 'rgba(139,92,246,0.09)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8445A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                   <circle cx="8.5" cy="8.5" r="1.5" />
                   <polyline points="21 15 16 10 5 21" />
@@ -183,11 +183,11 @@ export default function CharacterPage() {
               style={{
                 width: '100%', padding: '16px',
                 borderRadius: 'var(--r-xl)',
-                background: description.trim() ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'rgba(0,0,0,0.08)',
+                background: description.trim() ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'rgba(0,0,0,0.08)',
                 color: description.trim() ? '#fff' : 'var(--text-3)',
                 fontSize: 16, fontWeight: 700,
                 border: 'none', cursor: description.trim() ? 'pointer' : 'default',
-                boxShadow: description.trim() ? '0 6px 24px rgba(232,68,90,0.35)' : 'none',
+                boxShadow: description.trim() ? '0 6px 24px rgba(139,92,246,0.35)' : 'none',
                 transition: 'all 0.18s',
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10,
               }}
@@ -200,8 +200,8 @@ export default function CharacterPage() {
         {pageState === 'generating' && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: 420, gap: 20 }}>
             <div style={{ position: 'relative', width: 80, height: 80 }}>
-              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '2.5px solid rgba(232,68,90,0.15)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
-              <div style={{ position: 'absolute', inset: 8, borderRadius: '50%', border: '2px solid rgba(232,68,90,0.10)', borderBottomColor: '#FF8FA3', animation: 'spin 1.2s linear infinite reverse' }} />
+              <div style={{ position: 'absolute', inset: 0, borderRadius: '50%', border: '2.5px solid rgba(139,92,246,0.15)', borderTopColor: '#8B5CF6', animation: 'spin 0.85s linear infinite' }} />
+              <div style={{ position: 'absolute', inset: 8, borderRadius: '50%', border: '2px solid rgba(139,92,246,0.10)', borderBottomColor: '#EC4899', animation: 'spin 1.2s linear infinite reverse' }} />
               <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 28 }}>✨</div>
             </div>
             <div style={{ textAlign: 'center' }}>
@@ -209,7 +209,7 @@ export default function CharacterPage() {
               <p style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.5 }}>AI is crafting visual variants<br />based on your description</p>
             </div>
             <div style={{ ...glass, borderRadius: 'var(--r-lg)', padding: '10px 18px', marginTop: 8 }}>
-              <p style={{ fontSize: 13, color: '#E8445A', fontWeight: 500, fontStyle: 'italic' }}>"{description}"</p>
+              <p style={{ fontSize: 13, color: '#8B5CF6', fontWeight: 500, fontStyle: 'italic' }}>"{description}"</p>
             </div>
           </div>
         )}
@@ -230,8 +230,8 @@ export default function CharacterPage() {
                   onClick={() => setSelected(i)}
                   style={{
                     borderRadius: 16, overflow: 'hidden', cursor: 'pointer',
-                    border: selected === i ? '2.5px solid #E8445A' : '2px solid transparent',
-                    boxShadow: selected === i ? '0 4px 20px rgba(232,68,90,0.35)' : 'var(--shadow-sm)',
+                    border: selected === i ? '2.5px solid #8B5CF6' : '2px solid transparent',
+                    boxShadow: selected === i ? '0 4px 20px rgba(139,92,246,0.35)' : 'var(--shadow-sm)',
                     transition: 'all 0.18s', position: 'relative',
                   }}
                 >
@@ -253,12 +253,12 @@ export default function CharacterPage() {
                   {selected === i && (
                     <div style={{
                       position: 'absolute', inset: 0,
-                      background: 'rgba(232,68,90,0.15)',
+                      background: 'rgba(139,92,246,0.15)',
                       display: 'flex', alignItems: 'flex-end', justifyContent: 'center',
                       paddingBottom: 10,
                     }}>
                       <div style={{
-                        width: 28, height: 28, borderRadius: '50%', background: '#E8445A',
+                        width: 28, height: 28, borderRadius: '50%', background: '#8B5CF6',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                       }}>
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round">
@@ -285,11 +285,11 @@ export default function CharacterPage() {
               style={{
                 width: '100%', padding: '16px',
                 borderRadius: 'var(--r-xl)',
-                background: selected !== null ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'rgba(0,0,0,0.08)',
+                background: selected !== null ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'rgba(0,0,0,0.08)',
                 color: selected !== null ? '#fff' : 'var(--text-3)',
                 fontSize: 16, fontWeight: 700,
                 border: 'none', cursor: selected !== null ? 'pointer' : 'default',
-                boxShadow: selected !== null ? '0 6px 24px rgba(232,68,90,0.35)' : 'none',
+                boxShadow: selected !== null ? '0 6px 24px rgba(139,92,246,0.35)' : 'none',
                 transition: 'all 0.18s',
               }}
             >

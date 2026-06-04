@@ -19,6 +19,7 @@ export default function BeatCutsPage() {
   const [trackId, setTrackId] = useState(TRACKS[0].id);
   const [galleryPhotos, setGalleryPhotos] = useState<string[]>([]);
   const [uploadMode, setUploadMode] = useState<'none' | 'video' | 'gallery'>('none');
+  const [uploadedVideoName, setUploadedVideoName] = useState('');
   const fileRef = useRef<HTMLInputElement>(null);
   const photoRef = useRef<HTMLInputElement>(null);
 
@@ -27,7 +28,7 @@ export default function BeatCutsPage() {
   return (
     <div style={{ minHeight: '100svh', background: '#0A0A0F', paddingBottom: 100 }}>
       <div style={{ position: 'sticky', top: 0, zIndex: 50, padding: '12px 20px 10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'rgba(10,10,15,0.95)', backdropFilter: 'blur(20px)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-        <Link href="/" style={{ color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 4 }}>
+        <Link href="/" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 4 }}>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           Back
         </Link>
@@ -44,9 +45,9 @@ export default function BeatCutsPage() {
             {/* Upload options */}
             <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
               {/* Upload video */}
-              <div onClick={() => { fileRef.current?.click(); }} style={{ flex: 1, border: `2px dashed ${uploadMode === 'video' ? '#E8445A' : 'rgba(232,68,90,0.3)'}`, borderRadius: 18, padding: '20px 14px', textAlign: 'center', cursor: 'pointer', background: uploadMode === 'video' ? 'rgba(232,68,90,0.1)' : 'rgba(232,68,90,0.04)' }}>
-                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px' }}>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8445A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+              <div onClick={() => { fileRef.current?.click(); }} style={{ flex: 1, border: `2px dashed ${uploadMode === 'video' ? '#8B5CF6' : 'rgba(139,92,246,0.3)'}`, borderRadius: 18, padding: '20px 14px', textAlign: 'center', cursor: 'pointer', background: uploadMode === 'video' ? 'rgba(139,92,246,0.1)' : 'rgba(139,92,246,0.04)' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
                 </div>
                 <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>Upload Video</p>
                 <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>MP4, MOV</p>
@@ -77,23 +78,37 @@ export default function BeatCutsPage() {
               </div>
             )}
 
-            <input ref={fileRef} type="file" accept="video/*" style={{ display: 'none' }} onChange={() => setUploadMode('video')} />
+            <input ref={fileRef} type="file" accept="video/*" style={{ display: 'none' }} onChange={e => { const f = e.target.files?.[0]; if (f) { setUploadedVideoName(f.name); setUploadMode('video'); } }} />
             <input ref={photoRef} type="file" accept="image/*" multiple style={{ display: 'none' }} onChange={e => { const files = Array.from(e.target.files || []); setGalleryPhotos(files.map(f => URL.createObjectURL(f))); setUploadMode('gallery'); }} />
+
+            {/* Uploaded video preview */}
+            {uploadMode === 'video' && uploadedVideoName && (
+              <div style={{ marginBottom: 16, padding: '14px 16px', borderRadius: 16, background: 'rgba(139,92,246,0.08)', border: '1.5px solid rgba(139,92,246,0.3)', display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(139,92,246,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                </div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{uploadedVideoName}</p>
+                  <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>Ready to analyze</p>
+                </div>
+                <button onClick={() => { setUploadMode('none'); setUploadedVideoName(''); }} style={{ width: 24, height: 24, borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: 'none', color: 'rgba(255,255,255,0.4)', fontSize: 11, cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+              </div>
+            )}
 
             <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: 12 }}>Or try a sample clip</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
               {SAMPLE_CLIPS.map((clip, i) => (
-                <div key={i} onClick={() => setSelectedClip(i)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px', borderRadius: 16, cursor: 'pointer', border: selectedClip === i ? '1.5px solid #E8445A' : '1px solid rgba(255,255,255,0.08)', background: selectedClip === i ? 'rgba(232,68,90,0.08)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
+                <div key={i} onClick={() => setSelectedClip(i)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px', borderRadius: 16, cursor: 'pointer', border: selectedClip === i ? '1.5px solid #8B5CF6' : '1px solid rgba(255,255,255,0.08)', background: selectedClip === i ? 'rgba(139,92,246,0.08)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
                   <img src={`https://images.unsplash.com/${clip.imageId}?w=120&h=80&fit=crop&q=70`} alt="" style={{ width: 56, height: 40, borderRadius: 8, objectFit: 'cover', flexShrink: 0 }} />
                   <div style={{ flex: 1 }}>
                     <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF' }}>{clip.label}</p>
                     <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{clip.duration}</p>
                   </div>
-                  {selectedClip === i && <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#E8445A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
+                  {selectedClip === i && <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
                 </div>
               ))}
             </div>
-            <button onClick={() => setStage('track')} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(232,68,90,0.35)' }}>
+            <button onClick={() => setStage('track')} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.35)' }}>
               Choose Music →
             </button>
           </>
@@ -119,7 +134,7 @@ export default function BeatCutsPage() {
               ))}
             </div>
 
-            <button onClick={() => { setStage('generating'); setTimeout(() => setStage('result'), 3000); }} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(232,68,90,0.35)' }}>
+            <button onClick={() => { setStage('generating'); setTimeout(() => setStage('result'), 3000); }} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.35)' }}>
               ✨ Analyze & Cut
             </button>
           </>
@@ -129,7 +144,7 @@ export default function BeatCutsPage() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '65svh', gap: 24 }}>
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 3, height: 52 }}>
               {BAR_HEIGHTS.slice(0, 14).map((h, i) => (
-                <div key={i} style={{ width: 5, borderRadius: 3, height: `${h}%`, background: `linear-gradient(to top,#E8445A,#FF8FA3)`, animation: `pulse ${0.5+(i%3)*0.15}s ease-in-out infinite alternate`, animationDelay: `${i*0.06}s` }} />
+                <div key={i} style={{ width: 5, borderRadius: 3, height: `${h}%`, background: `linear-gradient(to top,#8B5CF6,#EC4899)`, animation: `pulse ${0.5+(i%3)*0.15}s ease-in-out infinite alternate`, animationDelay: `${i*0.06}s` }} />
               ))}
             </div>
             <div style={{ textAlign: 'center' }}>
@@ -146,19 +161,19 @@ export default function BeatCutsPage() {
             <div style={{ borderRadius: 20, overflow: 'hidden', marginBottom: 16, position: 'relative' }}>
               <img src={`https://images.unsplash.com/${SAMPLE_CLIPS[selectedClip].imageId}?w=800&h=450&fit=crop&q=80`} alt="" style={{ width: '100%', aspectRatio: '16/9', objectFit: 'cover', display: 'block' }} />
               <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.3)' }} />
-              <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(232,68,90,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>🎵 Beat-synced</div>
+              <div style={{ position: 'absolute', top: 12, left: 12, background: 'rgba(139,92,246,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>🎵 Beat-synced</div>
             </div>
             <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 14, padding: '12px 14px', marginBottom: 20 }}>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)', marginBottom: 8, fontWeight: 600 }}>CUT POINTS</p>
               <div style={{ display: 'flex', gap: 3 }}>
                 {BAR_HEIGHTS.map((h, i) => (
-                  <div key={i} style={{ flex: 1, height: 28, borderRadius: 3, background: `rgba(232,68,90,${h/100 * 0.8})` }} />
+                  <div key={i} style={{ flex: 1, height: 28, borderRadius: 3, background: `rgba(139,92,246,${h/100 * 0.8})` }} />
                 ))}
               </div>
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button onClick={() => setStage('track')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Change track</button>
-              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#E8445A,#FF8FA3)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(232,68,90,0.35)' }}>Export</button>
+              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(139,92,246,0.35)' }}>Export</button>
             </div>
           </>
         )}

@@ -47,7 +47,7 @@ export default function ProjectsPage() {
       }}>
         <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5, color: '#F0F0FF' }}>Projects</span>
         {projects.length > 0 && (
-          <div style={{ background: 'rgba(232,68,90,0.15)', border: '1px solid rgba(232,68,90,0.25)', borderRadius: 999, padding: '4px 12px', fontSize: 13, fontWeight: 600, color: '#E8445A' }}>
+          <div style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.25)', borderRadius: 999, padding: '4px 12px', fontSize: 13, fontWeight: 600, color: '#8B5CF6' }}>
             {projects.length}
           </div>
         )}
@@ -57,7 +57,7 @@ export default function ProjectsPage() {
 
         {projects.length === 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '55svh', textAlign: 'center', gap: 14 }}>
-            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(232,68,90,0.08)', border: '1px solid rgba(232,68,90,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34 }}>
+            <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34 }}>
               🎬
             </div>
             <div>
@@ -69,10 +69,10 @@ export default function ProjectsPage() {
               style={{
                 marginTop: 8, padding: '14px 36px',
                 borderRadius: 999,
-                background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+                background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
                 color: '#fff', fontSize: 15, fontWeight: 700,
                 border: 'none', cursor: 'pointer',
-                boxShadow: '0 6px 24px rgba(232,68,90,0.40)',
+                boxShadow: '0 6px 24px rgba(139,92,246,0.40)',
                 display: 'flex', alignItems: 'center', gap: 8,
               }}
             >
@@ -93,7 +93,7 @@ export default function ProjectsPage() {
                   <div style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                     <div style={{
                       width: 44, height: 44, borderRadius: 12, flexShrink: 0,
-                      background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.2)',
+                      background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.2)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20,
                     }}>
                       {FORMAT_EMOJI[p.format] || '🎬'}
@@ -113,7 +113,7 @@ export default function ProjectsPage() {
                         {p.exportMode === 'synced' && (
                           <>
                             <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)' }}>·</span>
-                            <span style={{ fontSize: 10, fontWeight: 600, color: '#E8445A', background: 'rgba(232,68,90,0.12)', borderRadius: 999, padding: '2px 7px' }}>Beat-synced</span>
+                            <span style={{ fontSize: 10, fontWeight: 600, color: '#8B5CF6', background: 'rgba(139,92,246,0.12)', borderRadius: 999, padding: '2px 7px' }}>Beat-synced</span>
                           </>
                         )}
                         <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)' }}>·</span>

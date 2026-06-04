@@ -24,7 +24,7 @@ function StepBar({ current }: { current: number }) {
         <div key={n} style={{
           height: 4, borderRadius: 999, transition: 'flex 0.3s',
           flex: n === current ? 2 : 1,
-          background: n <= current ? '#E8445A' : 'rgba(232,68,90,0.15)',
+          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
         }} />
       ))}
       <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
@@ -97,7 +97,7 @@ export default function MusicPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--glass-border)',
       }}>
-        <Link href="/scenes" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#E8445A', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
+        <Link href="/scenes" style={{ display: 'flex', alignItems: 'center', gap: 4, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500 }}>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
@@ -111,7 +111,7 @@ export default function MusicPage() {
         <StepBar current={4} />
 
         {/* Tabs */}
-        <div style={{ display: 'flex', gap: 8, marginBottom: 20, padding: '4px', background: 'rgba(232,68,90,0.07)', borderRadius: 14 }}>
+        <div style={{ display: 'flex', gap: 8, marginBottom: 20, padding: '4px', background: 'rgba(139,92,246,0.07)', borderRadius: 14 }}>
           {(['library', 'generate'] as const).map(t => (
             <button
               key={t}
@@ -120,7 +120,7 @@ export default function MusicPage() {
                 flex: 1, padding: '10px',
                 borderRadius: 10, border: 'none', cursor: 'pointer',
                 background: tab === t ? '#fff' : 'transparent',
-                color: tab === t ? '#E8445A' : 'var(--text-2)',
+                color: tab === t ? '#8B5CF6' : 'var(--text-2)',
                 fontSize: 14, fontWeight: 700,
                 boxShadow: tab === t ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
                 transition: 'all 0.18s',
@@ -145,7 +145,7 @@ export default function MusicPage() {
               <p style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-1)' }}>{selectedTrack.title}</p>
               <p style={{ fontSize: 10, color: 'var(--text-2)' }}>{selectedTrack.source === 'ai_generated' ? '✨ AI Generated' : 'Library'} · {selectedTrack.bpm} BPM</p>
             </div>
-            <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#E8445A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
             </div>
           </div>
@@ -158,13 +158,13 @@ export default function MusicPage() {
               {libraryMoods.map(m => (
                 <button key={m} onClick={() => setActiveMood(m)} style={{
                   padding: '6px 14px', borderRadius: 999, flexShrink: 0,
-                  background: activeMood === m ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'var(--glass)',
+                  background: activeMood === m ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'var(--glass)',
                   backdropFilter: activeMood === m ? 'none' : 'blur(24px)',
                   WebkitBackdropFilter: activeMood === m ? 'none' : 'blur(24px)',
                   border: activeMood === m ? 'none' : '1px solid var(--glass-border)',
                   color: activeMood === m ? '#fff' : 'var(--text-2)',
                   fontSize: 12, fontWeight: 600, cursor: 'pointer',
-                  boxShadow: activeMood === m ? '0 3px 12px rgba(232,68,90,0.28)' : 'none',
+                  boxShadow: activeMood === m ? '0 3px 12px rgba(139,92,246,0.28)' : 'none',
                   transition: 'all 0.18s',
                 }}>
                   {m}
@@ -180,8 +180,8 @@ export default function MusicPage() {
                   <div key={track.id} onClick={() => setSelectedTrack(track)} style={{
                     ...glass, borderRadius: 'var(--r-lg)', padding: '14px 16px',
                     display: 'flex', alignItems: 'center', gap: 14, cursor: 'pointer',
-                    border: isSelected ? '1.5px solid #E8445A' : '1px solid var(--glass-border)',
-                    boxShadow: isSelected ? '0 4px 18px rgba(232,68,90,0.2)' : 'var(--shadow-sm)',
+                    border: isSelected ? '1.5px solid #8B5CF6' : '1px solid var(--glass-border)',
+                    boxShadow: isSelected ? '0 4px 18px rgba(139,92,246,0.2)' : 'var(--shadow-sm)',
                     transition: 'all 0.18s',
                   }}>
                     <button
@@ -215,7 +215,7 @@ export default function MusicPage() {
                       </div>
                     </div>
                     {isSelected && (
-                      <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#E8445A', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#8B5CF6', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                       </div>
                     )}
@@ -261,13 +261,13 @@ export default function MusicPage() {
                       return (
                         <button key={m} onClick={() => toggleGenMood(m)} style={{
                           padding: '7px 14px', borderRadius: 999,
-                          background: active ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'var(--glass)',
+                          background: active ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'var(--glass)',
                           backdropFilter: active ? 'none' : 'blur(24px)',
                           WebkitBackdropFilter: active ? 'none' : 'blur(24px)',
                           border: active ? 'none' : '1px solid var(--glass-border)',
                           color: active ? '#fff' : 'var(--text-2)',
                           fontSize: 13, fontWeight: 600, cursor: 'pointer',
-                          boxShadow: active ? '0 3px 12px rgba(232,68,90,0.28)' : 'none',
+                          boxShadow: active ? '0 3px 12px rgba(139,92,246,0.28)' : 'none',
                           transition: 'all 0.18s',
                         }}>
                           {m}
@@ -286,7 +286,7 @@ export default function MusicPage() {
                       <button key={t} onClick={() => setGenTempo(t)} style={{
                         flex: 1, padding: '12px 8px',
                         borderRadius: 'var(--r-lg)',
-                        background: genTempo === t ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'var(--glass)',
+                        background: genTempo === t ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'var(--glass)',
                         backdropFilter: genTempo === t ? 'none' : 'blur(24px)',
                         WebkitBackdropFilter: genTempo === t ? 'none' : 'blur(24px)',
                         border: genTempo === t ? 'none' : '1px solid var(--glass-border)',
@@ -306,11 +306,11 @@ export default function MusicPage() {
                   style={{
                     width: '100%', padding: '16px',
                     borderRadius: 'var(--r-xl)',
-                    background: (genMoods.length > 0 || genDescription.trim()) ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'rgba(0,0,0,0.08)',
+                    background: (genMoods.length > 0 || genDescription.trim()) ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'rgba(0,0,0,0.08)',
                     color: (genMoods.length > 0 || genDescription.trim()) ? '#fff' : 'var(--text-3)',
                     fontSize: 16, fontWeight: 700, border: 'none',
                     cursor: (genMoods.length > 0 || genDescription.trim()) ? 'pointer' : 'default',
-                    boxShadow: (genMoods.length > 0 || genDescription.trim()) ? '0 6px 24px rgba(232,68,90,0.35)' : 'none',
+                    boxShadow: (genMoods.length > 0 || genDescription.trim()) ? '0 6px 24px rgba(139,92,246,0.35)' : 'none',
                     transition: 'all 0.18s',
                   }}
                 >
@@ -326,7 +326,7 @@ export default function MusicPage() {
                     <div key={i} style={{
                       width: 6, borderRadius: 3,
                       height: `${h}%`,
-                      background: `linear-gradient(to top, #E8445A, #FF8FA3)`,
+                      background: `linear-gradient(to top, #8B5CF6, #EC4899)`,
                       animation: `pulse ${0.5 + (i % 3) * 0.15}s ease-in-out infinite alternate`,
                       animationDelay: `${i * 0.06}s`,
                     }} />
@@ -354,8 +354,8 @@ export default function MusicPage() {
                       <div key={track.id} onClick={() => setSelectedTrack(track)} style={{
                         ...glass, borderRadius: 'var(--r-xl)', padding: '16px',
                         cursor: 'pointer',
-                        border: isSelected ? '1.5px solid #E8445A' : '1px solid var(--glass-border)',
-                        boxShadow: isSelected ? '0 4px 20px rgba(232,68,90,0.25)' : 'var(--shadow)',
+                        border: isSelected ? '1.5px solid #8B5CF6' : '1px solid var(--glass-border)',
+                        boxShadow: isSelected ? '0 4px 20px rgba(139,92,246,0.25)' : 'var(--shadow)',
                         transition: 'all 0.18s',
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
@@ -382,12 +382,12 @@ export default function MusicPage() {
                           <div style={{ flex: 1 }}>
                             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
                               <p style={{ fontSize: 14, fontWeight: 700, color: 'var(--text-1)' }}>{track.title}</p>
-                              <span style={{ fontSize: 10, fontWeight: 700, color: '#E8445A', background: 'rgba(232,68,90,0.1)', padding: '2px 6px', borderRadius: 999 }}>AI ✨</span>
+                              <span style={{ fontSize: 10, fontWeight: 700, color: '#8B5CF6', background: 'rgba(139,92,246,0.1)', padding: '2px 6px', borderRadius: 999 }}>AI ✨</span>
                             </div>
                             <p style={{ fontSize: 11, color: 'var(--text-2)' }}>{track.genre} · {track.bpm} BPM · {track.duration}</p>
                           </div>
                           {isSelected && (
-                            <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#E8445A', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#8B5CF6', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
                             </div>
                           )}
@@ -420,11 +420,11 @@ export default function MusicPage() {
           style={{
             width: '100%', padding: '16px',
             borderRadius: 'var(--r-xl)',
-            background: selectedTrack ? 'linear-gradient(135deg, #E8445A, #FF8FA3)' : 'rgba(0,0,0,0.08)',
+            background: selectedTrack ? 'linear-gradient(135deg, #8B5CF6, #EC4899)' : 'rgba(0,0,0,0.08)',
             color: selectedTrack ? '#fff' : 'var(--text-3)',
             fontSize: 16, fontWeight: 700,
             border: 'none', cursor: selectedTrack ? 'pointer' : 'default',
-            boxShadow: selectedTrack ? '0 6px 24px rgba(232,68,90,0.35)' : 'none',
+            boxShadow: selectedTrack ? '0 6px 24px rgba(139,92,246,0.35)' : 'none',
             transition: 'all 0.18s',
           }}
         >

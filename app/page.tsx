@@ -112,10 +112,10 @@ export default function Home() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 5,
-            background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
+            background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
             borderRadius: 999, padding: '5px 12px',
             fontSize: 12, fontWeight: 700, color: '#fff',
-            boxShadow: '0 3px 12px rgba(232,68,90,0.35)',
+            boxShadow: '0 3px 12px rgba(139,92,246,0.35)',
           }}>
             ✦ PRO
           </div>
@@ -140,7 +140,7 @@ export default function Home() {
               style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)', cursor: 'pointer' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.88) 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 20px 20px' }}>
-              <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#E8445A', background: 'rgba(232,68,90,0.18)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(232,68,90,0.3)' }}>
+              <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#8B5CF6', background: 'rgba(139,92,246,0.18)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(139,92,246,0.3)' }}>
                 {s.tag} · Featured
               </span>
               <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 5 }}>{s.title}</p>
@@ -166,7 +166,7 @@ export default function Home() {
       <div style={{ marginTop: 28 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
           <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>AI Features</span>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#E8445A', background: 'rgba(232,68,90,0.12)', borderRadius: 999, padding: '3px 10px', border: '1px solid rgba(232,68,90,0.2)' }}>New</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#8B5CF6', background: 'rgba(139,92,246,0.12)', borderRadius: 999, padding: '3px 10px', border: '1px solid rgba(139,92,246,0.2)' }}>New</span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: '0 20px' }}>
           <FeatureCard title="Animate Photo" desc="Upload a photo — AI adds parallax and motion" tag="Animation" color="#7C5CFC" onClick={() => router.push('/animate')}>
@@ -181,7 +181,7 @@ export default function Home() {
             </div>
           </FeatureCard>
 
-          <FeatureCard title="Beat Cuts" desc="AI auto-cuts scenes exactly on the beat" tag="Editing" color="#E8445A" onClick={() => router.push('/beat-cuts')}>
+          <FeatureCard title="Beat Cuts" desc="AI auto-cuts scenes exactly on the beat" tag="Editing" color="#8B5CF6" onClick={() => router.push('/beat-cuts')}>
             <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
           </FeatureCard>
 
@@ -213,7 +213,7 @@ export default function Home() {
                   <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', lineHeight: 1.3 }}>{item.desc}</p>
                 </div>
                 {/* Play indicator */}
-                <div style={{ position: 'absolute', top: 10, right: 10, width: 28, height: 28, borderRadius: '50%', background: 'rgba(232,68,90,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ position: 'absolute', top: 10, right: 10, width: 28, height: 28, borderRadius: '50%', background: 'rgba(139,92,246,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 1 }}><polygon points="5 3 19 12 5 21 5 3"/></svg>
                 </div>
               </div>
