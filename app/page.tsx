@@ -9,7 +9,7 @@ const HERO_SLIDES = [
   {
     title: 'TikTok Dance',
     desc: 'Trending moves, viral energy — your moment to shine',
-    imageId: 'photo-1516450360452-9312f5e86fc7',
+    imageId: 'tiktok-dance-custom',
     character: 'Dancer',
     story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.',
     tag: 'TikTok',
@@ -167,7 +167,11 @@ export default function Home() {
         {HERO_SLIDES.map((s, i) => (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === heroIndex ? 1 : 0, transition: 'opacity 0.6s ease', pointerEvents: i === heroIndex ? 'auto' : 'none' }}
             onClick={() => handleStart(s.character, s.story)}>
-            <img src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`} alt={s.title}
+            <img
+              src={s.imageId === 'tiktok-dance-custom'
+                ? 'https://source.unsplash.com/EhUEJhwPxHE/800x600'
+                : `https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`}
+              alt={s.title}
               style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)', cursor: 'pointer' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.88) 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 20px 20px' }}>
