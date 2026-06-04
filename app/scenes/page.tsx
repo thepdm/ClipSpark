@@ -63,8 +63,31 @@ export default function ScenesPage() {
   const [showMusicSheet, setShowMusicSheet] = useState(false);
   const [musicPlaying, setMusicPlaying] = useState(false);
   const [genLoading, setGenLoading] = useState(false);
+  const [dialogues, setDialogues] = useState<Record<string, { speaker: string; text: string }[]>>({});
+  const [showDialogueFor, setShowDialogueFor] = useState<string | null>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const playRef = useRef<NodeJS.Timeout | null>(null);
+
+  const addDialogueLine = (sceneId: string, speaker: string) => {
+    setDialogues(prev => ({
+      ...prev,
+      [sceneId]: [...(prev[sceneId] || []), { speaker, text: '' }],
+    }));
+  };
+
+  const updateDialogueLine = (sceneId: string, idx: number, field: 'speaker' | 'text', value: string) => {
+    setDialogues(prev => ({
+      ...prev,
+      [sceneId]: prev[sceneId].map((l, i) => i === idx ? { ...l, [field]: value } : l),
+    }));
+  };
+
+  const removeDialogueLine = (sceneId: string, idx: number) => {
+    setDialogues(prev => ({
+      ...prev,
+      [sceneId]: prev[sceneId].filter((_, i) => i !== idx),
+    }));
+  };
 
   useEffect(() => {
     const c = sessionStorage.getItem('clipspark_character');
@@ -233,6 +256,21 @@ export default function ScenesPage() {
                         <span style={{ fontSize: 9, fontWeight: 600, color: '#fff' }}>{character.name}</span>
                       </div>
                     )}
+                    {/* Dialogue subtitle overlay */}
+                    {dialogues[activeScene?.id]?.[0]?.text && (
+                      <div style={{
+                        position: 'absolute', bottom: 36, left: 8, right: 8,
+                        background: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)',
+                        borderRadius: 10, padding: '6px 10px', textAlign: 'center',
+                      }}>
+                        <p style={{ fontSize: 9, fontWeight: 700, color: '#8B5CF6', marginBottom: 2 }}>
+                          {dialogues[activeScene.id][0].speaker}
+                        </p>
+                        <p style={{ fontSize: 11, color: '#fff', lineHeight: 1.3, fontStyle: 'italic' }}>
+                          "{dialogues[activeScene.id][0].text}"
+                        </p>
+                      </div>
+                    )}
                   </>
                 ) : null}
 
@@ -307,6 +345,78 @@ export default function ScenesPage() {
                 </div>
               )}
             </div>
+
+            {/* Dialogue panel */}
+            {activeScene && (
+              <div style={{ margin: '0 16px 14px' }}>
+                <button
+                  onClick={() => setShowDialogueFor(showDialogueFor === activeScene.id ? null : activeScene.id)}
+                  style={{
+                    width: '100%', padding: '10px 14px', borderRadius: 12,
+                    background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)',
+                    color: '#8B5CF6', fontSize: 13, fontWeight: 600, cursor: 'pointer',
+                    display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                  }}
+                >
+                  <span>
+                    💬 Dialogue
+                    {(dialogues[activeScene.id]?.length || 0) > 0 && (
+                      <span style={{ marginLeft: 8, fontSize: 11, background: 'rgba(139,92,246,0.2)', borderRadius: 999, padding: '1px 7px' }}>
+                        {dialogues[activeScene.id].length} line{dialogues[activeScene.id].length > 1 ? 's' : ''}
+                      </span>
+                    )}
+                  </span>
+                  <span style={{ fontSize: 11, opacity: 0.6 }}>{showDialogueFor === activeScene.id ? '▲' : '▼'}</span>
+                </button>
+
+                {showDialogueFor === activeScene.id && (
+                  <div style={{ marginTop: 8, background: 'rgba(139,92,246,0.06)', borderRadius: 12, padding: '10px 12px', border: '1px solid rgba(139,92,246,0.15)' }}>
+                    {(dialogues[activeScene.id] || []).map((line, i) => (
+                      <div key={i} style={{ display: 'flex', gap: 8, marginBottom: 8, alignItems: 'flex-start' }}>
+                        <input
+                          value={line.speaker}
+                          onChange={e => updateDialogueLine(activeScene.id, i, 'speaker', e.target.value)}
+                          placeholder={character?.name || 'Speaker'}
+                          style={{
+                            width: 90, flexShrink: 0, padding: '7px 10px', borderRadius: 8,
+                            background: 'rgba(139,92,246,0.12)', border: '1px solid rgba(139,92,246,0.25)',
+                            color: '#8B5CF6', fontSize: 11, fontWeight: 700, outline: 'none',
+                            fontFamily: 'inherit',
+                          }}
+                        />
+                        <input
+                          value={line.text}
+                          onChange={e => updateDialogueLine(activeScene.id, i, 'text', e.target.value)}
+                          placeholder="What do they say..."
+                          style={{
+                            flex: 1, padding: '7px 10px', borderRadius: 8,
+                            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+                            color: '#F0F0FF', fontSize: 12, outline: 'none',
+                            fontFamily: 'inherit', fontStyle: 'italic',
+                          }}
+                        />
+                        <button onClick={() => removeDialogueLine(activeScene.id, i)} style={{ width: 26, height: 26, borderRadius: 8, background: 'rgba(255,255,255,0.06)', border: 'none', color: 'rgba(255,255,255,0.3)', fontSize: 11, cursor: 'pointer', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+                      </div>
+                    ))}
+
+                    <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
+                      <button
+                        onClick={() => addDialogueLine(activeScene.id, character?.name || 'Character')}
+                        style={{ flex: 1, padding: '8px', borderRadius: 8, background: 'rgba(139,92,246,0.1)', border: '1px dashed rgba(139,92,246,0.3)', color: '#8B5CF6', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                      >
+                        + {character?.name || 'Character'}
+                      </button>
+                      <button
+                        onClick={() => addDialogueLine(activeScene.id, 'Narrator')}
+                        style={{ flex: 1, padding: '8px', borderRadius: 8, background: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.15)', color: 'rgba(255,255,255,0.4)', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}
+                      >
+                        + Narrator
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Music panel */}
             <div style={{ margin: '0 16px 14px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 14, padding: '12px 14px' }}>
