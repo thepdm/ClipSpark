@@ -6,7 +6,7 @@ import { TabBar } from '@/components/TabBar';
 const GALLERY_PHOTOS = [
   'photo-1534528741775-53994a69daeb',
   'photo-1516117172878-fd2c41f4a759',
-  'photo-1524504388940-b1c1722653e0',
+  'photo-1529626455594-4ff0802cfb7e',
   'photo-1544005313-94ddf0286df2',
   'photo-1507003211169-0a1dd7228f2d',
   'photo-1426604966848-d7adac402bff',
@@ -74,7 +74,7 @@ export default function AnimatePage() {
 
         {/* Upload / Preview area */}
         {!selectedPhoto ? (
-          <div onClick={() => fileRef.current?.click()} style={{ borderRadius: 20, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '52px 20px', textAlign: 'center', cursor: 'pointer', marginBottom: 16 }}>
+          <div onClick={() => fileRef.current?.click()} style={{ borderRadius: 20, background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', padding: '52px 20px', cursor: 'pointer', marginBottom: 16, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.3)" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: 12 }}>
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
               <polyline points="17 8 12 3 7 8"/>
