@@ -132,6 +132,35 @@ export default function Home() {
         );
       })()}
 
+      {/* AI Features */}
+      <div style={{ marginTop: 28 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
+          <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>AI Features</span>
+          <span style={{ fontSize: 11, fontWeight: 600, color: '#E8445A', background: 'rgba(232,68,90,0.12)', borderRadius: 999, padding: '3px 10px', border: '1px solid rgba(232,68,90,0.2)' }}>New</span>
+        </div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: '0 20px' }}>
+          {[
+            { icon: '✨', title: 'Animate Photo', desc: 'Upload a photo — AI adds parallax, drift and motion', color: '#7C5CFC', bg: 'rgba(124,92,252,0.12)', border: 'rgba(124,92,252,0.25)' },
+            { icon: '🎞', title: 'Photos to Video', desc: 'Upload N photos — AI creates smooth transitions between them', color: '#06B6D4', bg: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.25)' },
+            { icon: '🎤', title: 'Lip Sync', desc: 'Upload a photo + track — the character sings along', color: '#E8445A', bg: 'rgba(232,68,90,0.12)', border: 'rgba(232,68,90,0.25)' },
+            { icon: '💃', title: 'Make It Dance', desc: 'Any photo, any beat — AI makes them move to the music', color: '#10B981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.25)' },
+          ].map(f => (
+            <div
+              key={f.title}
+              onClick={() => router.push('/character')}
+              style={{
+                background: f.bg, border: `1px solid ${f.border}`,
+                borderRadius: 18, padding: '16px 14px', cursor: 'pointer',
+              }}
+            >
+              <div style={{ fontSize: 28, marginBottom: 10 }}>{f.icon}</div>
+              <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF', marginBottom: 5, lineHeight: 1.2 }}>{f.title}</p>
+              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', lineHeight: 1.4 }}>{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* Content sections */}
       {SECTIONS.map(section => (
         <div key={section.title} style={{ marginTop: 28 }}>
