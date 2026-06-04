@@ -6,6 +6,7 @@ export function TabBar() {
   const path = usePathname();
   const router = useRouter();
   const isHome = path === '/';
+  const isRemix = path === '/remix';
   const isProjects = path === '/projects';
 
   return (
@@ -14,7 +15,7 @@ export function TabBar() {
       bottom: 20,
       left: '50%',
       transform: 'translateX(-50%)',
-      width: 'min(calc(100% - 40px), 380px)',
+      width: 'min(calc(100% - 24px), 420px)',
       height: 58,
       display: 'flex',
       alignItems: 'center',
@@ -26,7 +27,7 @@ export function TabBar() {
       borderRadius: 999,
       boxShadow: '0 8px 40px rgba(0,0,0,0.45)',
       zIndex: 100,
-      padding: '0 8px',
+      padding: '0 4px',
     }}>
       <TabItem href="/" active={isHome} icon={<HomeIcon />} label="Home" />
 
@@ -47,6 +48,7 @@ export function TabBar() {
         </svg>
       </button>
 
+      <TabItem href="/remix" active={isRemix} icon={<RemixIcon />} label="Remix" />
       <TabItem href="/projects" active={isProjects} icon={<FolderIcon />} label="Projects" />
     </nav>
   );
@@ -58,7 +60,7 @@ function TabItem({ href, active, icon, label }: {
   return (
     <Link href={href} style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3,
-      padding: '8px 28px',
+      padding: '8px 16px',
       borderRadius: 999,
       textDecoration: 'none',
       color: active ? '#8B5CF6' : 'rgba(255,255,255,0.30)',
@@ -75,6 +77,17 @@ function HomeIcon() {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
       <polyline points="9 22 9 12 15 12 15 22" />
+    </svg>
+  );
+}
+
+function RemixIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="17 1 21 5 17 9" />
+      <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+      <polyline points="7 23 3 19 7 15" />
+      <path d="M21 13v2a4 4 0 0 1-4 4H3" />
     </svg>
   );
 }
