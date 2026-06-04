@@ -45,7 +45,7 @@ const SECTIONS = [
   {
     title: 'Aesthetic Style',
     items: [
-      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1524504388940-b1c1722653e0', filter: 'grayscale(1) contrast(1.25) brightness(0.85)', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
+      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1531746020798-e6953c6e8e04', filter: 'grayscale(1) contrast(1.25) brightness(0.85)', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
       { name: 'Golden Hour', desc: 'Magic sunset, warm light', imageId: 'photo-1507003211169-0a1dd7228f2d', filter: 'sepia(0.45) saturate(1.8) brightness(0.9) contrast(1.05)', story: 'A girl walks through a field at golden hour as the sun sets behind her. Long shadows, warm glow, hair in the breeze — pure magic.' },
       { name: 'Vintage Film', desc: 'Film grain, 90s colours', imageId: 'photo-1526045612212-70caf35c14df', filter: 'sepia(0.5) saturate(0.75) brightness(0.88) contrast(1.1)', story: 'A girl explores the city in a vintage aesthetic — film grain, faded colours, analogue camera flares. Feels like a 90s music video.' },
       { name: 'Dark Botanica', desc: 'Tropics, jungle, luxury', imageId: 'photo-1441974231531-c6227db76b6e', filter: 'saturate(1.4) brightness(0.75) contrast(1.1)', story: 'A girl moves through a lush tropical jungle at dusk — exotic flowers, deep shadows, luxury and mystery at every turn.' },
