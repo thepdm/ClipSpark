@@ -45,10 +45,10 @@ const SECTIONS = [
   {
     title: 'Aesthetic Style',
     items: [
-      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1531746020798-e6953c6e8e04', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
-      { name: 'Golden Hour', desc: 'Magic sunset, warm light', imageId: 'photo-1501854140801-50d01698950b', story: 'A girl walks through a field at golden hour as the sun sets behind her. Long shadows, warm glow, hair in the breeze — pure magic.' },
-      { name: 'Vintage Film', desc: 'Film grain, 90s colours', imageId: 'photo-1526045612212-70caf35c14df', story: 'A girl explores the city in a vintage aesthetic — film grain, faded colours, analogue camera flares. Feels like a 90s music video.' },
-      { name: 'Dark Botanica', desc: 'Tropics, jungle, luxury', imageId: 'photo-1441974231531-c6227db76b6e', story: 'A girl moves through a lush tropical jungle at dusk — exotic flowers, deep shadows, luxury and mystery at every turn.' },
+      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1524504388940-b1c1722653e0', filter: 'grayscale(1) contrast(1.25) brightness(0.85)', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
+      { name: 'Golden Hour', desc: 'Magic sunset, warm light', imageId: 'photo-1507003211169-0a1dd7228f2d', filter: 'sepia(0.45) saturate(1.8) brightness(0.9) contrast(1.05)', story: 'A girl walks through a field at golden hour as the sun sets behind her. Long shadows, warm glow, hair in the breeze — pure magic.' },
+      { name: 'Vintage Film', desc: 'Film grain, 90s colours', imageId: 'photo-1526045612212-70caf35c14df', filter: 'sepia(0.5) saturate(0.75) brightness(0.88) contrast(1.1)', story: 'A girl explores the city in a vintage aesthetic — film grain, faded colours, analogue camera flares. Feels like a 90s music video.' },
+      { name: 'Dark Botanica', desc: 'Tropics, jungle, luxury', imageId: 'photo-1441974231531-c6227db76b6e', filter: 'saturate(1.4) brightness(0.75) contrast(1.1)', story: 'A girl moves through a lush tropical jungle at dusk — exotic flowers, deep shadows, luxury and mystery at every turn.' },
     ],
   },
   {
@@ -206,7 +206,7 @@ export default function Home() {
                 style={{ width: 150, height: 210, borderRadius: 16, overflow: 'hidden', flexShrink: 0, cursor: 'pointer', position: 'relative', border: '1px solid rgba(255,255,255,0.07)' }}
               >
                 <img src={`https://images.unsplash.com/${item.imageId}?w=300&h=420&fit=crop&q=80`} alt={item.name}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8) saturate(1.1)' }} />
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: (item as { filter?: string }).filter || 'brightness(0.8) saturate(1.1)' }} />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.95) 0%, transparent 55%)' }} />
                 <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
                   <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 3, lineHeight: 1.2 }}>{item.name}</p>
