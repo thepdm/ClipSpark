@@ -47,11 +47,15 @@ type Stage = 'gallery' | 'track' | 'generating' | 'result';
 
 export default function BeatCutsPage() {
   const [stage, setStage] = useState<Stage>('gallery');
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [trackId, setTrackId] = useState(TRACKS[0].id);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const selectedItem = GALLERY_GROUPS.flatMap(g => g.items).find(i => i.id === selectedId);
+  const toggleSelect = (id: string) => {
+    setSelectedIds(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+  };
+  const selectedItems = GALLERY_GROUPS.flatMap(g => g.items).filter(i => selectedIds.includes(i.id));
+  const selectedItem = selectedItems[0];
   const selectedTrack = TRACKS.find(t => t.id === trackId) || TRACKS[0];
 
   return (
@@ -67,7 +71,7 @@ export default function BeatCutsPage() {
           Back
         </Link>
         <span style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF' }}>Beat Cuts</span>
-        {stage === 'gallery' && selectedId ? (
+        {stage === 'gallery' && selectedIds.length > 0 ? (
           <button onClick={() => setStage('track')} style={{ padding: '7px 16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 13, fontWeight: 700, border: 'none', cursor: 'pointer' }}>
             Next →
           </button>
@@ -94,30 +98,29 @@ export default function BeatCutsPage() {
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, padding: '0 2px' }}>
                 {group.items.map(item => {
-                  const isSelected = selectedId === item.id;
+                  const selIdx = selectedIds.indexOf(item.id);
+                  const isSelected = selIdx !== -1;
                   return (
                     <div
                       key={item.id}
-                      onClick={() => setSelectedId(isSelected ? null : item.id)}
+                      onClick={() => toggleSelect(item.id)}
                       style={{ position: 'relative', aspectRatio: '1', cursor: 'pointer', overflow: 'hidden' }}
                     >
                       <img
                         src={`https://images.unsplash.com/${item.imageId}?w=200&h=200&fit=crop&q=70`}
                         alt=""
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: isSelected ? 'brightness(0.65)' : 'none' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', filter: isSelected ? 'brightness(0.6)' : 'none' }}
                       />
-                      {/* Video badge */}
-                      {item.type === 'video' && (
+                      {item.type === 'video' && !isSelected && (
                         <div style={{ position: 'absolute', bottom: 5, right: 6, display: 'flex', alignItems: 'center', gap: 3 }}>
                           <svg width="10" height="10" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                           <span style={{ fontSize: 9, fontWeight: 700, color: '#fff' }}>{item.duration}</span>
                         </div>
                       )}
-                      {/* Selected overlay */}
                       {isSelected && (
                         <div style={{ position: 'absolute', inset: 0, border: '3px solid #8B5CF6', pointerEvents: 'none' }}>
-                          <div style={{ position: 'absolute', top: 6, right: 6, width: 22, height: 22, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                          <div style={{ position: 'absolute', top: 6, right: 6, width: 22, height: 22, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 11, fontWeight: 800, color: '#fff' }}>
+                            {selIdx + 1}
                           </div>
                         </div>
                       )}
@@ -128,10 +131,10 @@ export default function BeatCutsPage() {
             </div>
           ))}
 
-          {selectedId && (
+          {selectedIds.length > 0 && (
             <div style={{ position: 'fixed', bottom: 90, left: '50%', transform: 'translateX(-50%)', zIndex: 90 }}>
               <button onClick={() => setStage('track')} style={{ padding: '14px 36px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 28px rgba(139,92,246,0.5)', whiteSpace: 'nowrap' }}>
-                Use this clip →
+                Use {selectedIds.length} clip{selectedIds.length > 1 ? 's' : ''} →
               </button>
             </div>
           )}
