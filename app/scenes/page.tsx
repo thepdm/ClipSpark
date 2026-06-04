@@ -178,7 +178,7 @@ export default function ScenesPage() {
 
             {/* Video preview */}
             <div style={{ padding: '0 16px' }}>
-              <div style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', background: '#000', aspectRatio: '16/9' }}>
+              <div style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', background: '#000', width: '52%', aspectRatio: '9/16', margin: '0 auto' }}>
                 {isRegen ? (
                   <div style={{ width: '100%', height: '100%', background: 'rgba(232,68,90,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10 }}>
                     <div style={{ width: 36, height: 36, borderRadius: '50%', border: '2.5px solid rgba(232,68,90,0.2)', borderTopColor: '#E8445A', animation: 'spin 0.85s linear infinite' }} />
