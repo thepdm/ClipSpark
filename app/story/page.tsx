@@ -54,6 +54,8 @@ export default function StoryPage() {
     if (c) setCharacter(JSON.parse(c));
     const f = sessionStorage.getItem('clipspark_format');
     if (f) setFormat(f);
+    const prefill = sessionStorage.getItem('clipspark_prefill_story');
+    if (prefill) { setStory(prefill); sessionStorage.removeItem('clipspark_prefill_story'); }
   }, []);
 
   const handleGenerate = () => {

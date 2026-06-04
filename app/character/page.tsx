@@ -43,6 +43,11 @@ export default function CharacterPage() {
   const [selected, setSelected] = useState<number | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  useEffect(() => {
+    const prefill = sessionStorage.getItem('clipspark_prefill_character');
+    if (prefill) { setDescription(prefill); sessionStorage.removeItem('clipspark_prefill_character'); }
+  }, []);
+
   const handleGenerate = () => {
     if (!description.trim()) return;
     setPageState('generating');

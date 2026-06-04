@@ -1,65 +1,74 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CHARACTER_IMAGES, REGEN_POOL } from '@/lib/mockScenes';
 import { TabBar } from '@/components/TabBar';
 
 const HERO_SLIDES = [
-  { title: 'Snow Queen', desc: 'A magical winter tale — forest, midnight glow', imageId: CHARACTER_IMAGES[0], tag: 'Fantasy' },
-  { title: 'Urban Dancer', desc: 'Neon streets, rhythm and pure soul energy', imageId: CHARACTER_IMAGES[1], tag: 'Urban' },
-  { title: 'Space Explorer', desc: 'Discover unknown worlds beyond the stars', imageId: CHARACTER_IMAGES[2], tag: 'Sci-Fi' },
-  { title: 'Young Chef', desc: 'Ingredients float, spices dance, magic cooks', imageId: CHARACTER_IMAGES[3], tag: 'Lifestyle' },
+  {
+    title: 'Snow Queen',
+    desc: 'Forest at midnight — magical New Year atmosphere',
+    imageId: CHARACTER_IMAGES[0],
+    character: 'Снегурочка',
+    story: 'Снегурочка walks around a snow-covered house in the forest at midnight, singing a magical song. After one circle the camera slowly pulls back — she fades into the snowy darkness.',
+    tag: 'Fantasy',
+  },
+  {
+    title: 'Urban Dancer',
+    desc: 'Neon streets — rhythm, energy and pure soul',
+    imageId: CHARACTER_IMAGES[1],
+    character: 'Street dancer',
+    story: 'A street dancer performs through neon-lit city alleys at midnight. A crowd gathers, the energy builds — the finale is an explosive move as the crowd erupts.',
+    tag: 'Urban',
+  },
+  {
+    title: 'Space Explorer',
+    desc: 'Unknown worlds beyond the stars',
+    imageId: CHARACTER_IMAGES[2],
+    character: 'Astronaut',
+    story: 'An astronaut discovers a glowing crystal cave on an alien planet. She reaches out to touch a crystal — the whole cave lights up in waves of colour.',
+    tag: 'Sci-Fi',
+  },
 ];
 
 const SECTIONS = [
   {
     title: 'Fantasy & Magic',
     items: [
-      { label: 'Snow Queen', desc: 'Forest at midnight', imageId: CHARACTER_IMAGES[0] },
-      { label: 'Dark Wizard', desc: 'Ancient spell ritual', imageId: CHARACTER_IMAGES[5] },
-      { label: 'Fairy Tale', desc: 'Enchanted kingdom', imageId: CHARACTER_IMAGES[3] },
-      { label: 'Cyber Witch', desc: 'Neon magic', imageId: CHARACTER_IMAGES[4] },
+      { name: 'Snow Queen', desc: 'Forest, midnight, New Year', imageId: CHARACTER_IMAGES[0], story: 'Снегурочка walks around a snow-covered house in the forest at midnight, singing. Camera pulls back — she vanishes into darkness.' },
+      { name: 'Dark Wizard', desc: 'Ancient library, summoning ritual', imageId: CHARACTER_IMAGES[5], story: 'A dark wizard performs an ancient ritual in a crumbling library. Books fly, candles flare — a portal tears open in the air.' },
+      { name: 'Forest Spirit', desc: 'Enchanted woods at dawn', imageId: REGEN_POOL[2], story: 'A forest spirit drifts between ancient trees at dawn. Flowers bloom at every footstep — the forest wakes up around her.' },
+      { name: 'Cyber Witch', desc: 'Neon magic, hologram spells', imageId: CHARACTER_IMAGES[4], story: 'A cyber witch casts holographic spells in a neon-soaked city. Code streams from her fingertips — the city grid obeys her will.' },
     ],
   },
   {
     title: 'Urban & Street',
     items: [
-      { label: 'Street Dancer', desc: 'City lights & rhythm', imageId: CHARACTER_IMAGES[1] },
-      { label: 'Rapper', desc: 'Downtown vibes', imageId: CHARACTER_IMAGES[6] },
-      { label: 'Skater', desc: 'Concrete jungle', imageId: CHARACTER_IMAGES[2] },
-      { label: 'Graffiti Artist', desc: 'Walls come alive', imageId: CHARACTER_IMAGES[7] },
+      { name: 'Street Dancer', desc: 'City lights, late night freestyle', imageId: CHARACTER_IMAGES[1], story: 'A street dancer freestyles through neon-lit alleys at midnight. Crowd gathers, energy builds to an explosive finale.' },
+      { name: 'Rapper', desc: 'Rooftop performance, downtown', imageId: CHARACTER_IMAGES[6], story: 'A rapper performs on a downtown rooftop at sunset. City sprawls behind — the track drops as golden hour hits.' },
+      { name: 'Graffiti Artist', desc: 'Warehouse walls come alive', imageId: REGEN_POOL[0], story: 'A graffiti artist paints a massive mural on a warehouse wall. The art comes alive — characters step off the wall and dance.' },
+      { name: 'Skater', desc: 'Concrete jungle, night session', imageId: REGEN_POOL[1], story: 'A skater tears through an empty city at 3am. Each trick lands perfectly — the city is hers and hers alone.' },
     ],
   },
   {
     title: 'Cinematic Drama',
     items: [
-      { label: 'Lost Astronaut', desc: 'Alone in deep space', imageId: REGEN_POOL[0] },
-      { label: 'Mountain Climber', desc: 'Summit at sunset', imageId: REGEN_POOL[3] },
-      { label: 'Ocean Diver', desc: 'Underwater silence', imageId: REGEN_POOL[4] },
-      { label: 'Forest Runner', desc: 'Chased by shadows', imageId: REGEN_POOL[2] },
+      { name: 'Lost Astronaut', desc: 'Alone, deep space, crystal cave', imageId: CHARACTER_IMAGES[2], story: 'An astronaut discovers a crystal cave on an alien planet. She reaches out — the cave explodes with colour and light.' },
+      { name: 'Mountain Climber', desc: 'Summit push at golden hour', imageId: REGEN_POOL[3], story: 'A climber makes the final push to a summit at golden hour. She reaches the top — endless mountain range stretches out below.' },
+      { name: 'Ocean Diver', desc: 'Shipwreck, bioluminescence', imageId: REGEN_POOL[4], story: 'A diver explores a sunken shipwreck at night. Bioluminescent creatures light up the darkness — she finds a glowing artefact.' },
+      { name: 'Forest Runner', desc: 'Chased by shadows, ancient trees', imageId: REGEN_POOL[2], story: 'A runner sprints through an ancient forest at dusk, chased by shadows. She bursts into a clearing — the shadows dissolve in golden light.' },
     ],
   },
 ];
 
 export default function Home() {
   const router = useRouter();
-  const [heroIndex, setHeroIndex] = useState(0);
-  const [recentProjects, setRecentProjects] = useState<{ id: string; title: string; format: string; createdAt: number }[]>([]);
 
-  useEffect(() => {
-    const data = localStorage.getItem('clipspark_projects');
-    if (data) setRecentProjects(JSON.parse(data).slice(0, 3));
-    const timer = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 4000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleStart = (prefill?: string) => {
-    if (prefill) sessionStorage.setItem('clipspark_prefill_character', prefill);
+  const handleStart = (character: string, story: string) => {
+    sessionStorage.setItem('clipspark_prefill_character', character);
+    sessionStorage.setItem('clipspark_prefill_story', story);
     router.push('/character');
   };
-
-  const slide = HERO_SLIDES[heroIndex];
 
   return (
     <div style={{ minHeight: '100svh', paddingBottom: 100, background: '#0A0A0F' }}>
@@ -69,7 +78,7 @@ export default function Home() {
         position: 'sticky', top: 0, zIndex: 50,
         padding: '14px 20px 12px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(10,10,15,0.85)',
+        background: 'rgba(10,10,15,0.90)',
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
@@ -86,170 +95,75 @@ export default function Home() {
           </div>
           <div style={{
             width: 34, height: 34, borderRadius: '50%',
-            background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.10)',
+            background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.09)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.55)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
             </svg>
           </div>
         </div>
       </div>
 
-      {/* Hero carousel */}
-      <div
-        style={{ position: 'relative', width: '100%', height: '56vw', maxHeight: 340, overflow: 'hidden', cursor: 'pointer' }}
-        onClick={() => handleStart(slide.title)}
-      >
-        {HERO_SLIDES.map((s, i) => (
-          <div key={i} style={{
-            position: 'absolute', inset: 0,
-            opacity: i === heroIndex ? 1 : 0,
-            transition: 'opacity 0.6s ease',
-          }}>
-            <img
-              src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`}
-              alt={s.title}
-              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.75) saturate(1.2)' }}
-            />
-          </div>
-        ))}
-
-        {/* Gradient overlays */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.2) 0%, transparent 40%, rgba(10,10,15,0.75) 100%)' }} />
-
-        {/* Content */}
-        <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 16px 16px' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 12 }}>
-            <div style={{ flex: 1 }}>
-              <span style={{
-                display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1,
-                color: '#E8445A', background: 'rgba(232,68,90,0.2)', borderRadius: 999,
-                padding: '3px 8px', marginBottom: 6,
-              }}>
-                {slide.tag}
+      {/* Hero — featured idea */}
+      {(() => {
+        const s = HERO_SLIDES[0];
+        return (
+          <div
+            onClick={() => handleStart(s.character, s.story)}
+            style={{ position: 'relative', width: '100%', height: 260, overflow: 'hidden', cursor: 'pointer' }}
+          >
+            <img src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`} alt={s.title}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)' }} />
+            <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.85) 100%)' }} />
+            <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 20px 20px' }}>
+              <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#E8445A', background: 'rgba(232,68,90,0.18)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(232,68,90,0.3)' }}>
+                {s.tag} · Featured
               </span>
-              <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 4 }}>
-                {slide.title}
-              </p>
-              <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.65)', lineHeight: 1.4 }}>
-                {slide.desc}
-              </p>
+              <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 5 }}>{s.title}</p>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4, flex: 1, marginRight: 12 }}>{s.desc}</p>
+                <button style={{ flexShrink: 0, padding: '9px 16px', borderRadius: 999, background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
+                  Try It →
+                </button>
+              </div>
             </div>
-            <button style={{
-              flexShrink: 0,
-              padding: '10px 18px', borderRadius: 999,
-              background: 'rgba(255,255,255,0.18)',
-              backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,0.35)',
-              color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer',
-            }}>
-              Try It!
-            </button>
           </div>
+        );
+      })()}
 
-          {/* Dots */}
-          <div style={{ display: 'flex', gap: 5, justifyContent: 'center', marginTop: 12 }}>
-            {HERO_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                onClick={e => { e.stopPropagation(); setHeroIndex(i); }}
-                style={{
-                  width: i === heroIndex ? 20 : 6, height: 6, borderRadius: 999, border: 'none', cursor: 'pointer',
-                  background: i === heroIndex ? '#fff' : 'rgba(255,255,255,0.35)',
-                  transition: 'all 0.3s', padding: 0,
-                }}
-              />
+      {/* Content sections */}
+      {SECTIONS.map(section => (
+        <div key={section.title} style={{ marginTop: 28 }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
+            <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>{section.title}</span>
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', fontWeight: 500 }}>See All</span>
+          </div>
+          <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingLeft: 20, paddingRight: 20, paddingBottom: 2 }}>
+            {section.items.map(item => (
+              <div
+                key={item.name}
+                onClick={() => handleStart(item.name, item.story)}
+                style={{ width: 150, height: 210, borderRadius: 16, overflow: 'hidden', flexShrink: 0, cursor: 'pointer', position: 'relative', border: '1px solid rgba(255,255,255,0.07)' }}
+              >
+                <img src={`https://images.unsplash.com/${item.imageId}?w=300&h=420&fit=crop&q=80`} alt={item.name}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8) saturate(1.1)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.95) 0%, transparent 55%)' }} />
+                <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
+                  <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 3, lineHeight: 1.2 }}>{item.name}</p>
+                  <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', lineHeight: 1.3 }}>{item.desc}</p>
+                </div>
+                {/* Play indicator */}
+                <div style={{ position: 'absolute', top: 10, right: 10, width: 28, height: 28, borderRadius: '50%', background: 'rgba(232,68,90,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 1 }}><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </div>
+              </div>
             ))}
           </div>
         </div>
-      </div>
+      ))}
 
-      {/* Content sections */}
-      <div style={{ padding: '0 0 8px' }}>
-        {SECTIONS.map(section => (
-          <div key={section.title} style={{ marginTop: 28 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
-              <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>{section.title}</span>
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>See All</span>
-            </div>
-            <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingLeft: 20, paddingRight: 20, paddingBottom: 2 }}>
-              {section.items.map(item => (
-                <div
-                  key={item.label}
-                  onClick={() => handleStart(item.label)}
-                  style={{
-                    width: 150, height: 210, borderRadius: 16, overflow: 'hidden',
-                    flexShrink: 0, cursor: 'pointer', position: 'relative',
-                    border: '1px solid rgba(255,255,255,0.07)',
-                  }}
-                >
-                  <img
-                    src={`https://images.unsplash.com/${item.imageId}?w=300&h=420&fit=crop&q=80`}
-                    alt={item.label}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.82) saturate(1.1)' }}
-                  />
-                  <div style={{
-                    position: 'absolute', inset: 0,
-                    background: 'linear-gradient(to top, rgba(10,10,15,0.92) 0%, transparent 50%)',
-                  }} />
-                  <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
-                    <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 2, lineHeight: 1.2 }}>{item.label}</p>
-                    <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {/* Recent projects */}
-        {recentProjects.length > 0 && (
-          <div style={{ marginTop: 28 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
-              <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>My Projects</span>
-              <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>See All</span>
-            </div>
-            <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {recentProjects.map(p => (
-                <div key={p.id} style={{
-                  background: 'rgba(255,255,255,0.06)', borderRadius: 16,
-                  padding: '14px 16px', border: '1px solid rgba(255,255,255,0.08)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer',
-                }}>
-                  <div>
-                    <p style={{ fontSize: 14, fontWeight: 600, color: '#F0F0FF', marginBottom: 2 }}>{p.title}</p>
-                    <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)', textTransform: 'capitalize' }}>{p.format}</p>
-                  </div>
-                  <span style={{ fontSize: 12, fontWeight: 600, color: '#E8445A' }}>Open →</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Floating CTA */}
-      <div style={{
-        position: 'fixed', bottom: 80, left: '50%', transform: 'translateX(-50%)',
-        zIndex: 90,
-      }}>
-        <button
-          onClick={() => handleStart()}
-          style={{
-            display: 'flex', alignItems: 'center', gap: 8,
-            padding: '14px 32px', borderRadius: 999,
-            background: 'linear-gradient(135deg, #E8445A, #FF8FA3)',
-            color: '#fff', fontSize: 16, fontWeight: 700,
-            border: 'none', cursor: 'pointer',
-            boxShadow: '0 8px 32px rgba(232,68,90,0.50)',
-            letterSpacing: -0.2, whiteSpace: 'nowrap',
-          }}
-        >
-          ✦ Create a Video
-        </button>
-      </div>
-
+      <div style={{ height: 20 }} />
       <TabBar />
     </div>
   );
