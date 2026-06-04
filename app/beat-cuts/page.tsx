@@ -1,5 +1,5 @@
 'use client';
-import { useState, useRef } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { TRACKS } from '@/lib/mockMusic';
 import { TabBar } from '@/components/TabBar';
@@ -17,7 +17,10 @@ export default function BeatCutsPage() {
   const [stage, setStage] = useState<Stage>('upload');
   const [selectedClip, setSelectedClip] = useState(0);
   const [trackId, setTrackId] = useState(TRACKS[0].id);
+  const [galleryPhotos, setGalleryPhotos] = useState<string[]>([]);
+  const [uploadMode, setUploadMode] = useState<'none' | 'video' | 'gallery'>('none');
   const fileRef = useRef<HTMLInputElement>(null);
+  const photoRef = useRef<HTMLInputElement>(null);
 
   const selectedTrack = TRACKS.find(t => t.id === trackId) || TRACKS[0];
 
@@ -38,16 +41,44 @@ export default function BeatCutsPage() {
             <p style={{ fontSize: 26, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.5, marginBottom: 8 }}>Choose your clip</p>
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 24 }}>AI will analyze the beat and cut your scenes perfectly in sync</p>
 
-            <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed rgba(232,68,90,0.4)', borderRadius: 20, padding: '28px 20px', textAlign: 'center', cursor: 'pointer', background: 'rgba(232,68,90,0.05)', marginBottom: 20, display: 'flex', alignItems: 'center', gap: 16 }}>
-              <div style={{ width: 52, height: 52, borderRadius: 14, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8445A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+            {/* Upload options */}
+            <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
+              {/* Upload video */}
+              <div onClick={() => { fileRef.current?.click(); }} style={{ flex: 1, border: `2px dashed ${uploadMode === 'video' ? '#E8445A' : 'rgba(232,68,90,0.3)'}`, borderRadius: 18, padding: '20px 14px', textAlign: 'center', cursor: 'pointer', background: uploadMode === 'video' ? 'rgba(232,68,90,0.1)' : 'rgba(232,68,90,0.04)' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(232,68,90,0.12)', border: '1px solid rgba(232,68,90,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E8445A" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                </div>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>Upload Video</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>MP4, MOV</p>
               </div>
-              <div style={{ textAlign: 'left' }}>
-                <p style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>Upload video</p>
-                <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>MP4, MOV · up to 2 minutes</p>
+
+              {/* Choose from gallery */}
+              <div onClick={() => photoRef.current?.click()} style={{ flex: 1, border: `2px dashed ${uploadMode === 'gallery' ? '#7C5CFC' : 'rgba(124,92,252,0.3)'}`, borderRadius: 18, padding: '20px 14px', textAlign: 'center', cursor: 'pointer', background: uploadMode === 'gallery' ? 'rgba(124,92,252,0.1)' : 'rgba(124,92,252,0.04)' }}>
+                <div style={{ width: 40, height: 40, borderRadius: 12, background: 'rgba(124,92,252,0.12)', border: '1px solid rgba(124,92,252,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 10px' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C5CFC" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF', marginBottom: 3 }}>From Gallery</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>Pick photos</p>
               </div>
             </div>
-            <input ref={fileRef} type="file" accept="video/*" style={{ display: 'none' }} />
+
+            {/* Gallery photos preview */}
+            {galleryPhotos.length > 0 && (
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: 0.6, marginBottom: 8 }}>{galleryPhotos.length} photos selected</p>
+                <div style={{ display: 'flex', gap: 6, overflowX: 'auto' }}>
+                  {galleryPhotos.map((url, i) => (
+                    <div key={i} style={{ width: 56, height: 56, borderRadius: 10, overflow: 'hidden', flexShrink: 0, border: '1.5px solid rgba(124,92,252,0.4)', position: 'relative' }}>
+                      <img src={url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <div style={{ position: 'absolute', top: 2, left: 2, width: 14, height: 14, borderRadius: '50%', background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 8, fontWeight: 700, color: '#fff' }}>{i+1}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <input ref={fileRef} type="file" accept="video/*" style={{ display: 'none' }} onChange={() => setUploadMode('video')} />
+            <input ref={photoRef} type="file" accept="image/*" multiple style={{ display: 'none' }} onChange={e => { const files = Array.from(e.target.files || []); setGalleryPhotos(files.map(f => URL.createObjectURL(f))); setUploadMode('gallery'); }} />
 
             <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: 0.6, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: 12 }}>Or try a sample clip</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 24 }}>
