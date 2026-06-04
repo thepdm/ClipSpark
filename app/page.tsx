@@ -140,22 +140,55 @@ export default function Home() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: '0 20px' }}>
           {[
-            { icon: '✨', title: 'Animate Photo', desc: 'Upload a photo — AI adds parallax, drift and motion', color: '#7C5CFC', bg: 'rgba(124,92,252,0.12)', border: 'rgba(124,92,252,0.25)' },
-            { icon: '🎞', title: 'Photos to Video', desc: 'Upload N photos — AI creates smooth transitions between them', color: '#06B6D4', bg: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.25)' },
-            { icon: '🎤', title: 'Lip Sync', desc: 'Upload a photo + track — the character sings along', color: '#E8445A', bg: 'rgba(232,68,90,0.12)', border: 'rgba(232,68,90,0.25)' },
-            { icon: '💃', title: 'Make It Dance', desc: 'Any photo, any beat — AI makes them move to the music', color: '#10B981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.25)' },
+            {
+              title: 'Animate Photo',
+              desc: 'Upload a photo — AI adds parallax and motion',
+              imageId: 'photo-1534528741775-53994a69daeb',
+              tag: 'Animation',
+              color: '#7C5CFC',
+            },
+            {
+              title: 'Photos to Video',
+              desc: 'N photos → AI generates smooth transitions between them',
+              imageId: 'photo-1516117172878-fd2c41f4a759',
+              tag: 'Video',
+              color: '#06B6D4',
+            },
+            {
+              title: 'Beat Cuts',
+              desc: 'AI auto-cuts scenes exactly on the beat of your music',
+              imageId: 'photo-1470225620780-dba8ba36b745',
+              tag: 'Editing',
+              color: '#E8445A',
+            },
+            {
+              title: 'Style Transfer',
+              desc: 'Apply Neon / Film Noir / Anime / Cinematic to all scenes at once',
+              imageId: 'photo-1536440136628-849c177e76a1',
+              tag: 'Style',
+              color: '#F59E0B',
+            },
           ].map(f => (
             <div
               key={f.title}
               onClick={() => router.push('/character')}
-              style={{
-                background: f.bg, border: `1px solid ${f.border}`,
-                borderRadius: 18, padding: '16px 14px', cursor: 'pointer',
-              }}
+              style={{ borderRadius: 18, overflow: 'hidden', cursor: 'pointer', position: 'relative', height: 180, border: '1px solid rgba(255,255,255,0.07)' }}
             >
-              <div style={{ fontSize: 28, marginBottom: 10 }}>{f.icon}</div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF', marginBottom: 5, lineHeight: 1.2 }}>{f.title}</p>
-              <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)', lineHeight: 1.4 }}>{f.desc}</p>
+              <img
+                src={`https://images.unsplash.com/${f.imageId}?w=300&h=360&fit=crop&q=80`}
+                alt={f.title}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.97) 0%, rgba(10,10,15,0.3) 55%, transparent 100%)' }} />
+              <div style={{ position: 'absolute', top: 10, left: 10 }}>
+                <span style={{ fontSize: 10, fontWeight: 700, color: f.color, background: 'rgba(10,10,15,0.7)', borderRadius: 999, padding: '3px 8px', border: `1px solid ${f.color}44` }}>
+                  {f.tag}
+                </span>
+              </div>
+              <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 4, lineHeight: 1.2 }}>{f.title}</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>{f.desc}</p>
+              </div>
             </div>
           ))}
         </div>
