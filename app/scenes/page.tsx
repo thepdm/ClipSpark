@@ -164,16 +164,15 @@ export default function ScenesPage() {
       {/* Nav */}
       <div style={{
         flexShrink: 0, padding: '12px 16px 10px',
-        display: 'flex', alignItems: 'center',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         background: 'rgba(10,10,15,0.95)',
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <Link href="/create" style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, flexShrink: 0 }}>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+        <Link href="/create" style={{ display: 'flex', alignItems: 'center', color: '#8B5CF6', textDecoration: 'none' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
-          Back
         </Link>
         <button
           onClick={handleExport}
