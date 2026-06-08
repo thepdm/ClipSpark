@@ -40,7 +40,7 @@ const SECTIONS = [
   {
     title: 'Dance',
     items: [
-      { name: 'TikTok Dance', desc: 'Trending moves, viral energy', imageId: 'photo-1529626455594-4ff0802cfb7e', story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.' },
+      { name: 'TikTok Dance', desc: 'Trending moves, viral energy', imageId: 'photo-1547153760-18fc86324498', story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.' },
       { name: 'Hip-Hop', desc: 'Street style, raw energy', imageId: 'photo-1516450360452-9312f5e86fc7', story: 'A person dances hip-hop in an urban setting — bold moves, street lights, pure confidence. Every step lands on the beat.' },
       { name: 'Ballet', desc: 'Grace, flow, cinematic', imageId: 'photo-1518611012118-696072aa579a', story: 'A dancer performs ballet in an empty theatre, soft spotlight, slow motion. Every movement is pure grace and emotion.' },
       { name: 'Club Night', desc: 'Neon, bass, night energy', imageId: 'photo-1470225620780-dba8ba36b745', story: 'Dancing under club lights — neon flashes, deep bass, slow-motion hair. The night belongs to you.' },
@@ -49,7 +49,7 @@ const SECTIONS = [
   {
     title: 'Runway & Beauty',
     items: [
-      { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1558618666-fcd25c85cd64', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
+      { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1509631179647-0177331693ae', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
       { name: 'Glow Up', desc: 'Beauty transformation, before & after', imageId: 'photo-1522337360788-8b13dee7a37e', story: 'A dramatic beauty transformation — soft lighting, flawless makeup, hair done to perfection. You step into the frame glowing.' },
       { name: 'Wedding', desc: 'Bridal walk, golden light', imageId: 'photo-1519225421980-715cb0215aed', story: 'You walk down the aisle in a breathtaking wedding dress. Golden light, rose petals, every eye in the room on you.' },
       { name: 'Fitness', desc: 'Workout, strength, results', imageId: 'photo-1571019613454-1cb2f99b2d8b', story: 'You train hard in a premium gym — powerful lifts, sweat, focus. The camera captures every moment of your transformation.' },
@@ -58,10 +58,10 @@ const SECTIONS = [
   {
     title: 'Cars',
     items: [
-      { name: 'Ferrari', desc: 'Red supercar, open road', imageId: 'photo-1583121274602-3e2820c69888', story: 'You drive a red Ferrari along an empty coastal road at sunset. Engine roars, wind in your hair — pure adrenaline and freedom.' },
-      { name: 'Lamborghini', desc: 'Luxury, speed, night city', imageId: 'photo-1544636331-e26879cd4d9b', story: 'You pull up in a Lamborghini on a neon-lit city street. Doors open upward — heads turn, cameras flash.' },
-      { name: 'Off-Road', desc: 'Desert, dust, power', imageId: 'photo-1503376780353-7e6692767b70', story: 'You push a massive 4x4 through desert dunes — dust clouds, roaring engine, golden sun. Raw power on raw terrain.' },
-      { name: 'Race Track', desc: 'Full speed, helmet on', imageId: 'photo-1558618047-3c8c76ca7d13', story: 'You fly around a race track at full speed — helmet on, hands steady, tyres screaming. You own every corner.' },
+      { name: 'Ferrari', desc: 'Red supercar, open road', imageId: 'photo-1492144534655-ae79c964c9d7', story: 'You drive a red Ferrari along an empty coastal road at sunset. Engine roars, wind in your hair — pure adrenaline and freedom.' },
+      { name: 'Lamborghini', desc: 'Luxury, speed, night city', imageId: 'photo-1567808291548-fc3ee04dbcf0', story: 'You pull up in a Lamborghini on a neon-lit city street. Doors open upward — heads turn, cameras flash.' },
+      { name: 'Off-Road', desc: 'Desert, dust, power', imageId: 'photo-1544191696-1b1776f1c3b3', story: 'You push a massive 4x4 through desert dunes — dust clouds, roaring engine, golden sun. Raw power on raw terrain.' },
+      { name: 'Race Track', desc: 'Full speed, helmet on', imageId: 'photo-1504215680853-026ed2a45def', story: 'You fly around a race track at full speed — helmet on, hands steady, tyres screaming. You own every corner.' },
     ],
   },
   {
@@ -209,7 +209,7 @@ export default function Home() {
       <div style={{ marginTop: 28 }}>
         <div style={{ display: 'flex', gap: 10, overflowX: 'auto', padding: '0 20px', paddingBottom: 2 }}>
           {[
-            { title: 'Living Photo', desc: 'Bring one photo to life', route: '/animate', imageId: 'photo-1531746020798-e6953c6e8e04' },
+            { title: 'Living Photo', desc: 'Bring one photo to life', route: '/animate', imageId: 'photo-1524504388940-b1c1722653e0' },
             { title: 'Photo Story', desc: 'Turn photos into a video', route: '/photos-to-video', imageId: 'photo-1516117172878-fd2c41f4a759' },
             { title: 'Beat Sync', desc: 'Scenes cut to the music', route: '/beat-cuts', imageId: 'photo-1470225620780-dba8ba36b745' },
           ].map(item => (
