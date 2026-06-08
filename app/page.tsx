@@ -110,8 +110,8 @@ export default function Home() {
   };
 
   const handleStart = (character: string, story: string) => {
-    sessionStorage.setItem('clipspark_prefill_description', story || character);
-    router.push('/create');
+    sessionStorage.setItem('clipspark_description', story || character);
+    router.push('/scenes');
   };
 
   // gallery for template picker
