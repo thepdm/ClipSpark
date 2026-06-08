@@ -176,7 +176,7 @@ export default function Home() {
       <div style={{ position: 'relative', margin: '0 16px', height: 220, borderRadius: 20, overflow: 'hidden' }}>
         {HERO_SLIDES.map((s, i) => (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === heroIndex ? 1 : 0, transition: 'opacity 0.6s ease', pointerEvents: i === heroIndex ? 'auto' : 'none' }}
-            onClick={() => handleStart(s.character, s.story)}>
+            onClick={() => handleStart('', s.story)}>
             <img
               src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`}
               alt={s.title}
