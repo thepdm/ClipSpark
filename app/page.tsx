@@ -186,7 +186,7 @@ export default function Home() {
       <div style={{ position: 'relative', margin: '0 16px', height: 220, borderRadius: 20, overflow: 'hidden' }}>
         {HERO_SLIDES.map((s, i) => (
           <div key={i} style={{ position: 'absolute', inset: 0, opacity: i === heroIndex ? 1 : 0, transition: 'opacity 0.6s ease', pointerEvents: i === heroIndex ? 'auto' : 'none' }}
-            onClick={() => openTemplate(s)}>
+            onClick={() => openTemplate({ name: s.title, desc: s.desc, imageId: s.imageId, story: s.story })}>
             <img
               src={`https://images.unsplash.com/${s.imageId}?w=800&h=600&fit=crop&q=80`}
               alt={s.title}
@@ -199,7 +199,7 @@ export default function Home() {
               <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 5 }}>{s.title}</p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.55)', lineHeight: 1.4, flex: 1, marginRight: 12 }}>{s.desc}</p>
-                <button onClick={e => { e.stopPropagation(); openTemplate(s); }} style={{ flexShrink: 0, padding: '9px 16px', borderRadius: 999, background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
+                <button onClick={e => { e.stopPropagation(); openTemplate({ name: s.title, desc: s.desc, imageId: s.imageId, story: s.story }); }} style={{ flexShrink: 0, padding: '9px 16px', borderRadius: 999, background: 'rgba(255,255,255,0.15)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.3)', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
                   Try It →
                 </button>
               </div>
