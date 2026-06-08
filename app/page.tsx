@@ -60,7 +60,7 @@ const SECTIONS = [
     items: [
       { name: 'Ferrari', desc: 'Red supercar, open road', imageId: 'photo-1492144534655-ae79c964c9d7', story: 'You drive a red Ferrari along an empty coastal road at sunset. Engine roars, wind in your hair — pure adrenaline and freedom.' },
       { name: 'Lamborghini', desc: 'Luxury, speed, night city', imageId: 'photo-1567808291548-fc3ee04dbcf0', story: 'You pull up in a Lamborghini on a neon-lit city street. Doors open upward — heads turn, cameras flash.' },
-      { name: 'Off-Road', desc: 'Desert, dust, power', imageId: 'photo-1544191696-1b1776f1c3b3', story: 'You push a massive 4x4 through desert dunes — dust clouds, roaring engine, golden sun. Raw power on raw terrain.' },
+      { name: 'Off-Road', desc: 'Desert, dust, power', imageId: 'photo-1503376780353-7e6692767b70', story: 'You push a massive 4x4 through desert dunes — dust clouds, roaring engine, golden sun. Raw power on raw terrain.' },
       { name: 'Race Track', desc: 'Full speed, helmet on', imageId: 'photo-1504215680853-026ed2a45def', story: 'You fly around a race track at full speed — helmet on, hands steady, tyres screaming. You own every corner.' },
     ],
   },
