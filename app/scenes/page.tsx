@@ -10,20 +10,6 @@ import { TabBar } from '@/components/TabBar';
 const PX_PER_SEC = 22;
 const BAR_HEIGHTS = [40,65,30,80,55,45,70,35,85,50,45,75,30,60,85,40,55,70,45,65];
 
-function StepBar() {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5, flex: 1, margin: '0 12px' }}>
-      {[1,2,3,4].map(n => (
-        <div key={n} style={{
-          height: 3, borderRadius: 999,
-          flex: n === 3 ? 2 : 1,
-          background: n <= 3 ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
-        }} />
-      ))}
-    </div>
-  );
-}
-
 function formatTime(sec: number) {
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60);
@@ -189,7 +175,6 @@ export default function ScenesPage() {
           </svg>
           Back
         </Link>
-        <StepBar />
         <button
           onClick={handleExport}
           disabled={loading || scenes.length === 0}

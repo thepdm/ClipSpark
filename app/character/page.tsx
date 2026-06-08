@@ -18,23 +18,6 @@ const glass: React.CSSProperties = {
 const EXAMPLES = ['Снегурочка', 'Street dancer', 'Space explorer', 'Young chef', 'Cyber robot'];
 const VARIANTS = CHARACTER_IMAGES.slice(0, 3);
 
-function StepBar({ current }: { current: number }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 24 }}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <div key={n} style={{
-          height: 4, borderRadius: 999, transition: 'flex 0.3s',
-          flex: n === current ? 2 : 1,
-          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
-        }} />
-      ))}
-      <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
-        {current} / 5
-      </span>
-    </div>
-  );
-}
-
 export default function CharacterPage() {
   const router = useRouter();
   const [pageState, setPageState] = useState<PageState>('input');
@@ -86,8 +69,6 @@ export default function CharacterPage() {
       </div>
 
       <main style={{ padding: '20px 20px 0' }}>
-        <StepBar current={1} />
-
         {pageState === 'input' && (
           <>
             <div style={{ marginBottom: 8 }}>

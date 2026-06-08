@@ -18,17 +18,6 @@ const BAR_HEIGHTS = [40, 65, 30, 80, 55, 45, 70, 35, 85, 50, 45, 75, 30, 60, 85,
 
 type ExportMode = null | 'syncing' | 'synced' | 'custom';
 
-function StepBar() {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 20 }}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <div key={n} style={{ height: 4, borderRadius: 999, flex: 1, background: '#8B5CF6' }} />
-      ))}
-      <span style={{ fontSize: 11, color: '#8B5CF6', fontWeight: 700, whiteSpace: 'nowrap', marginLeft: 4 }}>Done ✓</span>
-    </div>
-  );
-}
-
 export default function ResultPage() {
   const router = useRouter();
   const [scenes, setScenes] = useState<Scene[]>([]);
@@ -119,8 +108,6 @@ export default function ResultPage() {
       </div>
 
       <main style={{ padding: '16px 20px 0' }}>
-        <StepBar />
-
         {/* Video preview */}
         <div style={{ ...glass, borderRadius: 'var(--r-xl)', overflow: 'hidden', marginBottom: 16, boxShadow: 'var(--shadow)' }}>
           <div style={{ position: 'relative', aspectRatio, maxHeight, overflow: 'hidden', margin: '0 auto' }}>

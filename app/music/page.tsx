@@ -17,23 +17,6 @@ const MOODS = ['Energetic', 'Calm', 'Confident', 'Dark', 'Playful', 'Epic', 'Rom
 const TEMPOS = ['Slow', 'Medium', 'Fast'];
 const BAR_HEIGHTS = [40, 65, 30, 80, 55, 45, 70, 35, 85, 50, 45, 75, 30, 60, 85, 40, 55, 70, 45, 65];
 
-function StepBar({ current }: { current: number }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 20 }}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <div key={n} style={{
-          height: 4, borderRadius: 999, transition: 'flex 0.3s',
-          flex: n === current ? 2 : 1,
-          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
-        }} />
-      ))}
-      <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
-        {current} / 5
-      </span>
-    </div>
-  );
-}
-
 function Waveform({ color, active }: { color: string; active: boolean }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 2, height: 28, flex: 1 }}>
@@ -108,8 +91,6 @@ export default function MusicPage() {
       </div>
 
       <main style={{ padding: '20px 20px 0' }}>
-        <StepBar current={4} />
-
         {/* Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 20, padding: '4px', background: 'rgba(139,92,246,0.07)', borderRadius: 14 }}>
           {(['library', 'generate'] as const).map(t => (

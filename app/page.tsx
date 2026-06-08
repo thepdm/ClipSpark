@@ -16,7 +16,7 @@ const HERO_SLIDES = [
   {
     title: 'Runway',
     desc: 'Fashion show, designer looks, all eyes on you',
-    imageId: 'photo-1509631179647-0177331693ae',
+    imageId: 'photo-1483985988355-763728e1935b',
     story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.',
     tag: 'Runway',
   },
@@ -49,7 +49,7 @@ const SECTIONS = [
   {
     title: 'Runway & Beauty',
     items: [
-      { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1509631179647-0177331693ae', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
+      { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1483985988355-763728e1935b', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
       { name: 'Glow Up', desc: 'Beauty transformation, before & after', imageId: 'photo-1522337360788-8b13dee7a37e', story: 'A dramatic beauty transformation — soft lighting, flawless makeup, hair done to perfection. You step into the frame glowing.' },
       { name: 'Wedding', desc: 'Bridal walk, golden light', imageId: 'photo-1519225421980-715cb0215aed', story: 'You walk down the aisle in a breathtaking wedding dress. Golden light, rose petals, every eye in the room on you.' },
       { name: 'Fitness', desc: 'Workout, strength, results', imageId: 'photo-1571019613454-1cb2f99b2d8b', story: 'You train hard in a premium gym — powerful lifts, sweat, focus. The camera captures every moment of your transformation.' },
@@ -117,6 +117,15 @@ export default function Home() {
     const timer = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 4000);
     return () => clearInterval(timer);
   }, []);
+
+  useEffect(() => {
+    if (activeTemplate) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [activeTemplate]);
 
   const openTemplate = (item: TemplateItem) => {
     setActiveTemplate(item);

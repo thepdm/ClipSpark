@@ -25,23 +25,6 @@ const EXAMPLES = [
   'Astronaut discovers a glowing crystal cave on an alien planet, reaches out to touch it',
 ];
 
-function StepBar({ current }: { current: number }) {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginBottom: 24 }}>
-      {[1, 2, 3, 4, 5].map(n => (
-        <div key={n} style={{
-          height: 4, borderRadius: 999, transition: 'flex 0.3s',
-          flex: n === current ? 2 : 1,
-          background: n <= current ? '#8B5CF6' : 'rgba(139,92,246,0.15)',
-        }} />
-      ))}
-      <span style={{ fontSize: 11, color: 'var(--text-2)', fontWeight: 600, whiteSpace: 'nowrap', marginLeft: 4 }}>
-        {current} / 5
-      </span>
-    </div>
-  );
-}
-
 export default function StoryPage() {
   const router = useRouter();
   const [story, setStory] = useState('');
@@ -87,8 +70,6 @@ export default function StoryPage() {
       </div>
 
       <main style={{ padding: '20px 20px 0' }}>
-        <StepBar current={2} />
-
         {/* Character chip */}
         {character && (
           <div style={{
