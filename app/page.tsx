@@ -253,7 +253,7 @@ export default function Home() {
         <>
           <div onClick={() => setActiveTemplate(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 200 }} />
           <div style={{
-            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 201,
+            position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 430, zIndex: 201,
             background: '#0F0F16', borderRadius: '24px 24px 0 0',
             border: '1px solid rgba(255,255,255,0.08)',
             maxHeight: '92svh', overflowY: 'auto',
@@ -296,7 +296,7 @@ export default function Home() {
         <>
           <div onClick={() => setShowMenu(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 300 }} />
           <div style={{
-            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 301,
+            position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 430, zIndex: 301,
             background: 'rgba(18,18,26,0.97)',
             borderRadius: '24px 24px 0 0',
             border: '1px solid rgba(255,255,255,0.1)',

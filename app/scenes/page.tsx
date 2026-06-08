@@ -489,7 +489,7 @@ export default function ScenesPage() {
         <>
           <div onClick={() => setShowMusicSheet(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 200 }} />
           <div style={{
-            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 201,
+            position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 430, zIndex: 201,
             background: '#12121A', borderRadius: '20px 20px 0 0',
             border: '1px solid rgba(255,255,255,0.09)',
             padding: '16px 20px 40px',

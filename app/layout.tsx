@@ -17,7 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className="h-full antialiased">
       <body style={{ minHeight: "100svh", display: "flex", justifyContent: "center" }}>
-        <div style={{ width: "100%", maxWidth: 430, position: "relative" }}>
+        <div style={{ width: "100%", maxWidth: 430, position: "relative", borderLeft: "1px solid rgba(255,255,255,0.06)", borderRight: "1px solid rgba(255,255,255,0.06)", minHeight: "100svh" }}>
           {children}
         </div>
       </body>
