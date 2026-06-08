@@ -7,28 +7,32 @@ import { TabBar } from '@/components/TabBar';
 
 const HERO_SLIDES = [
   {
+    title: 'Ferrari',
+    desc: 'Red supercar, open road, pure adrenaline',
+    imageId: 'photo-1583121274602-3e2820c69888',
+    story: 'You drive a red Ferrari along an empty coastal road at sunset. Engine roars, wind in your hair — pure adrenaline and freedom.',
+    tag: 'Cars',
+  },
+  {
+    title: 'Runway',
+    desc: 'Fashion show, designer looks, all eyes on you',
+    imageId: 'photo-1558618666-fcd25c85cd64',
+    story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.',
+    tag: 'Runway',
+  },
+  {
     title: 'TikTok Dance',
-    desc: 'Trending moves, viral energy — your moment to shine',
+    desc: 'Trending moves, viral energy',
     imageId: 'photo-1529626455594-4ff0802cfb7e',
-    character: 'Dancer',
     story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.',
-    tag: 'TikTok',
+    tag: 'Dance',
   },
   {
-    title: 'Maldives Sunset',
-    desc: 'Turquoise water, white sand, golden hour',
-    imageId: 'photo-1573843981267-be1999ff37cd',
-    character: 'Beach girl',
-    story: 'A girl walks along a white sand beach in the Maldives at golden hour. Crystal clear water surrounds her — the sky turns pink and violet as the sun sets.',
-    tag: 'Locations',
-  },
-  {
-    title: 'Night City',
-    desc: 'Neon rain, city lights, midnight vibes',
-    imageId: 'photo-1519501025264-65ba15a82390',
-    character: 'Night city girl',
-    story: 'A girl walks through a neon-lit rainy city at midnight. Reflections shimmer on wet streets — she owns the night.',
-    tag: 'Urban',
+    title: 'Private Jet',
+    desc: 'Luxury travel, first class, business at altitude',
+    imageId: 'photo-1540962351504-03099e0a754b',
+    story: 'You board a private jet with a briefcase in hand. Leather seats, champagne, clouds below — business at the highest level.',
+    tag: 'CEO',
   },
 ];
 
@@ -43,7 +47,7 @@ const SECTIONS = [
     ],
   },
   {
-    title: 'For Girls',
+    title: 'Runway & Beauty',
     items: [
       { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1558618666-fcd25c85cd64', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
       { name: 'Glow Up', desc: 'Beauty transformation, before & after', imageId: 'photo-1522337360788-8b13dee7a37e', story: 'A dramatic beauty transformation — soft lighting, flawless makeup, hair done to perfection. You step into the frame glowing.' },
@@ -175,8 +179,8 @@ export default function Home() {
               style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(1.2)', cursor: 'pointer' }} />
             <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(10,10,15,0.1) 0%, transparent 40%, rgba(10,10,15,0.88) 100%)' }} />
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 20px 20px' }}>
-              <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: '#8B5CF6', background: 'rgba(139,92,246,0.18)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(139,92,246,0.3)' }}>
-                {s.tag} · Featured
+              <span style={{ display: 'inline-block', fontSize: 10, fontWeight: 700, letterSpacing: 1, color: 'rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.1)', borderRadius: 999, padding: '3px 8px', marginBottom: 8, border: '1px solid rgba(255,255,255,0.15)' }}>
+                {s.tag}
               </span>
               <p style={{ fontSize: 22, fontWeight: 800, color: '#fff', letterSpacing: -0.4, lineHeight: 1.1, marginBottom: 5 }}>{s.title}</p>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
