@@ -201,9 +201,9 @@ export default function Home() {
       <div style={{ marginTop: 28 }}>
         <div style={{ display: 'flex', gap: 10, overflowX: 'auto', padding: '0 20px', paddingBottom: 2 }}>
           {[
-            { title: 'From photo', desc: 'Animate a single photo', route: '/animate', imageId: 'photo-1531746020798-e6953c6e8e04' },
-            { title: 'From photos', desc: 'Combine multiple photos', route: '/photos-to-video', imageId: 'photo-1516117172878-fd2c41f4a759' },
-            { title: 'With beat', desc: 'AI cuts scenes to music', route: '/beat-cuts', imageId: 'photo-1470225620780-dba8ba36b745' },
+            { title: 'Living Photo', desc: 'Bring one photo to life', route: '/animate', imageId: 'photo-1531746020798-e6953c6e8e04' },
+            { title: 'Photo Story', desc: 'Turn photos into a video', route: '/photos-to-video', imageId: 'photo-1516117172878-fd2c41f4a759' },
+            { title: 'Beat Sync', desc: 'Scenes cut to the music', route: '/beat-cuts', imageId: 'photo-1470225620780-dba8ba36b745' },
           ].map(item => (
             <div key={item.route} onClick={() => router.push(item.route)} style={{ flexShrink: 0, width: 140, height: 90, borderRadius: 16, overflow: 'hidden', cursor: 'pointer', position: 'relative', border: '1px solid rgba(255,255,255,0.07)' }}>
               <img src={`https://images.unsplash.com/${item.imageId}?w=280&h=180&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }} />
