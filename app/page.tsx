@@ -107,7 +107,6 @@ type TemplateItem = { name: string; desc: string; imageId: string; story: string
 export default function Home() {
   const router = useRouter();
   const [heroIndex, setHeroIndex] = useState(0);
-  const [activeTemplate, setActiveTemplate] = useState<TemplateItem | null>(null);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -116,16 +115,16 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (activeTemplate || showMenu) {
+    if (showMenu) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [activeTemplate, showMenu]);
+  }, [showMenu]);
 
   const openTemplate = (item: TemplateItem) => {
-    setActiveTemplate(item);
+    handleStart('', item.story);
   };
 
   const handleStart = (character: string, story: string) => {
@@ -248,48 +247,6 @@ export default function Home() {
       ))}
 
       <div style={{ height: 20 }} />
-      {/* Template overlay */}
-      {activeTemplate && (
-        <>
-          <div onClick={() => setActiveTemplate(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.7)', zIndex: 200 }} />
-          <div style={{
-            position: 'fixed', bottom: 0, left: '50%', transform: 'translateX(-50%)', width: '100%', maxWidth: 430, zIndex: 201,
-            background: '#0F0F16', borderRadius: '24px 24px 0 0',
-            border: '1px solid rgba(255,255,255,0.08)',
-            maxHeight: '92svh', overflowY: 'auto',
-          }}>
-            {/* Handle */}
-            <div style={{ width: 40, height: 4, borderRadius: 999, background: 'rgba(255,255,255,0.15)', margin: '14px auto 0' }} />
-
-            {/* Template preview */}
-            <div style={{ position: 'relative', margin: '16px 16px 0' }}>
-              <img
-                src={`https://images.unsplash.com/${activeTemplate.imageId}?w=800&h=500&fit=crop&q=80`}
-                alt={activeTemplate.name}
-                style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 18, display: 'block', filter: (activeTemplate as { filter?: string }).filter || 'brightness(0.85) saturate(1.1)' }}
-              />
-              <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.65))' }} />
-              {/* Play indicator */}
-              <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: 52, height: 52, borderRadius: '50%', background: 'rgba(255,255,255,0.18)', backdropFilter: 'blur(12px)', border: '1.5px solid rgba(255,255,255,0.4)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="white" style={{ marginLeft: 2 }}><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </div>
-              <div style={{ position: 'absolute', bottom: 14, left: 14 }}>
-                <p style={{ fontSize: 20, fontWeight: 800, color: '#fff', marginBottom: 3 }}>{activeTemplate.name}</p>
-                <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)' }}>{activeTemplate.desc}</p>
-              </div>
-            </div>
-
-            <div style={{ padding: '20px 16px 32px' }}>
-              <button
-                onClick={() => { handleStart('', activeTemplate.story); setActiveTemplate(null); }}
-                style={{ width: '100%', padding: '17px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', border: 'none', color: '#fff', fontSize: 16, fontWeight: 700, cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.4)' }}
-              >
-                ✦ Use this template
-              </button>
-            </div>
-          </div>
-        </>
-      )}
 
       {/* Hamburger menu bottom sheet */}
       {showMenu && (
