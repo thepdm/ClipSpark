@@ -14,13 +14,6 @@ const GALLERY_PHOTOS = [
   'photo-1447752875215-b2761acb3c5d',
 ];
 
-const MY_WORKS = [
-  { imageId: 'photo-1534528741775-53994a69daeb', title: 'My Portrait', date: 'Today' },
-  { imageId: 'photo-1573843981267-be1999ff37cd', title: 'Beach Day', date: 'Yesterday' },
-  { imageId: 'photo-1519501025264-65ba15a82390', title: 'Night Walk', date: 'June 3' },
-  { imageId: 'photo-1516117172878-fd2c41f4a759', title: 'Forest', date: 'June 1' },
-];
-
 const TABS = ['Animate', 'Combine', 'Change'];
 const PROMPT_EXAMPLES = [
   'Butterflies fly and shimmer in all colors of the rainbow',
@@ -154,21 +147,6 @@ export default function AnimatePage() {
           </div>
         )}
 
-        {/* My Works */}
-        <p style={{ fontSize: 17, fontWeight: 700, color: '#F0F0FF', textAlign: 'center', marginBottom: 16 }}>My Works</p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          {MY_WORKS.map(w => (
-            <div key={w.imageId} style={{ borderRadius: 16, overflow: 'hidden', position: 'relative', aspectRatio: '1', border: '1px solid rgba(255,255,255,0.07)' }}>
-              <img src={`https://images.unsplash.com/${w.imageId}?w=300&h=300&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.8)' }} />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.8) 0%, transparent 50%)' }} />
-              <div style={{ position: 'absolute', bottom: 8, left: 10, right: 28 }}>
-                <p style={{ fontSize: 12, fontWeight: 600, color: '#fff', marginBottom: 1 }}>{w.title}</p>
-                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>{w.date}</p>
-              </div>
-              <button style={{ position: 'absolute', bottom: 8, right: 8, background: 'none', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', fontSize: 16, lineHeight: 1 }}>⋯</button>
-            </div>
-          ))}
-        </div>
       </div>
 
       <TabBar />
