@@ -154,7 +154,11 @@ export default function Home() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <span style={{ fontSize: 20, fontWeight: 800, letterSpacing: -0.5, color: '#F0F0FF' }}>ClipSpark</span>
+        <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', flexDirection: 'column', gap: 5 }}>
+          <span style={{ display: 'block', width: 22, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
+          <span style={{ display: 'block', width: 16, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
+          <span style={{ display: 'block', width: 22, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
+        </button>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{
             display: 'flex', alignItems: 'center', gap: 5,
