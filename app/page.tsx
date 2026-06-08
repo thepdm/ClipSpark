@@ -80,9 +80,6 @@ function FeatureCard({ title, desc, tag, color, onClick, children }: {
     <div onClick={onClick} style={{ borderRadius: 18, overflow: 'hidden', cursor: 'pointer', position: 'relative', height: 180, border: '1px solid rgba(255,255,255,0.07)', background: '#111' }}>
       <div style={{ position: 'absolute', inset: 0 }}>{children}</div>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.97) 0%, rgba(10,10,15,0.2) 55%, transparent 100%)' }} />
-      <div style={{ position: 'absolute', top: 10, left: 10 }}>
-        <span style={{ fontSize: 10, fontWeight: 700, color, background: 'rgba(10,10,15,0.75)', borderRadius: 999, padding: '3px 8px', border: `1px solid ${color}44` }}>{tag}</span>
-      </div>
       <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
         <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 4, lineHeight: 1.2 }}>{title}</p>
         <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>{desc}</p>
