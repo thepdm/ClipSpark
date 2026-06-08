@@ -98,21 +98,6 @@ const SECTIONS = [
   },
 ];
 
-function FeatureCard({ title, desc, tag, color, onClick, children }: {
-  title: string; desc: string; tag: string; color: string;
-  onClick: () => void; children: React.ReactNode;
-}) {
-  return (
-    <div onClick={onClick} style={{ borderRadius: 18, overflow: 'hidden', cursor: 'pointer', position: 'relative', height: 180, border: '1px solid rgba(255,255,255,0.07)', background: '#111' }}>
-      <div style={{ position: 'absolute', inset: 0 }}>{children}</div>
-      <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.97) 0%, rgba(10,10,15,0.2) 55%, transparent 100%)' }} />
-      <div style={{ position: 'absolute', bottom: 12, left: 12, right: 12 }}>
-        <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 4, lineHeight: 1.2 }}>{title}</p>
-        <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)', lineHeight: 1.4 }}>{desc}</p>
-      </div>
-    </div>
-  );
-}
 
 type TemplateItem = { name: string; desc: string; imageId: string; story: string; filter?: string };
 
@@ -212,30 +197,26 @@ export default function Home() {
         ))}
       </div>
 
-      {/* AI Features */}
+      {/* Create modes */}
       <div style={{ marginTop: 28 }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
-          <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>AI Features</span>
-          <span style={{ fontSize: 11, fontWeight: 600, color: '#8B5CF6', background: 'rgba(139,92,246,0.12)', borderRadius: 999, padding: '3px 10px', border: '1px solid rgba(139,92,246,0.2)' }}>New</span>
-        </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, padding: '0 20px' }}>
-          <FeatureCard title="Animate Photo" desc="Upload a photo — AI adds parallax and motion" tag="Animation" color="#7C5CFC" onClick={() => router.push('/animate')}>
-            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
-          </FeatureCard>
-
-          <FeatureCard title="Photos to Video" desc="N photos → AI generates smooth transitions" tag="Video" color="#06B6D4" onClick={() => router.push('/photos-to-video')}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2, width: '100%', height: '100%' }}>
-              {['photo-1534528741775-53994a69daeb','photo-1516117172878-fd2c41f4a759','photo-1507003211169-0a1dd7228f2d','photo-1470071459604-3b5ec3a7fe05'].map((id, i) => (
-                <img key={i} src={`https://images.unsplash.com/${id}?w=150&h=150&fit=crop&q=70`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7)' }} />
-              ))}
+        <div style={{ display: 'flex', gap: 10, overflowX: 'auto', padding: '0 20px', paddingBottom: 2 }}>
+          {[
+            { title: 'From photo', desc: 'Animate a single photo', route: '/animate', imageId: 'photo-1531746020798-e6953c6e8e04' },
+            { title: 'From photos', desc: 'Combine multiple photos', route: '/photos-to-video', imageId: 'photo-1516117172878-fd2c41f4a759' },
+            { title: 'With beat', desc: 'AI cuts scenes to music', route: '/beat-cuts', imageId: 'photo-1470225620780-dba8ba36b745' },
+          ].map(item => (
+            <div key={item.route} onClick={() => router.push(item.route)} style={{ flexShrink: 0, width: 140, height: 90, borderRadius: 16, overflow: 'hidden', cursor: 'pointer', position: 'relative', border: '1px solid rgba(255,255,255,0.07)' }}>
+              <img src={`https://images.unsplash.com/${item.imageId}?w=280&h=180&fit=crop&q=80`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.55)' }} />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10,10,15,0.9) 0%, transparent 60%)' }} />
+              <div style={{ position: 'absolute', bottom: 10, left: 10, right: 10 }}>
+                <p style={{ fontSize: 13, fontWeight: 700, color: '#fff', marginBottom: 2 }}>{item.title}</p>
+                <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.45)' }}>{item.desc}</p>
+              </div>
             </div>
-          </FeatureCard>
-
-          <FeatureCard title="Beat Cuts" desc="AI auto-cuts scenes exactly on the beat" tag="Editing" color="#8B5CF6" onClick={() => router.push('/beat-cuts')}>
-            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=360&fit=crop&q=80" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(1.1)' }} />
-          </FeatureCard>
+          ))}
         </div>
       </div>
+
 
       {/* Content sections */}
       {SECTIONS.map(section => (
