@@ -66,9 +66,8 @@ export default function BeatCutsPage() {
         background: 'rgba(10,10,15,0.95)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <Link href="/" style={{ color: '#8B5CF6', textDecoration: 'none', fontSize: 15, fontWeight: 500, display: 'flex', alignItems: 'center', gap: 4 }}>
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          Back
+        <Link href="/" style={{ color: '#8B5CF6', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </Link>
         <span style={{ fontSize: 15, fontWeight: 700, color: '#F0F0FF' }}>Beat Cuts</span>
         {stage === 'gallery' && selectedIds.length > 0 ? (
@@ -201,7 +200,7 @@ export default function BeatCutsPage() {
               <p style={{ fontSize: 13, fontWeight: 700, color: '#F0F0FF' }}>{selectedTrack.title}</p>
               <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{selectedTrack.bpm} BPM · Beat-synced</p>
             </div>
-            <button style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <button onClick={() => { try { navigator.share({ title: 'My beat video', text: 'Created with ClipSpark' }) } catch(e) {} }} style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
             </button>
           </div>
@@ -254,21 +253,6 @@ export default function BeatCutsPage() {
               </div>
             </div>
 
-            {/* Toolbar */}
-            <div style={{ display: 'flex', justifyContent: 'space-around', padding: '8px 0 16px', borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-              {[
-                { icon: '⇄', label: 'REPLACE' },
-                { icon: '⊢', label: 'SPLIT' },
-                { icon: '⊡', label: 'SCALE' },
-                { icon: '🗑', label: 'DELETE' },
-                { icon: '⧉', label: 'DUPLICATE' },
-              ].map(tool => (
-                <button key={tool.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 5, background: 'none', border: 'none', cursor: 'pointer', padding: '0 8px' }}>
-                  <span style={{ fontSize: 20, color: '#fff' }}>{tool.icon}</span>
-                  <span style={{ fontSize: 9, fontWeight: 700, color: 'rgba(255,255,255,0.45)', letterSpacing: 0.5 }}>{tool.label}</span>
-                </button>
-              ))}
-            </div>
           </div>
         </div>
       )}

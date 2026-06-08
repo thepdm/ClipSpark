@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { getStoryScenes, Scene, REGEN_POOL } from '@/lib/mockScenes';
 import { TRACKS, Track, generateAITracks } from '@/lib/mockMusic';
 import { TabBar } from '@/components/TabBar';
@@ -169,11 +168,11 @@ export default function ScenesPage() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <Link href="/create" style={{ display: 'flex', alignItems: 'center', color: '#8B5CF6', textDecoration: 'none' }}>
+        <button onClick={() => router.back()} style={{ display: 'flex', alignItems: 'center', color: '#8B5CF6', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
-        </Link>
+        </button>
         <button
           onClick={handleExport}
           disabled={loading || scenes.length === 0}

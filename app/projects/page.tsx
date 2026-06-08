@@ -21,8 +21,20 @@ export default function ProjectsPage() {
   const [projects, setProjects] = useState<Project[]>([]);
 
   useEffect(() => {
-    const data = localStorage.getItem('clipspark_projects');
-    if (data) setProjects(JSON.parse(data));
+    const parse = (key: string): Project[] => {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+      } catch {
+        return [];
+      }
+    };
+    const merged = [
+      ...parse('clipspark_projects'),
+      ...parse('clipspark_animate_projects'),
+      ...parse('clipspark_photo_story_projects'),
+    ].sort((a, b) => b.createdAt - a.createdAt);
+    setProjects(merged);
   }, []);
 
   const deleteProject = (id: string) => {

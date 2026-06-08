@@ -14,7 +14,6 @@ const GALLERY_PHOTOS = [
   'photo-1447752875215-b2761acb3c5d',
 ];
 
-const TABS = ['Animate', 'Combine', 'Change'];
 const PROMPT_EXAMPLES = [
   'Butterflies fly and shimmer in all colors of the rainbow',
   'The wind gently moves the hair, golden light',
@@ -25,7 +24,6 @@ const PROMPT_EXAMPLES = [
 type Stage = 'idle' | 'generating' | 'result';
 
 export default function AnimatePage() {
-  const [activeTab, setActiveTab] = useState(0);
   const [selectedPhoto, setSelectedPhoto] = useState<string | null>(null);
   const [prompt, setPrompt] = useState('');
   const [stage, setStage] = useState<Stage>('idle');
@@ -49,18 +47,13 @@ export default function AnimatePage() {
 
       {/* Nav */}
       <div style={{ padding: '52px 20px 16px', display: 'flex', alignItems: 'center', gap: 16 }}>
-        <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: 20, lineHeight: 1 }}>‹</Link>
+        <Link href="/" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </Link>
         <span style={{ flex: 1, textAlign: 'center', fontSize: 17, fontWeight: 700, color: '#F0F0FF' }}>Studio</span>
         <div style={{ width: 20 }} />
-      </div>
-
-      {/* Tabs */}
-      <div style={{ margin: '0 16px 20px', background: 'rgba(255,255,255,0.08)', borderRadius: 999, padding: 4, display: 'flex' }}>
-        {TABS.map((tab, i) => (
-          <button key={tab} onClick={() => setActiveTab(i)} style={{ flex: 1, padding: '10px', borderRadius: 999, border: 'none', cursor: 'pointer', background: activeTab === i ? 'rgba(255,255,255,0.15)' : 'transparent', color: activeTab === i ? '#fff' : 'rgba(255,255,255,0.4)', fontSize: 14, fontWeight: activeTab === i ? 700 : 500, transition: 'all 0.2s' }}>
-            {tab}
-          </button>
-        ))}
       </div>
 
       <div style={{ padding: '0 16px' }}>
@@ -142,7 +135,7 @@ export default function AnimatePage() {
             <div style={{ position: 'absolute', top: 10, left: 10, background: 'rgba(139,92,246,0.85)', borderRadius: 999, padding: '4px 10px', fontSize: 10, fontWeight: 700, color: '#fff' }}>✨ Animated</div>
             <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 14px 14px', display: 'flex', gap: 8 }}>
               <button onClick={() => setStage('idle')} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.15)', color: '#fff', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>↻ Redo</button>
-              <button style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', border: 'none', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Save & Share</button>
+              <button onClick={async () => { try { await navigator.share({ title: 'My animated photo', text: 'Created with ClipSpark' }); } catch {} }} style={{ flex: 1, padding: '10px', borderRadius: 12, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', border: 'none', color: '#fff', fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>Save & Share</button>
             </div>
           </div>
         )}

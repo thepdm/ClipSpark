@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { TabBar } from '@/components/TabBar';
 
 export default function CreatePage() {
@@ -26,6 +27,20 @@ export default function CreatePage() {
 
   return (
     <div style={{ minHeight: '100svh', background: '#0A0A0F', display: 'flex', flexDirection: 'column' }}>
+      {/* Nav */}
+      <div style={{
+        flexShrink: 0, padding: '12px 16px 10px',
+        display: 'flex', alignItems: 'center',
+        background: 'rgba(10,10,15,0.95)',
+        backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: '1px solid rgba(255,255,255,0.07)',
+      }}>
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', color: '#8B5CF6', textDecoration: 'none' }}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </Link>
+      </div>
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 24px', gap: 16 }}>
 
         <textarea

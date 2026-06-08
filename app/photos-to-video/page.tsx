@@ -27,7 +27,7 @@ export default function PhotosToVideoPage() {
   const handleGenerate = () => {
     setStage('generating');
     const timer = setInterval(() => setActivePreview(p => (p + 1) % photos.length), 600);
-    setTimeout(() => { clearInterval(timer); setStage('result'); }, 2800);
+    setTimeout(() => { setStage('result'); }, 2800);
   };
 
   const SAMPLE_PHOTOS = [
@@ -63,8 +63,8 @@ export default function PhotosToVideoPage() {
                 </div>
               ))}
               {photos.length < 8 && (
-                <div onClick={() => fileRef.current?.click()} style={{ aspectRatio: '1', borderRadius: 14, border: '2px dashed rgba(6,182,212,0.4)', background: 'rgba(6,182,212,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', gap: 4 }}>
-                  <span style={{ fontSize: 24, color: 'rgba(6,182,212,0.6)' }}>+</span>
+                <div onClick={() => fileRef.current?.click()} style={{ aspectRatio: '1', borderRadius: 14, border: '2px dashed rgba(139,92,246,0.4)', background: 'rgba(139,92,246,0.06)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', gap: 4 }}>
+                  <span style={{ fontSize: 24, color: 'rgba(139,92,246,0.6)' }}>+</span>
                   <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)' }}>Add</span>
                 </div>
               )}
@@ -74,14 +74,14 @@ export default function PhotosToVideoPage() {
             {photos.length === 0 && (
               <>
                 <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', textAlign: 'center', marginBottom: 10 }}>Or try with sample photos</p>
-                <button onClick={() => { setPhotos(SAMPLE_PHOTOS.map(id => `https://images.unsplash.com/${id}?w=400&h=400&fit=crop`)); }} style={{ width: '100%', padding: '12px', borderRadius: 14, background: 'rgba(6,182,212,0.08)', border: '1px solid rgba(6,182,212,0.2)', color: 'rgba(6,182,212,0.8)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
+                <button onClick={() => { setPhotos(SAMPLE_PHOTOS.map(id => `https://images.unsplash.com/${id}?w=400&h=400&fit=crop`)); }} style={{ width: '100%', padding: '12px', borderRadius: 14, background: 'rgba(139,92,246,0.08)', border: '1px solid rgba(139,92,246,0.2)', color: 'rgba(139,92,246,0.8)', fontSize: 14, fontWeight: 600, cursor: 'pointer' }}>
                   Use sample photos
                 </button>
               </>
             )}
 
             {photos.length >= 2 && (
-              <button onClick={() => setStage('style')} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#06B6D4,#67e8f9)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(6,182,212,0.35)', marginTop: 8 }}>
+              <button onClick={() => setStage('style')} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#C4B5FD)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.35)', marginTop: 8 }}>
                 Continue ({photos.length} photos) →
               </button>
             )}
@@ -94,18 +94,18 @@ export default function PhotosToVideoPage() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 24 }}>
               {TRANSITIONS.map(t => (
-                <div key={t.id} onClick={() => setTransition(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', borderRadius: 16, cursor: 'pointer', border: transition === t.id ? '1.5px solid #06B6D4' : '1px solid rgba(255,255,255,0.08)', background: transition === t.id ? 'rgba(6,182,212,0.1)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
+                <div key={t.id} onClick={() => setTransition(t.id)} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '14px 16px', borderRadius: 16, cursor: 'pointer', border: transition === t.id ? '1.5px solid #8B5CF6' : '1px solid rgba(255,255,255,0.08)', background: transition === t.id ? 'rgba(139,92,246,0.1)' : 'rgba(255,255,255,0.04)', transition: 'all 0.15s' }}>
                   <span style={{ fontSize: 22, flexShrink: 0 }}>{t.icon}</span>
                   <div style={{ flex: 1 }}>
                     <p style={{ fontSize: 14, fontWeight: 700, color: '#F0F0FF' }}>{t.label}</p>
                     <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.4)' }}>{t.desc}</p>
                   </div>
-                  {transition === t.id && <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#06B6D4', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
+                  {transition === t.id && <div style={{ width: 20, height: 20, borderRadius: '50%', background: '#8B5CF6', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>}
                 </div>
               ))}
             </div>
 
-            <button onClick={handleGenerate} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#06B6D4,#67e8f9)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(6,182,212,0.35)' }}>
+            <button onClick={handleGenerate} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#C4B5FD)', color: '#fff', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.35)' }}>
               ✨ Create Video
             </button>
           </>
@@ -113,7 +113,7 @@ export default function PhotosToVideoPage() {
 
         {stage === 'generating' && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '65svh', gap: 20 }}>
-            <div style={{ width: 120, height: 120, borderRadius: 20, overflow: 'hidden', border: '2px solid rgba(6,182,212,0.5)' }}>
+            <div style={{ width: 120, height: 120, borderRadius: 20, overflow: 'hidden', border: '2px solid rgba(139,92,246,0.5)' }}>
               <img src={photos[activePreview]} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s' }} />
             </div>
             <p style={{ fontSize: 17, fontWeight: 700, color: '#F0F0FF' }}>Creating your video...</p>
@@ -130,7 +130,7 @@ export default function PhotosToVideoPage() {
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button onClick={() => setStage('style')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Redo</button>
-              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#06B6D4,#67e8f9)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(6,182,212,0.35)' }}>Save & Share</button>
+              <button onClick={async () => { try { await navigator.share({ title: 'My video', text: 'Created with ClipSpark' }); } catch {} }} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#C4B5FD)', color: '#fff', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(139,92,246,0.35)' }}>Save & Share</button>
             </div>
           </>
         )}

@@ -111,6 +111,7 @@ export default function Home() {
   const [activeTemplate, setActiveTemplate] = useState<TemplateItem | null>(null);
   const [userPhoto, setUserPhoto] = useState<string | null>(null);
   const [templateStage, setTemplateStage] = useState<'pick' | 'generating' | 'result'>('pick');
+  const [showMenu, setShowMenu] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -119,13 +120,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (activeTemplate) {
+    if (activeTemplate || showMenu) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
     return () => { document.body.style.overflow = ''; };
-  }, [activeTemplate]);
+  }, [activeTemplate, showMenu]);
 
   const openTemplate = (item: TemplateItem) => {
     setActiveTemplate(item);
@@ -163,7 +164,7 @@ export default function Home() {
         backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
         borderBottom: '1px solid rgba(255,255,255,0.07)',
       }}>
-        <button style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', flexDirection: 'column', gap: 5 }}>
+        <button onClick={() => setShowMenu(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 4, display: 'flex', flexDirection: 'column', gap: 5 }}>
           <span style={{ display: 'block', width: 22, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
           <span style={{ display: 'block', width: 16, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
           <span style={{ display: 'block', width: 22, height: 2, borderRadius: 999, background: 'rgba(255,255,255,0.8)' }} />
@@ -238,9 +239,8 @@ export default function Home() {
       {/* Content sections */}
       {SECTIONS.map(section => (
         <div key={section.title} style={{ marginTop: 28 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', marginBottom: 14 }}>
+          <div style={{ padding: '0 20px', marginBottom: 14 }}>
             <span style={{ fontSize: 18, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.3 }}>{section.title}</span>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.25)', fontWeight: 500 }}>See All</span>
           </div>
           <div style={{ display: 'flex', gap: 10, overflowX: 'auto', paddingLeft: 20, paddingRight: 20, paddingBottom: 2 }}>
             {section.items.map(item => (
@@ -386,6 +386,36 @@ export default function Home() {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* Hamburger menu bottom sheet */}
+      {showMenu && (
+        <>
+          <div onClick={() => setShowMenu(false)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 300 }} />
+          <div style={{
+            position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 301,
+            background: 'rgba(18,18,26,0.97)',
+            borderRadius: '24px 24px 0 0',
+            border: '1px solid rgba(255,255,255,0.1)',
+            paddingBottom: 40,
+          }}>
+            {/* Handle bar */}
+            <div style={{ width: 40, height: 4, borderRadius: 999, background: 'rgba(255,255,255,0.15)', margin: '14px auto 0' }} />
+            {/* Close button */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end', padding: '12px 20px 4px' }}>
+              <button onClick={() => setShowMenu(false)} style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '50%', width: 32, height: 32, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', fontSize: 16, lineHeight: 1 }}>✕</button>
+            </div>
+            {/* Menu items */}
+            <div style={{ padding: '4px 20px 0' }}>
+              <div style={{ padding: '18px 0', borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
+                <p style={{ fontSize: 16, fontWeight: 600, color: '#F0F0FF' }}>About ClipSpark</p>
+              </div>
+              <div style={{ padding: '18px 0' }}>
+                <p style={{ fontSize: 16, fontWeight: 600, color: '#F0F0FF' }}>Feedback</p>
+              </div>
             </div>
           </div>
         </>

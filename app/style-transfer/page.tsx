@@ -7,9 +7,9 @@ const STYLES = [
   { id: 'neon', label: 'Neon', desc: 'Glowing city lights', filter: 'saturate(2) contrast(1.2) hue-rotate(280deg)', color: '#7C5CFC', preview: 'photo-1448375240586-882707db888b' },
   { id: 'noir', label: 'Film Noir', desc: 'Classic black & white', filter: 'grayscale(1) contrast(1.3)', color: '#888', preview: 'photo-1536440136628-849c177e76a1' },
   { id: 'anime', label: 'Anime', desc: 'Vibrant illustrated', filter: 'saturate(1.8) contrast(1.15) brightness(1.05)', color: '#10B981', preview: 'photo-1516117172878-fd2c41f4a759' },
-  { id: 'cinematic', label: 'Cinematic', desc: 'Teal & orange grade', filter: 'saturate(1.4) contrast(1.1) sepia(0.15)', color: '#F59E0B', preview: 'photo-1426604966848-d7adac402bff' },
+  { id: 'cinematic', label: 'Cinematic', desc: 'Teal & orange grade', filter: 'saturate(1.4) contrast(1.1) sepia(0.15)', color: '#8B5CF6', preview: 'photo-1426604966848-d7adac402bff' },
   { id: 'vintage', label: 'Vintage Film', desc: 'Faded 90s grain', filter: 'sepia(0.5) saturate(0.8) brightness(0.95)', color: '#D97706', preview: 'photo-1470071459604-3b5ec3a7fe05' },
-  { id: 'golden', label: 'Golden Hour', desc: 'Warm sunset tones', filter: 'sepia(0.3) saturate(1.6) brightness(1.05)', color: '#F59E0B', preview: 'photo-1493246507139-91e8fad9978e' },
+  { id: 'golden', label: 'Golden Hour', desc: 'Warm sunset tones', filter: 'sepia(0.3) saturate(1.6) brightness(1.05)', color: '#8B5CF6', preview: 'photo-1493246507139-91e8fad9978e' },
 ];
 
 type Stage = 'upload' | 'style' | 'generating' | 'result';
@@ -46,7 +46,7 @@ export default function StyleTransferPage() {
             <p style={{ fontSize: 26, fontWeight: 800, color: '#F0F0FF', letterSpacing: -0.5, marginBottom: 8 }}>Upload your photo</p>
             <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 20 }}>Choose a style and AI will apply it to create a stunning video</p>
 
-            <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed rgba(245,158,11,0.4)', borderRadius: 20, padding: '50px 20px', textAlign: 'center', cursor: 'pointer', background: 'rgba(245,158,11,0.05)', marginBottom: 20 }}>
+            <div onClick={() => fileRef.current?.click()} style={{ border: '2px dashed rgba(139,92,246,0.4)', borderRadius: 20, padding: '50px 20px', textAlign: 'center', cursor: 'pointer', background: 'rgba(139,92,246,0.05)', marginBottom: 20 }}>
               <div style={{ fontSize: 44, marginBottom: 14 }}>🎨</div>
               <p style={{ fontSize: 16, fontWeight: 700, color: '#F0F0FF', marginBottom: 6 }}>Upload photo or video</p>
               <p style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)' }}>JPG, PNG, MP4</p>
@@ -63,7 +63,7 @@ export default function StyleTransferPage() {
               ))}
             </div>
 
-            <button onClick={() => { setPhotoUrl(`https://images.unsplash.com/${currentStyle.preview}?w=600&h=800&fit=crop`); setStage('style'); }} style={{ width: '100%', padding: '14px', borderRadius: 999, background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.3)', color: '#F59E0B', fontSize: 14, fontWeight: 700, cursor: 'pointer', marginBottom: 10 }}>
+            <button onClick={() => { setPhotoUrl(`https://images.unsplash.com/${currentStyle.preview}?w=600&h=800&fit=crop`); setStage('style'); }} style={{ width: '100%', padding: '14px', borderRadius: 999, background: 'rgba(139,92,246,0.1)', border: '1px solid rgba(139,92,246,0.3)', color: '#8B5CF6', fontSize: 14, fontWeight: 700, cursor: 'pointer', marginBottom: 10 }}>
               Use sample photo
             </button>
           </>
@@ -89,7 +89,7 @@ export default function StyleTransferPage() {
               ))}
             </div>
 
-            <button onClick={() => { setStage('generating'); setTimeout(() => setStage('result'), 2500); }} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#F59E0B,#FCD34D)', color: '#111', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(245,158,11,0.35)' }}>
+            <button onClick={() => { setStage('generating'); setTimeout(() => setStage('result'), 2500); }} style={{ width: '100%', padding: '16px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#111', fontSize: 16, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 6px 24px rgba(139,92,246,0.35)' }}>
               ✨ Apply Style
             </button>
           </>
@@ -122,7 +122,7 @@ export default function StyleTransferPage() {
             </div>
             <div style={{ display: 'flex', gap: 10 }}>
               <button onClick={() => setStage('style')} style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.1)', color: '#fff', fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>↻ Try another</button>
-              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#F59E0B,#FCD34D)', color: '#111', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(245,158,11,0.35)' }}>Save & Share</button>
+              <button style={{ flex: 1, padding: '14px', borderRadius: 999, background: 'linear-gradient(135deg,#8B5CF6,#EC4899)', color: '#111', fontSize: 14, fontWeight: 700, border: 'none', cursor: 'pointer', boxShadow: '0 4px 18px rgba(139,92,246,0.35)' }}>Save & Share</button>
             </div>
           </>
         )}
