@@ -16,14 +16,14 @@ const HERO_SLIDES = [
   {
     title: 'Runway',
     desc: 'Fashion show, designer looks, all eyes on you',
-    imageId: 'photo-1558618666-fcd25c85cd64',
+    imageId: 'photo-1509631179647-0177331693ae',
     story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.',
     tag: 'Runway',
   },
   {
     title: 'TikTok Dance',
     desc: 'Trending moves, viral energy',
-    imageId: 'photo-1529626455594-4ff0802cfb7e',
+    imageId: 'photo-1547153760-18fc86324498',
     story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.',
     tag: 'Dance',
   },
@@ -209,7 +209,7 @@ export default function Home() {
       <div style={{ marginTop: 28 }}>
         <div style={{ display: 'flex', gap: 10, overflowX: 'auto', padding: '0 20px', paddingBottom: 2 }}>
           {[
-            { title: 'Living Photo', desc: 'Bring one photo to life', route: '/animate', imageId: 'photo-1524504388940-b1c1722653e0' },
+            { title: 'Living Photo', desc: 'Bring one photo to life', route: '/animate', imageId: 'photo-1534528741775-53994a69daeb' },
             { title: 'Photo Story', desc: 'Turn photos into a video', route: '/photos-to-video', imageId: 'photo-1516117172878-fd2c41f4a759' },
             { title: 'Beat Sync', desc: 'Scenes cut to the music', route: '/beat-cuts', imageId: 'photo-1470225620780-dba8ba36b745' },
           ].map(item => (
