@@ -52,6 +52,15 @@ const SECTIONS = [
     ],
   },
   {
+    title: 'Dance',
+    items: [
+      { name: 'TikTok Dance', desc: 'Trending moves, viral energy', imageId: 'photo-1529626455594-4ff0802cfb7e', story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.' },
+      { name: 'Hip-Hop', desc: 'Street style, raw energy', imageId: 'photo-1516450360452-9312f5e86fc7', story: 'A girl dances hip-hop in an urban setting — bold moves, street lights, pure confidence. Every step lands on the beat.' },
+      { name: 'Ballet', desc: 'Grace, flow, cinematic', imageId: 'photo-1518611012118-696072aa579a', story: 'A ballerina dances in an empty theatre, soft spotlight, slow motion. Every movement is pure grace and emotion.' },
+      { name: 'Club Night', desc: 'Neon, bass, night energy', imageId: 'photo-1470225620780-dba8ba36b745', story: 'A girl dances under club lights — neon flashes, deep bass, slow-motion hair. The night belongs to her.' },
+    ],
+  },
+  {
     title: 'Mood & Vibe',
     items: [
       { name: 'Winter Luxe', desc: 'Snow, fur coat, cosy', imageId: 'photo-1491555103944-7c647fd857e6', story: 'A girl walks through a snowy city in a luxurious fur coat. Snowflakes fall gently — warm café lights glow through frosted windows.' },
