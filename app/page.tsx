@@ -34,40 +34,66 @@ const HERO_SLIDES = [
 
 const SECTIONS = [
   {
-    title: 'Locations',
-    items: [
-      { name: 'Maldives', desc: 'Turquoise water, white sand, sunset', imageId: 'photo-1573843981267-be1999ff37cd', story: 'A girl walks along a white sand beach in the Maldives at golden hour. Crystal clear water surrounds her — the sky turns pink and violet as the sun sets.' },
-      { name: 'Paris', desc: 'Streets, cafés, flowers, rain', imageId: 'photo-1499856871958-5b9627545d1a', story: 'A girl strolls through rainy Paris streets, past flower stalls and glowing café windows. She twirls her umbrella — the city lights reflect in puddles.' },
-      { name: 'Dubai Desert', desc: 'Golden dunes, luxury, sunset', imageId: 'photo-1512453979798-5ea266f8880c', story: 'A girl stands on golden desert dunes in Dubai at sunset. Sand flows around her — the horizon glows deep orange and red.' },
-      { name: 'Amalfi Coast', desc: 'Blue sea, lemons, Italian summer', imageId: 'photo-1534445867742-43195f401b6c', story: 'A girl walks through the colourful streets of Amalfi, past lemon trees and sea views. She sits at a cliffside café — the Mediterranean sparkles below.' },
-    ],
-  },
-  {
-    title: 'Aesthetic Style',
-    items: [
-      { name: 'B&W Photo Shoot', desc: 'Studio light, cinematic', imageId: 'photo-1531746020798-e6953c6e8e04', filter: 'grayscale(1) contrast(1.25) brightness(0.85)', story: 'A girl poses in a minimalist studio under dramatic black and white lighting. Each movement is precise and powerful — pure cinematic elegance.' },
-      { name: 'Golden Hour', desc: 'Magic sunset, warm light', imageId: 'photo-1507003211169-0a1dd7228f2d', filter: 'sepia(0.45) saturate(1.8) brightness(0.9) contrast(1.05)', story: 'A girl walks through a field at golden hour as the sun sets behind her. Long shadows, warm glow, hair in the breeze — pure magic.' },
-      { name: 'Vintage Film', desc: 'Film grain, 90s colours', imageId: 'photo-1526045612212-70caf35c14df', filter: 'sepia(0.5) saturate(0.75) brightness(0.88) contrast(1.1)', story: 'A girl explores the city in a vintage aesthetic — film grain, faded colours, analogue camera flares. Feels like a 90s music video.' },
-      { name: 'Dark Botanica', desc: 'Tropics, jungle, luxury', imageId: 'photo-1441974231531-c6227db76b6e', filter: 'saturate(1.4) brightness(0.75) contrast(1.1)', story: 'A girl moves through a lush tropical jungle at dusk — exotic flowers, deep shadows, luxury and mystery at every turn.' },
-    ],
-  },
-  {
     title: 'Dance',
     items: [
       { name: 'TikTok Dance', desc: 'Trending moves, viral energy', imageId: 'photo-1529626455594-4ff0802cfb7e', story: 'A girl performs a trending TikTok dance in a neon-lit space. Every move hits on the beat — she spins, the camera follows, the crowd goes wild.' },
-      { name: 'Hip-Hop', desc: 'Street style, raw energy', imageId: 'photo-1516450360452-9312f5e86fc7', story: 'A girl dances hip-hop in an urban setting — bold moves, street lights, pure confidence. Every step lands on the beat.' },
-      { name: 'Ballet', desc: 'Grace, flow, cinematic', imageId: 'photo-1518611012118-696072aa579a', story: 'A ballerina dances in an empty theatre, soft spotlight, slow motion. Every movement is pure grace and emotion.' },
-      { name: 'Club Night', desc: 'Neon, bass, night energy', imageId: 'photo-1470225620780-dba8ba36b745', story: 'A girl dances under club lights — neon flashes, deep bass, slow-motion hair. The night belongs to her.' },
+      { name: 'Hip-Hop', desc: 'Street style, raw energy', imageId: 'photo-1516450360452-9312f5e86fc7', story: 'A person dances hip-hop in an urban setting — bold moves, street lights, pure confidence. Every step lands on the beat.' },
+      { name: 'Ballet', desc: 'Grace, flow, cinematic', imageId: 'photo-1518611012118-696072aa579a', story: 'A dancer performs ballet in an empty theatre, soft spotlight, slow motion. Every movement is pure grace and emotion.' },
+      { name: 'Club Night', desc: 'Neon, bass, night energy', imageId: 'photo-1470225620780-dba8ba36b745', story: 'Dancing under club lights — neon flashes, deep bass, slow-motion hair. The night belongs to you.' },
     ],
   },
   {
-    title: 'Mood & Vibe',
+    title: 'For Girls',
     items: [
-      { name: 'Winter Luxe', desc: 'Snow, fur coat, cosy', imageId: 'photo-1491555103944-7c647fd857e6', story: 'A girl walks through a snowy city in a luxurious fur coat. Snowflakes fall gently — warm café lights glow through frosted windows.' },
-      { name: 'Spring Bloom', desc: 'Blooming garden, pastel', imageId: 'photo-1469474968028-56623f02e42e', story: 'A girl wanders through a cherry blossom garden in spring. Petals fall around her like snow — soft pastel colours, pure joy.' },
-      { name: 'Night City', desc: 'Neon rain, city lights', imageId: 'photo-1447752875215-b2761acb3c5d', story: 'A girl walks through a neon-lit rainy city at midnight. Reflections shimmer on wet streets — she owns the night.' },
-      { name: 'Rooftop Sunset', desc: 'City view, wind, golden sky', imageId: 'photo-1426604966848-d7adac402bff', story: 'A girl stands on a rooftop at sunset with the whole city below. Wind in her hair, golden sky behind her — the city is hers.' },
-      { name: 'Glam & Sexy', desc: 'Confidence, luxury, allure', imageId: 'photo-1529626455594-4ff0802cfb7e', story: 'A girl owns the room — dramatic lighting, confident gaze, slow motion. Every frame is pure power and femininity.' },
+      { name: 'Runway', desc: 'Fashion show, designer looks', imageId: 'photo-1558618666-fcd25c85cd64', story: 'You walk a high-fashion runway in a stunning designer outfit. Cameras flash, the crowd watches — every step is power and elegance.' },
+      { name: 'Glow Up', desc: 'Beauty transformation, before & after', imageId: 'photo-1522337360788-8b13dee7a37e', story: 'A dramatic beauty transformation — soft lighting, flawless makeup, hair done to perfection. You step into the frame glowing.' },
+      { name: 'Wedding', desc: 'Bridal walk, golden light', imageId: 'photo-1519225421980-715cb0215aed', story: 'You walk down the aisle in a breathtaking wedding dress. Golden light, rose petals, every eye in the room on you.' },
+      { name: 'Fitness', desc: 'Workout, strength, results', imageId: 'photo-1571019613454-1cb2f99b2d8b', story: 'You train hard in a premium gym — powerful lifts, sweat, focus. The camera captures every moment of your transformation.' },
+    ],
+  },
+  {
+    title: 'Cars',
+    items: [
+      { name: 'Ferrari', desc: 'Red supercar, open road', imageId: 'photo-1583121274602-3e2820c69888', story: 'You drive a red Ferrari along an empty coastal road at sunset. Engine roars, wind in your hair — pure adrenaline and freedom.' },
+      { name: 'Lamborghini', desc: 'Luxury, speed, night city', imageId: 'photo-1544636331-e26879cd4d9b', story: 'You pull up in a Lamborghini on a neon-lit city street. Doors open upward — heads turn, cameras flash.' },
+      { name: 'Off-Road', desc: 'Desert, dust, power', imageId: 'photo-1503376780353-7e6692767b70', story: 'You push a massive 4x4 through desert dunes — dust clouds, roaring engine, golden sun. Raw power on raw terrain.' },
+      { name: 'Race Track', desc: 'Full speed, helmet on', imageId: 'photo-1558618047-3c8c76ca7d13', story: 'You fly around a race track at full speed — helmet on, hands steady, tyres screaming. You own every corner.' },
+    ],
+  },
+  {
+    title: 'CEO',
+    items: [
+      { name: 'Office Entry', desc: 'Suit, confidence, slow-mo', imageId: 'photo-1507003211169-0a1dd7228f2d', story: 'You walk into a glass-walled corporate tower in a sharp suit — slow motion, confident stride, everyone takes notice.' },
+      { name: 'Boardroom', desc: 'Deal, power, leadership', imageId: 'photo-1519389950473-47ba0277781c', story: 'You sit at the head of a boardroom table, signing a major deal. The team watches — you are the one in charge.' },
+      { name: 'Private Jet', desc: 'Luxury travel, first class', imageId: 'photo-1540962351504-03099e0a754b', story: 'You board a private jet with a briefcase in hand. Leather seats, champagne, clouds below — business at the highest level.' },
+      { name: 'Penthouse', desc: 'City view, success, night', imageId: 'photo-1486325212027-8081e485255e', story: 'You stand on a penthouse terrace overlooking the lit-up city skyline. Glass in hand, suit perfect — this is what success looks like.' },
+    ],
+  },
+  {
+    title: 'Sports',
+    items: [
+      { name: 'Basketball', desc: 'Court, dunk, crowd', imageId: 'photo-1546519638-68e109498ffc', story: 'You drive to the basket and slam it home — crowd erupts, slow motion, pure athletic power.' },
+      { name: 'Football', desc: 'Stadium, goal, glory', imageId: 'photo-1431324155629-1a6deb1dec8d', story: 'You score the winning goal in a packed stadium — the crowd goes wild, you slide across the pitch in celebration.' },
+      { name: 'Boxing', desc: 'Ring, power, fight night', imageId: 'photo-1549719386-74dfcbf7dbed', story: 'You stand in the boxing ring under bright lights — gloves up, focused, ready. The bell rings and you own the fight.' },
+      { name: 'Surfing', desc: 'Waves, speed, freedom', imageId: 'photo-1502680390469-be75c86b636f', story: 'You ride a massive wave at golden hour — perfect form, spray flying, pure freedom on the water.' },
+    ],
+  },
+  {
+    title: 'Travel',
+    items: [
+      { name: 'Tokyo', desc: 'Neon streets, Japan, night', imageId: 'photo-1540959733332-eab4deabeeaf', story: 'You walk through the neon-lit streets of Tokyo at night — bright signs, busy crossings, total immersion in the city.' },
+      { name: 'Dubai', desc: 'Skyscrapers, luxury, desert', imageId: 'photo-1512453979798-5ea266f8880c', story: 'You stand at the top of the Burj Khalifa looking out over Dubai — the desert city stretches to the horizon below you.' },
+      { name: 'Bali', desc: 'Jungle, temples, sunrise', imageId: 'photo-1537996194471-e657df975ab4', story: 'You walk through a Balinese jungle at sunrise — ancient temples, mist, the sound of birds. Pure peace and adventure.' },
+      { name: 'New York', desc: 'Manhattan, hustle, iconic', imageId: 'photo-1534430480872-3498386e7856', story: 'You cross a busy Manhattan intersection in style — yellow cabs, skyscrapers, the energy of the greatest city on earth.' },
+    ],
+  },
+  {
+    title: 'Action',
+    items: [
+      { name: 'Movie Hero', desc: 'Explosion, slow-mo, epic', imageId: 'photo-1478720568477-152d9b164e26', story: 'You walk away from an explosion in slow motion — debris flies, flames rise, you don\'t look back. Pure cinematic hero moment.' },
+      { name: 'Spy Thriller', desc: 'Suit, mission, night', imageId: 'photo-1500099817043-86d46000d58f', story: 'You move through the shadows on a rooftop mission — earpiece in, suit on, city lights below. James Bond energy.' },
+      { name: 'Apocalypse', desc: 'Post-apocalyptic, dust, epic', imageId: 'photo-1516912481808-3406841bd33c', story: 'You stand in a post-apocalyptic wasteland — dust storm behind you, gear on, ready for whatever comes next.' },
+      { name: 'Superhero', desc: 'Cape, power, city above', imageId: 'photo-1531746020798-e6953c6e8e04', story: 'You leap off a skyscraper and soar above the city — cape flowing, lights below, the world is yours to protect.' },
     ],
   },
 ];
