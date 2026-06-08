@@ -266,7 +266,7 @@ export default function Home() {
               <img
                 src={`https://images.unsplash.com/${activeTemplate.imageId}?w=800&h=500&fit=crop&q=80`}
                 alt={activeTemplate.name}
-                style={{ width: '100%', aspectRatio: '4/3', objectFit: 'cover', borderRadius: 18, display: 'block', filter: (activeTemplate as { filter?: string }).filter || 'brightness(0.85) saturate(1.1)' }}
+                style={{ width: '100%', height: 220, objectFit: 'cover', borderRadius: 18, display: 'block', filter: (activeTemplate as { filter?: string }).filter || 'brightness(0.85) saturate(1.1)' }}
               />
               <div style={{ position: 'absolute', inset: 0, borderRadius: 18, background: 'linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.65))' }} />
               {/* Play indicator */}
