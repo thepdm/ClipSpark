@@ -14,7 +14,7 @@ const GALLERY_GROUPS = [
       { id: 'g1', imageId: 'photo-1534528741775-53994a69daeb', type: 'video', duration: '0:23' },
       { id: 'g2', imageId: 'photo-1573843981267-be1999ff37cd', type: 'photo' },
       { id: 'g3', imageId: 'photo-1529626455594-4ff0802cfb7e', type: 'video', duration: '0:41' },
-      { id: 'g4', imageId: 'photo-1524504388940-b1c1722653e0', type: 'photo' },
+      { id: 'g4', imageId: 'photo-1506905925346-21bda4d32df4', type: 'photo' },
       { id: 'g5', imageId: 'photo-1516117172878-fd2c41f4a759', type: 'video', duration: '0:12' },
       { id: 'g6', imageId: 'photo-1519501025264-65ba15a82390', type: 'photo' },
     ],
