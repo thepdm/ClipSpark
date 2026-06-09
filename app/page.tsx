@@ -113,13 +113,6 @@ export default function Home() {
   const [templateStage, setTemplateStage] = useState<'pick' | 'generating' | 'result'>('pick');
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const SAMPLE_FACES = [
-    'photo-1507003211169-0a1dd7228f2d',
-    'photo-1529626455594-4ff0802cfb7e',
-    'photo-1544005313-94ddf0286df2',
-    'photo-1534528741775-53994a69daeb',
-    'photo-1500648767791-00dcc994a43e',
-  ];
 
   useEffect(() => {
     const timer = setInterval(() => setHeroIndex(i => (i + 1) % HERO_SLIDES.length), 4000);
@@ -318,18 +311,10 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* Sample faces */}
                   {userPhotos.length === 0 && (
-                    <>
-                      <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.2)', marginBottom: 8 }}>Or try with a sample</p>
-                      <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
-                        {SAMPLE_FACES.map(id => (
-                          <div key={id} onClick={() => setUserPhotos([`https://images.unsplash.com/${id}?w=300&h=300&fit=crop`])} style={{ width: 52, height: 52, borderRadius: 12, overflow: 'hidden', cursor: 'pointer', border: '2px solid transparent', flexShrink: 0 }}>
-                            <img src={`https://images.unsplash.com/${id}?w=104&h=104&fit=crop&q=70`} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                          </div>
-                        ))}
-                      </div>
-                    </>
+                    <p style={{ fontSize: 11, color: 'rgba(255,255,255,0.25)', marginBottom: 16, lineHeight: 1.5 }}>
+                      💡 The more photos you add — different angles, lighting — the more accurate the result
+                    </p>
                   )}
 
                   <button onClick={handleGenerate} disabled={userPhotos.length === 0} style={{ width: '100%', padding: '16px', borderRadius: 999, marginBottom: 24, background: userPhotos.length > 0 ? 'linear-gradient(135deg,#8B5CF6,#EC4899)' : 'rgba(255,255,255,0.06)', border: 'none', color: userPhotos.length > 0 ? '#fff' : 'rgba(255,255,255,0.2)', fontSize: 16, fontWeight: 700, cursor: userPhotos.length > 0 ? 'pointer' : 'default', boxShadow: userPhotos.length > 0 ? '0 6px 24px rgba(139,92,246,0.4)' : 'none', transition: 'all 0.2s' }}>
