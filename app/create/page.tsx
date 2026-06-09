@@ -60,28 +60,31 @@ export default function CreatePage() {
           }}
         />
 
-        <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
           {/* Photo ref */}
-          <button
-            onClick={() => fileRef.current?.click()}
-            style={{
-              width: 54, height: 54, borderRadius: 16, flexShrink: 0,
-              background: refPhoto ? 'rgba(139,92,246,0.15)' : 'rgba(255,255,255,0.06)',
-              border: refPhoto ? '1.5px solid rgba(139,92,246,0.4)' : '1px solid rgba(255,255,255,0.1)',
-              cursor: 'pointer', overflow: 'hidden', padding: 0,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            {refPhoto ? (
-              <img src={refPhoto} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2"/>
-                <circle cx="8.5" cy="8.5" r="1.5"/>
-                <polyline points="21 15 16 10 5 21"/>
-              </svg>
-            )}
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, flexShrink: 0 }}>
+            <button
+              onClick={() => fileRef.current?.click()}
+              style={{
+                width: 54, height: 54, borderRadius: 16,
+                background: refPhoto ? 'rgba(139,92,246,0.15)' : 'rgba(255,255,255,0.06)',
+                border: refPhoto ? '1.5px solid rgba(139,92,246,0.4)' : '1px solid rgba(255,255,255,0.1)',
+                cursor: 'pointer', overflow: 'hidden', padding: 0,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}
+            >
+              {refPhoto ? (
+                <img src={refPhoto} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              )}
+            </button>
+            <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)', textAlign: 'center', lineHeight: 1.3 }}>Ref{' '}photo</span>
+          </div>
           <input ref={fileRef} type="file" accept="image/*" style={{ display: 'none' }} onChange={e => { const f = e.target.files?.[0]; if (f) setRefPhoto(URL.createObjectURL(f)); }} />
 
           {/* Generate */}
@@ -89,7 +92,7 @@ export default function CreatePage() {
             onClick={handleGenerate}
             disabled={!description.trim() || isGenerating}
             style={{
-              flex: 1, height: 54, borderRadius: 16,
+              flex: 1, height: 54, borderRadius: 16, alignSelf: 'flex-start',
               background: description.trim() && !isGenerating
                 ? 'linear-gradient(135deg, #8B5CF6, #EC4899)'
                 : 'rgba(255,255,255,0.06)',
